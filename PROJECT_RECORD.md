@@ -192,4 +192,7 @@ flowchart TD
   - 完成 `PROJECT_RECORD.md` 規格書與專案紀錄初版編製。
   - 完成 `index.html` 建立（符合 GitHub Pages 預設首頁規範，開箱即用）。
   - 配置 `.gitignore` 排除 Office 暫存檔、Windows 縮圖與臨時日誌。
-  - 準備 Git 環境與 GitHub Pages 上線部署流程指南。
+  - 完成 Git 本地初始化與初始版本提交 (`main` 分支)。
+  - 成功推送至遠端倉庫：`https://github.com/DAIDAI082340/MEDICAL-TOOL-ANTIBIOTICS-DOSE.git`。
+  - 成功透過 GitHub Pages API 自動啟用並完成部署，正式上線運作。
+  - 線上速查系統網址：`https://daidai082340.github.io/MEDICAL-TOOL-ANTIBIOTICS-DOSE/`。
