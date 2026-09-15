@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臨床抗生素腎功能劑量調整速查系統</title>
+    <style>
+        :root {
+            --primary: #1F4E79;
+            --primary-light: #2F5597;
+            --category-bg: #D9E1F2;
+            --bg: #F4F7FA;
+            --card-bg: #FFFFFF;
+            --text-main: #2C3E50;
+            --text-muted: #666666;
+            --border: #DDE2E6;
+            --highlight: #FFF2CC;
+            --zebra: #F9FAFB;
+            --tag-iv: #E3F2FD;
+            --tag-iv-text: #0D47A1;
+            --tag-po: #FFF3E0;
+            --tag-po-text: #E65100;
+            --tag-inh: #E8F5E9;
+            --tag-inh-text: #1B5E20;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Microsoft JhengHei", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            padding: 20px 15px;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* Header Banner */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 24px 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.15);
+            margin-bottom: 22px;
+        }
+
+        .header h1 {
+            font-size: 1.65rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header p {
+            font-size: 0.92rem;
+            opacity: 0.9;
+        }
+
+        /* Search & Filter Card */
+        .search-panel {
+            background: var(--card-bg);
+            padding: 20px 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+            margin-bottom: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .search-box-wrapper {
+            flex: 2;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .search-box-wrapper input {
+            width: 100%;
+            padding: 12px 16px 12px 42px;
+            font-size: 1.05rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-box-wrapper input:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(47, 85, 151, 0.15);
+        }
+
+        .search-box-wrapper .icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #888;
+        }
+
+        .select-wrapper {
+            flex: 1.5;
+            min-width: 260px;
+        }
+
+        .select-wrapper select {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background-color: #fff;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .select-wrapper select:focus {
+            border-color: var(--primary-light);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-main);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Result Counter */
+        .status-bar {
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4px;
+        }
+
+        /* Table Design */
+        .table-responsive {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.93rem;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 12px;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        th:last-child {
+            border-right: none;
+        }
+
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        tr.category-row td {
+            background-color: var(--category-bg);
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 10px 16px;
+            border-bottom: 1px solid #c2cde2;
+        }
+
+        tbody tr.drug-row:hover {
+            background-color: #f0f4f9 !important;
+        }
+
+        tbody tr.drug-row:nth-child(even) {
+            background-color: var(--zebra);
+        }
+
+        .drug-name {
+            font-weight: bold;
+            color: #102a43;
+            min-width: 180px;
+        }
+
+        .route-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .route-iv { background-color: var(--tag-iv); color: var(--tag-iv-text); }
+        .route-po { background-color: var(--tag-po); color: var(--tag-po-text); }
+        .route-inh { background-color: var(--tag-inh); color: var(--tag-inh-text); }
+        .route-mix { background-color: #EDE7F6; color: #4A148C; }
+
+        .dose-cell {
+            text-align: center;
+            min-width: 140px;
+            white-space: pre-line;
+            line-height: 1.45;
+        }
+
+        .dose-normal { color: #1b5e20; font-weight: 500; }
+        .dose-moderate { color: #b76e00; font-weight: 500; }
+        .dose-severe { color: #b71c1c; font-weight: 600; }
+
+        .notes-cell {
+            color: #555;
+            font-size: 0.87rem;
+            min-width: 220px;
+            line-height: 1.4;
+        }
+
+        .highlight-match {
+            background-color: #ffeb3b;
+            font-weight: bold;
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+
+        /* Quick Card for selected drug */
+        .featured-card {
+            display: none;
+            background: #fff;
+            border: 2px solid var(--primary-light);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 14px rgba(47, 85, 151, 0.12);
+        }
+
+        .featured-card.active {
+            display: block;
+        }
+
+        .featured-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .grid-dose {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .dose-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 14px;
+            text-align: center;
+        }
+
+        .dose-box .label {
+            font-size: 0.82rem;
+            font-weight: bold;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .dose-box .val {
+            font-size: 1.05rem;
+            font-weight: bold;
+            white-space: pre-line;
+        }
+
+        .dose-box.c-stat .label { color: #475569; }
+        .dose-box.c-norm .label { color: #166534; }
+        .dose-box.c-mod .label { color: #b45309; }
+        .dose-box.c-sev .label { color: #991b1b; }
+
+        @media (max-width: 768px) {
+            body { padding: 12px 8px; }
+            .header h1 { font-size: 1.35rem; }
+            .search-panel { padding: 14px; }
+            table { font-size: 0.86rem; }
+            th, td { padding: 10px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>💊 臨床抗生素腎功能劑量調整速查系統</h1>
+        <p>依據 eGFR 分級速查（>50、10–50、<10 mL/min 與透析劑量），支援即時關鍵字搜尋與分類快選。</p>
+    </div>
+
+    <!-- Interactive Query Toolbar -->
+    <div class="search-panel">
+        <div class="search-box-wrapper">
+            <span class="icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="輸入藥名關鍵字（如 vanco, zefotam, mica, cef 等）..." autofocus>
+        </div>
+        <div class="select-wrapper">
+            <select id="drugSelect">
+                <option value="">-- 下拉挑選單一抗生素快速預覽 --</option>
+            </select>
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-route="ALL">全部途徑</button>
+            <button class="filter-btn" data-route="IV">IV 針劑</button>
+            <button class="filter-btn" data-route="PO">PO 口服</button>
+        </div>
+    </div>
+
+    <!-- Single Selected Drug Card (Quick Highlight) -->
+    <div class="featured-card" id="featuredCard">
+        <div class="featured-title">
+            <span id="featName">藥物名稱</span>
+            <span id="featRoute" class="route-badge route-iv">IV</span>
+        </div>
+        <div class="grid-dose">
+            <div class="dose-box c-stat">
+                <div class="label">Stat / Loading Dose</div>
+                <div class="val" id="featStat">—</div>
+            </div>
+            <div class="dose-box c-norm">
+                <div class="label">eGFR > 50 mL/min (常規/輕度)</div>
+                <div class="val dose-normal" id="featNorm">—</div>
+            </div>
+            <div class="dose-box c-mod">
+                <div class="label">eGFR 10–50 mL/min (中度減量)</div>
+                <div class="val dose-moderate" id="featMod">—</div>
+            </div>
+            <div class="dose-box c-sev">
+                <div class="label">eGFR < 10 mL/min (重度/HD/PD)</div>
+                <div class="val dose-severe" id="featSev">—</div>
+            </div>
+        </div>
+        <div style="margin-top: 12px; font-size: 0.9rem; color: #555; background: #fff8e1; padding: 8px 12px; border-radius: 6px;">
+            <strong>📌 臨床備註：</strong><span id="featNote">—</span>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <span id="resultCount">共顯示 33 種抗生素品項</span>
+        <span>可點選表頭欄位或使用上方搜尋欄即時過濾</span>
+    </div>
+
+    <!-- Full Database Table -->
+    <div class="table-responsive">
+        <table id="mainTable">
+            <thead>
+                <tr>
+                    <th style="width: 22%;">抗生素名稱 (Antibiotics / 規格)</th>
+                    <th style="width: 7%;">途徑</th>
+                    <th style="width: 14%;">Stat / Loading Dose</th>
+                    <th style="width: 15%;">eGFR > 50 mL/min<br><span style="font-size:0.8rem; font-weight:normal;">(常規/輕度)</span></th>
+                    <th style="width: 17%;">eGFR 10–50 mL/min<br><span style="font-size:0.8rem; font-weight:normal;">(中度腎功能不全)</span></th>
+                    <th style="width: 15%;">eGFR < 10 mL/min<br><span style="font-size:0.8rem; font-weight:normal;">(重度/HD/PD)</span></th>
+                    <th style="width: 20%;">臨床備註 (Notes)</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Javascript will inject data dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+const drugDatabase = [
+    {
+        category: "Penicillins & β-Lactam / Inhibitor Combinations",
+        drugs: [
+            { name: "Oxacillin 2g", route: "IV", stat: "2g", norm: "2g Q6H", mod: "2g Q6H", sev: "2g Q6H", note: "肝臟代謝為主，腎功能不全不需調整劑量" },
+            { name: "Dicloxacillin 250mg (PO)", route: "PO", stat: "2#", norm: "2# QID", mod: "2# QID", sev: "2# QID", note: "不需調整劑量" },
+            { name: "Curam 500mg/125mg (PO)", route: "PO", stat: "1#", norm: "1# TID", mod: "1# BID", sev: "1# QD", note: "Amoxicillin/Clavulanate" },
+            { name: "Tapimycin 2.25g (Piperacillin/Tazobactam)", route: "IV", stat: "2.25g–4.5g", norm: "4.5g Q6H", mod: "2.25g Q6H", sev: "2.25g Q8H", note: "HD 後建議補給劑量" },
+            { name: "Ansullina 3g (Ampicillin/Sulbactam)", route: "IV", stat: "3g", norm: "3g Q6H", mod: "3g Q8–12H", sev: "3g QD", note: "HD 後補充 1.5g" }
+        ]
+    },
+    {
+        category: "Cephalosporins (頭孢菌素類)",
+        drugs: [
+            { name: "Cefazolin 1g (1st gen)", route: "IV", stat: "1g", norm: "1g Q8H", mod: "1g Q12H", sev: "1g QD", note: "HD 後給藥" },
+            { name: "Cefadroxil 500mg (PO, 1st gen)", route: "PO", stat: "1#–2#", norm: "2# Q12H", mod: "1# Q12H", sev: "1# QD", note: "" },
+            { name: "Cephalexin 500mg (PO, 1st gen)", route: "PO", stat: "250–500mg", norm: "500mg Q6H", mod: "500mg Q12H", sev: "250mg Q12H", note: "" },
+            { name: "Curoxime 750mg (Cefuroxime, 2nd gen)", route: "IV", stat: "1.5g", norm: "1.5g Q8H", mod: "1.5g Q12H", sev: "1.5g QD", note: "" },
+            { name: "Flomoxef 1g (Flumarin, 2nd gen)", route: "IV", stat: "HD 前後 各 1g", norm: "1g Q6H", mod: "1.5g Q12H (30–50)\n1g Q12H (<30)", sev: "1g QD\nPD: 1g QD", note: "" },
+            { name: "Ceftriaxone / Sintrix 500mg (3rd gen)", route: "IV", stat: "1g–2g", norm: "2g QD 或 1g Q12H", mod: "2g QD 或 1g Q12H", sev: "2g QD 或 1g Q12H", note: "主要經膽汁及腎雙重排泄，一般不需調整" },
+            { name: "Cefixime 100mg (PO, 3rd gen)", route: "PO", stat: "200mg", norm: "200mg Q12H", mod: "100mg Q12H", sev: "100mg QD", note: "" },
+            { name: "Cetadime / Fortum 1g (Ceftazidime, 3rd gen)", route: "IV", stat: "2g", norm: "2g Q8H", mod: "1g Q12H (31–50)\n1g Q12H (16–30)\n1g QD (6–15)", sev: "1g HS (隨HD後給)", note: "綠膿桿菌首選之一" },
+            { name: "Cefoperazone 1g / Sulbactam 1g (Brosym)", route: "IV", stat: "2g / 2g", norm: "2g / 2g Q12H", mod: "2g / 2g Q12H (30–50)\n1g / 1g Q12H (15–30)", sev: "1g / 1g Q12H (eGFR<15)", note: "膽汁排泄為主" },
+            { name: "Zefotam 1000mg/1000mg/Vial (Cefoperazone, Sulbactam)", route: "IV", stat: "-", norm: "2 vial Q12H", mod: "2 vial Q12H", sev: "2 vial Q12H", note: "膽汁與腎雙重代謝，各腎功能分級維持 2 vial Q12H" },
+            { name: "Cefepime 1g/2g (Maxipime, 4th gen)", route: "IV", stat: "1g–2g", norm: "2g Q8H", mod: "2g Q12H (30–49)\n2g QD (11–29)", sev: "1g QD", note: "腎功能不全需減量，避免神經毒性 (Neurotoxicity)" },
+            { name: "Zinforo 600mg (Ceftaroline, 5th gen)", route: "IV", stat: "600mg", norm: "600mg Q12H", mod: "400mg Q12H (30–50)\n300mg Q12H (15–30)", sev: "200mg Q12H (<15)", note: "MRSA 活性" },
+            { name: "Zavicefta 2g/0.5g (Ceftazidime/Avibactam)", route: "IV", stat: "—", norm: "2g/0.5g Q8H (drip 2h)", mod: "1g/0.25g Q8H (31–50)\n1g/0.25g Q12H (16–30)", sev: "0.75g/0.1875g QD (6–15)\n0.75g/0.1875g Q48H (HD)", note: "CRE / 困難抗藥性 GNB" }
+        ]
+    },
+    {
+        category: "Carbapenems (碳青黴烯類)",
+        drugs: [
+            { name: "Tienam 500mg (Imipenem/Cilastatin)", route: "IV", stat: "500mg", norm: "500mg Q6H", mod: "500mg Q8H (30–49)\n500mg Q12H (11–29)", sev: "250mg Q12H", note: "腎功能不良蓄積易引發抽搐 (Seizure)" },
+            { name: "Invanz 1g (Ertapenem)", route: "IV", stat: "0.5g–1g", norm: "1g QD", mod: "1g QD (30–49)\n0.5g QD (11–29)", sev: "0.5g QD", note: "不涵蓋 Pseudomonas" },
+            { name: "Meropenem 1g (Mepem)", route: "IV", stat: "1g / 0.5g", norm: "1g Q8H", mod: "1g Q12H (25–50)\n0.5g Q12H (10–25)", sev: "0.5g QD", note: "HD 病患於透析後給藥" }
+        ]
+    },
+    {
+        category: "Fluoroquinolones (氟喹諾酮類)",
+        drugs: [
+            { name: "Ciprofloxacin 400mg (IV)", route: "IV", stat: "200–400mg", norm: "400mg Q12H", mod: "200mg Q12H 或 400mg QD", sev: "400mg QD", note: "" },
+            { name: "Ciproxin 250/500mg (PO)", route: "PO", stat: "250–500mg", norm: "500mg Q12H", mod: "250mg Q12H", sev: "250mg Q12H", note: "" },
+            { name: "Cravit 500mg (Levofloxacin)", route: "IV/PO", stat: "500–750mg", norm: "500–750mg QD", mod: "500–750mg Q2D", sev: "500mg Q2D", note: "750mg 適用於綠膿桿菌/重症肺炎" },
+            { name: "Avelox 400mg (Moxifloxacin)", route: "IV/PO", stat: "400mg", norm: "400mg QD", mod: "400mg QD", sev: "400mg QD", note: "肝臟代謝為主，不需調整劑量；不適用於 UTI" }
+        ]
+    },
+    {
+        category: "Glycopeptides & Lipopeptides (糖肽類及抗革蘭氏陽性菌)",
+        drugs: [
+            { name: "Vancomycin 500mg", route: "IV", stat: "500mg–1g (drip > 1h)", norm: "1g Q12H", mod: "1g QD–Q3D (隨 HD 後打)", sev: "500mg Q2–3D (隨 HD 後打)", note: "需常規監測 Trough level (建議 15–20 μg/mL)" },
+            { name: "Teicon 200mg (Teicoplanin / Targocid)", route: "IV", stat: "10 mg/kg Q12H × 3 doses", norm: "5 mg/kg QD", mod: "5 mg/kg QD (>30)\n5 mg/kg Q2D (<30)", sev: "5 mg/kg Q2D", note: "Loading 需打滿 3 劑確保血中濃度；HD 病患維持 5 mg/kg Q2D" }
+        ]
+    },
+    {
+        category: "Aminoglycosides & Polymyxins (氨基糖苷類與多黏菌素)",
+        drugs: [
+            { name: "Amikacin 250mg", route: "IV", stat: "—", norm: ">80: 15mg/kg QD\n60–80: 12mg/kg QD", mod: "40–60: 7.5mg/kg QD\n30–40: 4mg/kg QD\n20–30: 7.5mg/kg Q2D\n10–20: 4mg/kg Q2D", sev: "3mg/kg Q3D", note: "具耳毒性與腎毒性，務必監測 Peak & Trough" },
+            { name: "Colimycin 2MU (Colistimethate sodium)", route: "IV/Inh", stat: "Loading:\n>60: 4.5支\n>50: 3.5支\n>40: 3支\n**1# Q12H (inh)", norm: ">70: 2.5支 Q12H\n50–69: 2支 Q12H\n**1# Q12H (inh)", mod: "20–49: 1 vial Q12H\n**1# Q12H (inh)", sev: "0.5 vial Q12H\n**1# Q12H (inh)", note: "吸入劑型 (inh) 不需依腎功能調整" }
+        ]
+    },
+    {
+        category: "Antifungals (抗黴菌藥物)",
+        drugs: [
+            { name: "Fluconazole 200mg (IV)", route: "IV", stat: "100–400mg", norm: "100–400mg QD (視嚴重度)", mod: "50–200mg QD (視嚴重度)", sev: "50–200mg QD (視嚴重度)", note: "HD 後給予常規全劑量" },
+            { name: "Diflucan 50mg (Fluconazole PO)", route: "PO", stat: "100–400mg", norm: "100–400mg QD (視嚴重度)", mod: "50–200mg QD (視嚴重度)", sev: "50–200mg QD (視嚴重度)", note: "" },
+            { name: "Micafungin 50mg (Mycamine)", route: "IV", stat: "—", norm: "100mg QD", mod: "100mg QD", sev: "100mg QN", note: "主要由肝臟代謝排泄，HD 透析後亦不需追加劑量" }
+        ]
+    },
+    {
+        category: "Antivirals (抗病毒藥物)",
+        drugs: [
+            { name: "Aciclovir 250mg (Acyclovir)", route: "IV", stat: "—", norm: "500mg Q8H (IV drip > 1hr)", mod: "5–12.5 mg/kg Q12–24H", sev: "2.5–6.25 mg/kg QD (洗腎後給)", note: "需充足水分補充，預防腎小管結晶" },
+            { name: "Paxlovid (Nirmatrelvir / Ritonavir)", route: "PO", stat: "—", norm: "3# BID (300/100mg)", mod: "2# BID (30–60 mL/min)\neGFR < 30 不建議使用", sev: "不建議使用 (eGFR < 30)", note: "含粉紅錠 (Nirmatrelvir) 2顆 + 白錠 (Ritonavir) 1顆" },
+            { name: "Tamiflu / Eraflu 75mg (Oseltamivir)", route: "PO", stat: "—", norm: "75mg BID", mod: "30mg BID (30–60)\n30mg QD (10–30)", sev: "HD/PD: 30mg QD", note: "" }
+        ]
+    },
+    {
+        category: "Other Antibiotics (其他各類抗生素)",
+        drugs: [
+            { name: "Clindamycin 300mg (Cleocin)", route: "IV", stat: "300mg", norm: "300mg Q6–8H", mod: "300mg Q6–8H", sev: "300mg Q6–8H", note: "肝臟代謝，腎功能不全不需調整" },
+            { name: "Klaricid 500mg (Clarithromycin)", route: "PO", stat: "—", norm: "500mg BID", mod: "500mg QD", sev: "500mg QD", note: "" },
+            { name: "Baktar 400/80mg (TMP/SMX)", route: "PO", stat: "—", norm: "2# BID", mod: "1# BID (15–30)", sev: "不建議使用 (<15)", note: "高血鉀高風險族群需密切監測" },
+            { name: "Metronidazol 500mg (IV) / 250mg (PO)", route: "IV/PO", stat: "500mg", norm: "500mg Q6H", mod: "500mg Q6H", sev: "500mg Q12H", note: "厭氧菌感染專用" },
+            { name: "Tigecyclin 50mg (Tygacil)", route: "IV", stat: "100mg", norm: "50mg Q12H", mod: "50mg Q12H", sev: "50mg Q12H", note: "肝臟代謝，不需依腎功能調整；不適用於 UTI / BSI" },
+            { name: "UFO 2g/4g (Flomoxef 複合劑)", route: "IV", stat: "2g / 4g", norm: "4g Q8H", mod: "2g Q8H", sev: "1g Q12H", note: "" },
+            { name: "Fosfomycin 3g/8g (PO/IV)", route: "PO", stat: "3g", norm: "UTI: 3g x 1 dose\nComplicated UTI: 3g x 3 doses Q2-3days\nProstatitis: 3g x 7 dose Q3D", mod: "UTI: 3g x 1 dose\nComplicated UTI: 3g x 3 doses Q2-3days\nProstatitis: 3g x 7 doses Q3D", sev: "不建議使用", note: "主要用於單純性下泌尿道感染" }
+        ]
+    }
+];
+
+// Initialize DOM
+const tableBody = document.getElementById("tableBody");
+const searchInput = document.getElementById("searchInput");
+const drugSelect = document.getElementById("drugSelect");
+const filterBtns = document.querySelectorAll(".filter-btn");
+const resultCount = document.getElementById("resultCount");
+const featuredCard = document.getElementById("featuredCard");
+
+let currentRoute = "ALL";
+
+// Populate Select Dropdown
+let flatDrugList = [];
+drugDatabase.forEach(cat => {
+    cat.drugs.forEach(d => {
+        flatDrugList.push(d);
+        const opt = document.createElement("option");
+        opt.value = d.name;
+        opt.textContent = `${d.name} [${d.route}]`;
+        drugSelect.appendChild(opt);
+    });
+});
+
+function getRouteBadge(route) {
+    if (route.includes("IV") && route.includes("PO")) return `<span class="route-badge route-mix">${route}</span>`;
+    if (route.includes("IV")) return `<span class="route-badge route-iv">${route}</span>`;
+    if (route.includes("PO")) return `<span class="route-badge route-po">${route}</span>`;
+    if (route.includes("Inh")) return `<span class="route-badge route-inh">${route}</span>`;
+    return `<span class="route-badge">${route}</span>`;
+}
+
+function renderTable(searchTerm = "", routeFilter = "ALL") {
+    tableBody.innerHTML = "";
+    let totalMatches = 0;
+    const term = searchTerm.trim().toLowerCase();
+
+    drugDatabase.forEach(cat => {
+        const filteredDrugs = cat.drugs.filter(d => {
+            const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
+            const matchesSearch = !term || matchText.includes(term);
+            const matchesRoute = (routeFilter === "ALL") || d.route.includes(routeFilter);
+            return matchesSearch && matchesRoute;
+        });
+
+        if (filteredDrugs.length > 0) {
+            // Category Row
+            const catTr = document.createElement("tr");
+            catTr.className = "category-row";
+            catTr.innerHTML = `<td colspan="7">【${cat.category}】</td>`;
+            tableBody.appendChild(catTr);
+
+            filteredDrugs.forEach(d => {
+                totalMatches++;
+                const tr = document.createElement("tr");
+                tr.className = "drug-row";
+                
+                // Highlight text if searching
+                let displayName = d.name;
+                if (term) {
+                    const regex = new RegExp(`(${term})`, "gi");
+                    displayName = displayName.replace(regex, `<span class="highlight-match">$1</span>`);
+                }
+
+                tr.innerHTML = `
+                    <td class="drug-name">${displayName}</td>
+                    <td style="text-align:center;">${getRouteBadge(d.route)}</td>
+                    <td class="dose-cell">${d.stat.replace(/\n/g, '<br>')}</td>
+                    <td class="dose-cell dose-normal">${d.norm.replace(/\n/g, '<br>')}</td>
+                    <td class="dose-cell dose-moderate">${d.mod.replace(/\n/g, '<br>')}</td>
+                    <td class="dose-cell dose-severe">${d.sev.replace(/\n/g, '<br>')}</td>
+                    <td class="notes-cell">${d.note}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+    });
+
+    resultCount.textContent = `共符合 ${totalMatches} 種抗生素品項`;
+}
+
+// Event Listeners
+searchInput.addEventListener("input", (e) => {
+    renderTable(e.target.value, currentRoute);
+});
+
+filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentRoute = btn.getAttribute("data-route");
+        renderTable(searchInput.value, currentRoute);
+    });
+});
+
+drugSelect.addEventListener("change", (e) => {
+    const selectedName = e.target.value;
+    if (!selectedName) {
+        featuredCard.classList.remove("active");
+        return;
+    }
+    const drug = flatDrugList.find(d => d.name === selectedName);
+    if (drug) {
+        document.getElementById("featName").textContent = drug.name;
+        document.getElementById("featRoute").outerHTML = getRouteBadge(drug.route);
+        document.getElementById("featStat").innerHTML = drug.stat.replace(/\n/g, '<br>') || "—";
+        document.getElementById("featNorm").innerHTML = drug.norm.replace(/\n/g, '<br>') || "—";
+        document.getElementById("featMod").innerHTML = drug.mod.replace(/\n/g, '<br>') || "—";
+        document.getElementById("featSev").innerHTML = drug.sev.replace(/\n/g, '<br>') || "—";
+        document.getElementById("featNote").textContent = drug.note || "無特別備註";
+        featuredCard.classList.add("active");
+        featuredCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+});
+
+// Initial Render
+renderTable();
+</script>
+
+</body>
+</html>

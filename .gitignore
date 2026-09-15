@@ -1,0 +1,15 @@
+# Windows OS Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Temporary / Office files
+~$*
+*.tmp
+*.log
+
+# Editor / IDE settings
+.vscode/
+.idea/
+*.swp
