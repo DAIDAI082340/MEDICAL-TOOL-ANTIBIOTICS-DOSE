@@ -33,19 +33,19 @@ Antibiotics dose/
 
 本工具為純靜態單頁應用，已配置標準 `index.html`，可一鍵免費部署至 GitHub Pages：
 
-1. **建立遠端倉庫**：於 GitHub 建立新 Repository（例如名為 `antibiotics-dose-guide`）。
+1. **遠端倉庫網址**：`https://github.com/DAIDAI082340/MEDICAL-TOOL-ANTIBIOTICS-DOSE.git`
 2. **推送本專案至 GitHub**：
    ```bash
    git branch -M main
-   git remote add origin https://github.com/<您的帳號>/antibiotics-dose-guide.git
+   git remote add origin https://github.com/DAIDAI082340/MEDICAL-TOOL-ANTIBIOTICS-DOSE.git
    git push -u origin main
    ```
 3. **啟用 GitHub Pages**：
    - 進入 GitHub 倉庫的 **Settings** -> 左側選單 **Pages**。
    - 在 **Build and deployment** > **Source** 選擇 `Deploy from a branch`。
    - 在 **Branch** 選取 `main` / `(root)`，並點擊 **Save**。
-4. **完成上線**：
-   - 等待約 1~2 分鐘後，即可在 `https://<您的帳號>.github.io/antibiotics-dose-guide/` 隨時隨地開啟使用！
+4. **線上查詢系統網址**：
+   - `https://daidai082340.github.io/MEDICAL-TOOL-ANTIBIOTICS-DOSE/`
 
 ---
 
