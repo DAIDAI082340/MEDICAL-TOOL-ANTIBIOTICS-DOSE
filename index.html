@@ -416,7 +416,7 @@
         <!-- Header -->
         <div class="header">
             <h1>💊 臨床抗生素腎功能劑量調整速查系統</h1>
-            <p>依據 eGFR 分級速查（>50、10–50、<10 mL/min/1.73^2 與透析劑量），支援即時關鍵字搜尋與分類快選。</p>
+            <p>依據 eGFR 分級速查（>50、10–50、<10 mL/min/1.73m2 與透析劑量），支援即時關鍵字搜尋與分類快選。</p>
         </div>
 
         <!-- Interactive Query Toolbar -->
@@ -458,15 +458,15 @@
                     <div class="val" id="featStat">—</div>
                 </div>
                 <div class="dose-box c-norm">
-                    <div class="label">eGFR > 50 mL/min/1.73^2<br><span style="font-size:0.75rem; font-weight:normal;">(常規/輕度)</span></div>
+                    <div class="label">eGFR > 50 mL/min/1.73m2<br><span style="font-size:0.75rem; font-weight:normal;">(常規/輕度)</span></div>
                     <div class="val dose-normal" id="featNorm">—</div>
                 </div>
                 <div class="dose-box c-mod">
-                    <div class="label">eGFR 10–50 mL/min/1.73^2<br><span style="font-size:0.75rem; font-weight:normal;">(中度減量)</span></div>
+                    <div class="label">eGFR 10–50 mL/min/1.73m2<br><span style="font-size:0.75rem; font-weight:normal;">(中度減量)</span></div>
                     <div class="val dose-moderate" id="featMod">—</div>
                 </div>
                 <div class="dose-box c-sev">
-                    <div class="label">eGFR < 10 mL/min/1.73^2<br><span style="font-size:0.75rem; font-weight:normal;">(重度/HD/PD)</span></div>
+                    <div class="label">eGFR < 10 mL/min/1.73m2<br><span style="font-size:0.75rem; font-weight:normal;">(重度/HD/PD)</span></div>
                     <div class="val dose-severe" id="featSev">—</div>
                 </div>
             </div>
@@ -490,9 +490,9 @@
                     <th style="width: 22%;">抗生素名稱 (Antibiotics / 規格)</th>
                     <th style="width: 7%;">途徑</th>
                     <th style="width: 14%;">Stat / Loading Dose</th>
-                    <th style="width: 15%;">eGFR > 50 mL/min/1.73^2<br><span style="font-size:0.8rem; font-weight:normal;">(常規/輕度)</span></th>
-                    <th style="width: 17%;">eGFR 10–50 mL/min/1.73^2<br><span style="font-size:0.8rem; font-weight:normal;">(中度腎功能不全)</span></th>
-                    <th style="width: 15%;">eGFR < 10 mL/min/1.73^2<br><span style="font-size:0.8rem; font-weight:normal;">(重度/HD/PD)</span></th>
+                    <th style="width: 15%;">eGFR > 50 mL/min/1.73m2<br><span style="font-size:0.8rem; font-weight:normal;">(常規/輕度)</span></th>
+                    <th style="width: 17%;">eGFR 10–50 mL/min/1.73m2<br><span style="font-size:0.8rem; font-weight:normal;">(中度腎功能不全)</span></th>
+                    <th style="width: 15%;">eGFR < 10 mL/min/1.73m2<br><span style="font-size:0.8rem; font-weight:normal;">(重度/HD/PD)</span></th>
                     <th style="width: 20%;">臨床備註 (Notes)</th>
                 </tr>
             </thead>
@@ -523,7 +523,7 @@ const drugDatabase = [
             { name: "Cephalexin 500mg (PO, 1st gen)", route: "PO", stat: "250–500mg", norm: "500mg Q6H", mod: "500mg Q12H", sev: "250mg Q12H", note: "第一代口服頭孢菌素，常見於皮膚與軟組織感染；主要經腎排泄，重度腎功能不全需減半並拉長間隔至 Q12H。" },
             { name: "Curoxime 750mg (Cefuroxime, 2nd gen)", route: "IV", stat: "1.5g", norm: "1.5g Q8H", mod: "1.5g Q12H", sev: "1.5g QD", note: "第二代頭孢菌素，涵蓋流感嗜血桿菌等呼吸道致病菌；主要經腎小球濾過與腎小管排泄，腎衰竭需顯著減量。" },
             { name: "Flomoxef 1g (Flumarin, 2nd gen)", route: "IV", stat: "HD 前後 各 1g", norm: "1g Q6H", mod: "1.5g Q12H (30–50)\n1g Q12H (<30)", sev: "1g QD\nPD: 1g QD", note: "具良好抗厭氧菌活性；含 N-MTT 側鏈，長期使用需監測凝血功能 (PT/INR) 防出血，並避免飲酒以防雙硫侖樣反應。" },
-            { name: "Ceftriaxone / Sintrix 500mg (3rd gen)", route: "IV", stat: "1g–2g", norm: "2g QD 或 1g Q12H", mod: "2g QD 或 1g Q12H", sev: "2g QD 或 1g Q12H", note: "雙重排泄途徑 (膽汁 40%、腎 60%)，腎功能不全不需調整；⚠️ 嚴禁與含鈣溶液 (如 Ringer's) 同管輸注防結晶沉澱；蛋白結合率高不易被透析清除。" },
+            { name: "Ceftriaxone / Cefin / Sintrix 500mg (3rd gen)", route: "IV", stat: "1g–2g", norm: "2g QD 或 1g Q12H", mod: "2g QD 或 1g Q12H", sev: "2g QD 或 1g Q12H", note: "【常用商品名】Cefin (賽芬) / Sintrix (欣得力) / Rocephin (羅氏芬)；雙重排泄途徑 (膽汁 40%、腎 60%)，各腎功能分級不需調整劑量；⚠️ 嚴禁與含鈣溶液 (如 Ringer's) 同管輸注防結晶沉澱；蛋白結合率高不易被透析清除。" },
             { name: "Cefixime 100mg (PO, 3rd gen)", route: "PO", stat: "200mg", norm: "200mg Q12H", mod: "100mg Q12H", sev: "100mg QD", note: "第三代口服頭孢菌素，對 GNB 活性佳 (對綠膿桿菌無效)；主要經腎排泄，eGFR < 50 需減量至 100mg Q12H–QD。" },
             { name: "Cetadime / Fortum 1g (Ceftazidime, 3rd gen)", route: "IV", stat: "2g", norm: "2g Q8H", mod: "1g Q12H (31–50)\n1g Q12H (16–30)\n1g QD (6–15)", sev: "1g HS (隨HD後給)", note: "抗綠膿桿菌第三代頭孢菌素主力；主要經腎排泄，腎衰竭蓄積易引發神經毒性 (腦病變、意識混亂、抽搐)；HD 透析後給藥。" },
             { name: "Cefoperazone 1g / Sulbactam 1g (Brosym)", route: "IV", stat: "2g / 2g", norm: "2g / 2g Q12H", mod: "2g / 2g Q12H (30–50)\n1g / 1g Q12H (15–30)", sev: "1g / 1g Q12H (eGFR<15)", note: "主要經膽汁代謝排泄 (約 75%)，一般腎功能不全不需大幅減量；含 N-MTT 側鏈，長期使用宜補充維生素 K 防出血，避免飲酒。" },

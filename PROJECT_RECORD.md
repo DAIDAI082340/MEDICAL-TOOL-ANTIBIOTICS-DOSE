@@ -186,6 +186,12 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
+- **v0.4.1 (2026-09-16)**:
+  - **單位顯示微調**：依使用者回饋將 eGFR 單位由 `mL/min/1.73^2` 優化修訂為標準格式 **`mL/min/1.73m2`**。
+  - **藥名別名擴充 (Ceftriaxone = Cefin)**：
+    - 將第三代頭孢菌素 **Ceftriaxone** 正式增列常見院內商品名 **Cefin (賽芬)**，命名更新為 `Ceftriaxone / Cefin / Sintrix 500mg (3rd gen)`。
+    - 支援直接輸入 `Cefin` 或 `Ceftriaxone` 快速聯想過濾。
+
 - **v0.4.0 (2026-09-16)**:
   - **版面比例優化與獨立滾動 (Fixed Top + Scrollable Table)**：
     - 將「抗生素品項」以上區塊（Banner、搜尋工具列、單藥卡片、狀態欄）大幅緊湊化收合，提升下方表格可視面積逾 50%。
