@@ -186,6 +186,14 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
+- **v0.4.2 (2026-09-16)**:
+  - **版面上方與整體字體適度放大 (Layout & Font Readability Enhancement)**：
+    - 上方固定區塊（Header、搜尋工具列、選定藥物精選卡、狀態欄）適度放寬間距與高度，提供更舒適的閱讀與操作呼吸感。
+    - 全面放大整體文字字級：標題 (`1.35rem`)、搜尋輸入框與下拉選單 (`1.0rem` / `0.96rem`)、四大劑量方塊文字與數值 (`0.88rem` / `1.15rem`)、備註文字 (`0.95rem`)。
+    - 下方主資料庫表格表頭、品項名稱、途徑標籤、各 eGFR 區間劑量及備註全面放大，顯著提升長者或高壓臨床情境下的易讀性與點擊辨識率。
+  - **防瀏覽器快取設定 (Anti-cache Meta Tags)**：
+    - 於 `<head>` 區塊增設 `Cache-Control: no-cache, no-store, must-revalidate`、`Pragma: no-cache`、`Expires: 0`，防止瀏覽器讀取過期本機快取以確保即時顯示最新劑量與單位。
+
 - **v0.4.1 (2026-09-16)**:
   - **單位顯示微調**：依使用者回饋將 eGFR 單位由 `mL/min/1.73^2` 優化修訂為標準格式 **`mL/min/1.73m2`**。
   - **藥名別名擴充 (Ceftriaxone = Cefin)**：
