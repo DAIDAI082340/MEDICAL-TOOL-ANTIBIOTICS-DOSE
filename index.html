@@ -30,96 +30,118 @@
             padding: 0;
         }
 
-        body {
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Microsoft JhengHei", Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text-main);
-            padding: 20px 15px;
             line-height: 1.4;
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1440px;
+            height: 100vh;
             margin: 0 auto;
+            padding: 8px 14px 10px 14px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
-        /* Header Banner */
+        /* Top Fixed Section */
+        .top-fixed-section {
+            flex-shrink: 0;
+        }
+
+        /* Header Banner - Compact */
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
-            padding: 24px 28px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(31, 78, 121, 0.15);
-            margin-bottom: 22px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(31, 78, 121, 0.12);
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .header h1 {
-            font-size: 1.65rem;
-            margin-bottom: 8px;
+            font-size: 1.15rem;
+            margin: 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .header p {
-            font-size: 0.92rem;
+            font-size: 0.8rem;
             opacity: 0.9;
+            margin: 0;
         }
 
-        /* Search & Filter Card */
+        /* Search & Filter Card - Compact */
         .search-panel {
             background: var(--card-bg);
-            padding: 20px 24px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-            margin-bottom: 22px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            margin-bottom: 6px;
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 8px;
             align-items: center;
         }
 
         .search-box-wrapper {
-            flex: 2;
-            min-width: 280px;
+            flex: 1.8;
+            min-width: 200px;
             position: relative;
         }
 
         .search-box-wrapper input {
             width: 100%;
-            padding: 12px 16px 12px 42px;
-            font-size: 1.05rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
+            height: 32px;
+            padding: 4px 12px 4px 32px;
+            font-size: 0.88rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
             outline: none;
             transition: all 0.2s ease;
         }
 
         .search-box-wrapper input:focus {
             border-color: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(47, 85, 151, 0.15);
+            box-shadow: 0 0 0 2px rgba(47, 85, 151, 0.15);
         }
 
         .search-box-wrapper .icon {
             position: absolute;
-            left: 14px;
+            left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.2rem;
+            font-size: 0.95rem;
             color: #888;
         }
 
         .select-wrapper {
-            flex: 1.5;
-            min-width: 260px;
+            flex: 1.2;
+            min-width: 170px;
         }
 
         .select-wrapper select {
             width: 100%;
-            padding: 12px 16px;
-            font-size: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
+            height: 32px;
+            padding: 4px 8px;
+            font-size: 0.85rem;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
             background-color: #fff;
             outline: none;
             cursor: pointer;
@@ -132,16 +154,19 @@
 
         .filter-buttons {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .filter-btn {
-            padding: 8px 14px;
+            padding: 4px 10px;
+            height: 32px;
+            line-height: 22px;
             border: 1px solid var(--border);
             background: white;
-            border-radius: 20px;
-            font-size: 0.88rem;
+            border-radius: 16px;
+            font-size: 0.82rem;
             cursor: pointer;
             transition: all 0.2s ease;
             color: var(--text-main);
@@ -154,11 +179,13 @@
         }
 
         .reset-btn {
-            padding: 8px 14px;
+            padding: 4px 10px;
+            height: 32px;
+            line-height: 22px;
             border: 1px dashed var(--border);
             background: white;
-            border-radius: 20px;
-            font-size: 0.88rem;
+            border-radius: 16px;
+            font-size: 0.82rem;
             cursor: pointer;
             transition: all 0.2s ease;
             color: var(--text-muted);
@@ -172,21 +199,29 @@
 
         /* Result Counter */
         .status-bar {
-            margin-bottom: 12px;
-            font-size: 0.92rem;
+            margin-bottom: 6px;
+            font-size: 0.84rem;
             color: var(--text-muted);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 4px;
+            padding: 0 2px;
+        }
+
+        .status-tip {
+            font-size: 0.8rem;
+            color: #777;
         }
 
         /* Table Design */
         .table-responsive {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
             overflow-x: auto;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border: 1px solid var(--border);
         }
 
@@ -194,18 +229,22 @@
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 0.93rem;
+            font-size: 0.88rem;
         }
 
         th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
             background-color: var(--primary);
             color: white;
-            padding: 14px 12px;
+            padding: 9px 8px;
             font-weight: 600;
             text-align: center;
             white-space: nowrap;
             letter-spacing: 0.5px;
             border-right: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
         }
 
         th:last-child {
@@ -213,7 +252,7 @@
         }
 
         td {
-            padding: 12px 14px;
+            padding: 8px 10px;
             border-bottom: 1px solid var(--border);
             vertical-align: middle;
         }
@@ -222,8 +261,8 @@
             background-color: var(--category-bg);
             color: var(--primary);
             font-weight: bold;
-            font-size: 1rem;
-            padding: 10px 16px;
+            font-size: 0.92rem;
+            padding: 6px 12px;
             border-bottom: 1px solid #c2cde2;
         }
 
@@ -248,14 +287,14 @@
         .drug-name {
             font-weight: bold;
             color: #102a43;
-            min-width: 180px;
+            min-width: 170px;
         }
 
         .route-badge {
             display: inline-block;
-            padding: 3px 8px;
+            padding: 2px 6px;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: bold;
             text-align: center;
         }
@@ -267,9 +306,9 @@
 
         .dose-cell {
             text-align: center;
-            min-width: 140px;
+            min-width: 130px;
             white-space: pre-line;
-            line-height: 1.45;
+            line-height: 1.35;
         }
 
         .dose-normal { color: #1b5e20; font-weight: 500; }
@@ -278,9 +317,9 @@
 
         .notes-cell {
             color: #555;
-            font-size: 0.87rem;
+            font-size: 0.84rem;
             min-width: 220px;
-            line-height: 1.45;
+            line-height: 1.4;
             white-space: pre-line;
         }
 
@@ -291,15 +330,15 @@
             padding: 0 2px;
         }
 
-        /* Quick Card for selected drug */
+        /* Quick Card for selected drug - Compact */
         .featured-card {
             display: none;
             background: #fff;
-            border: 2px solid var(--primary-light);
-            border-radius: 12px;
-            padding: 18px 22px;
-            margin-bottom: 22px;
-            box-shadow: 0 4px 14px rgba(47, 85, 151, 0.12);
+            border: 1.5px solid var(--primary-light);
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            box-shadow: 0 3px 10px rgba(47, 85, 151, 0.1);
         }
 
         .featured-card.active {
@@ -307,10 +346,10 @@
         }
 
         .featured-title {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-weight: bold;
             color: var(--primary);
-            margin-bottom: 14px;
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -318,29 +357,29 @@
 
         .grid-dose {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 8px;
         }
 
         .dose-box {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 12px 14px;
+            border-radius: 6px;
+            padding: 6px 8px;
             text-align: center;
         }
 
         .dose-box .label {
-            font-size: 0.82rem;
-            font-weight: bold;
-            margin-bottom: 6px;
-            text-transform: uppercase;
+            font-size: 0.76rem;
+            font-weight: 600;
+            margin-bottom: 3px;
         }
 
         .dose-box .val {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: bold;
             white-space: pre-line;
+            line-height: 1.35;
         }
 
         .dose-box.c-stat .label { color: #475569; }
@@ -348,82 +387,102 @@
         .dose-box.c-mod .label { color: #b45309; }
         .dose-box.c-sev .label { color: #991b1b; }
 
+        .featured-note-box {
+            margin-top: 6px;
+            font-size: 0.82rem;
+            color: #444;
+            background: #fff8e1;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border-left: 4px solid #f59e0b;
+            line-height: 1.4;
+        }
+
         @media (max-width: 768px) {
-            body { padding: 12px 8px; }
-            .header h1 { font-size: 1.35rem; }
-            .search-panel { padding: 14px; }
-            table { font-size: 0.86rem; }
-            th, td { padding: 10px 8px; }
+            html, body { overflow: auto; height: auto; }
+            .container { height: auto; padding: 6px 8px; overflow: visible; }
+            .header h1 { font-size: 1.1rem; }
+            .search-panel { padding: 8px; }
+            table { font-size: 0.82rem; }
+            th, td { padding: 6px 6px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Header -->
-    <div class="header">
-        <h1>💊 臨床抗生素腎功能劑量調整速查系統</h1>
-        <p>依據 eGFR 分級速查（>50、10–50、<10 mL/min 與透析劑量），支援即時關鍵字搜尋與分類快選。</p>
+    <!-- Top Fixed Section: Everything above table -->
+    <div class="top-fixed-section">
+        <!-- Header -->
+        <div class="header">
+            <h1>💊 臨床抗生素腎功能劑量調整速查系統</h1>
+            <p>依據 eGFR 分級速查（>50、10–50、<10 mL/min/1.73^2 與透析劑量），支援即時關鍵字搜尋與分類快選。</p>
+        </div>
+
+        <!-- Interactive Query Toolbar -->
+        <div class="search-panel">
+            <div class="search-box-wrapper">
+                <span class="icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="輸入藥名關鍵字（如 vanco, dapto, xocova, cef 等）..." autofocus>
+            </div>
+            <div class="select-wrapper">
+                <select id="categorySelect">
+                    <option value="ALL">-- 全部分類 (9 大類) --</option>
+                </select>
+            </div>
+            <div class="select-wrapper">
+                <select id="drugSelect">
+                    <option value="">-- 全部抗生素品項 (A–Z 依序排列) --</option>
+                </select>
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-route="ALL">全部途徑</button>
+                <button class="filter-btn" data-route="IV">IV 針劑</button>
+                <button class="filter-btn" data-route="PO">PO 口服</button>
+                <button class="reset-btn" id="resetBtn" title="清除搜尋並還原所有抗生素清單">↺ 顯示全部</button>
+            </div>
+        </div>
+
+        <!-- Single Selected Drug Card (Quick Highlight) -->
+        <div class="featured-card" id="featuredCard">
+            <div class="featured-title">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span id="featName">藥物名稱</span>
+                    <span id="featRouteContainer"><span id="featRoute" class="route-badge route-iv">IV</span></span>
+                </div>
+                <button id="closeFeatBtn" style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: #888; padding: 2px 6px; border-radius: 4px;" title="關閉單藥卡片">✕</button>
+            </div>
+            <div class="grid-dose">
+                <div class="dose-box c-stat">
+                    <div class="label">Stat / Loading Dose</div>
+                    <div class="val" id="featStat">—</div>
+                </div>
+                <div class="dose-box c-norm">
+                    <div class="label">eGFR > 50 mL/min/1.73^2<br><span style="font-size:0.75rem; font-weight:normal;">(常規/輕度)</span></div>
+                    <div class="val dose-normal" id="featNorm">—</div>
+                </div>
+                <div class="dose-box c-mod">
+                    <div class="label">eGFR 10–50 mL/min/1.73^2<br><span style="font-size:0.75rem; font-weight:normal;">(中度減量)</span></div>
+                    <div class="val dose-moderate" id="featMod">—</div>
+                </div>
+                <div class="dose-box c-sev">
+                    <div class="label">eGFR < 10 mL/min/1.73^2<br><span style="font-size:0.75rem; font-weight:normal;">(重度/HD/PD)</span></div>
+                    <div class="val dose-severe" id="featSev">—</div>
+                </div>
+            </div>
+            <div class="featured-note-box">
+                <strong>📌 臨床備註：</strong><span id="featNote" style="white-space: pre-line; display: inline-block; vertical-align: top; margin-top: 1px;">—</span>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span id="resultCount">共符合 45 種抗生素品項</span>
+            <span class="status-tip">點選表格任一品項鎖定檢視，或使用上方分類與搜尋即時過濾</span>
+        </div>
     </div>
 
-    <!-- Interactive Query Toolbar -->
-    <div class="search-panel">
-        <div class="search-box-wrapper">
-            <span class="icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="輸入藥名關鍵字（如 vanco, dapto, xocova, cef 等）..." autofocus>
-        </div>
-        <div class="select-wrapper">
-            <select id="drugSelect">
-                <option value="">-- 下拉挑選單一抗生素 (A–Z 依序排列) --</option>
-            </select>
-        </div>
-        <div class="filter-buttons">
-            <button class="filter-btn active" data-route="ALL">全部途徑</button>
-            <button class="filter-btn" data-route="IV">IV 針劑</button>
-            <button class="filter-btn" data-route="PO">PO 口服</button>
-            <button class="reset-btn" id="resetBtn" title="清除搜尋並還原所有抗生素清單">↺ 顯示全部</button>
-        </div>
-    </div>
-
-    <!-- Single Selected Drug Card (Quick Highlight) -->
-    <div class="featured-card" id="featuredCard">
-        <div class="featured-title">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span id="featName">藥物名稱</span>
-                <span id="featRouteContainer"><span id="featRoute" class="route-badge route-iv">IV</span></span>
-            </div>
-            <button id="closeFeatBtn" style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: #888; padding: 2px 8px; border-radius: 4px;" title="關閉單藥卡片">✕</button>
-        </div>
-        <div class="grid-dose">
-            <div class="dose-box c-stat">
-                <div class="label">Stat / Loading Dose</div>
-                <div class="val" id="featStat">—</div>
-            </div>
-            <div class="dose-box c-norm">
-                <div class="label">eGFR > 50 mL/min (常規/輕度)</div>
-                <div class="val dose-normal" id="featNorm">—</div>
-            </div>
-            <div class="dose-box c-mod">
-                <div class="label">eGFR 10–50 mL/min (中度減量)</div>
-                <div class="val dose-moderate" id="featMod">—</div>
-            </div>
-            <div class="dose-box c-sev">
-                <div class="label">eGFR < 10 mL/min (重度/HD/PD)</div>
-                <div class="val dose-severe" id="featSev">—</div>
-            </div>
-        </div>
-        <div style="margin-top: 12px; font-size: 0.9rem; color: #555; background: #fff8e1; padding: 10px 14px; border-radius: 6px; border-left: 4px solid #f59e0b;">
-            <strong>📌 臨床備註：</strong><span id="featNote" style="white-space: pre-line; display: inline-block; vertical-align: top; margin-top: 2px;">—</span>
-        </div>
-    </div>
-
-    <!-- Status Bar -->
-    <div class="status-bar">
-        <span id="resultCount">共顯示 34 種抗生素品項</span>
-        <span>可點選表頭欄位或使用上方搜尋欄即時過濾</span>
-    </div>
-
-    <!-- Full Database Table -->
+    <!-- Full Database Table (Scrollable Section) -->
     <div class="table-responsive">
         <table id="mainTable">
             <thead>
@@ -431,9 +490,9 @@
                     <th style="width: 22%;">抗生素名稱 (Antibiotics / 規格)</th>
                     <th style="width: 7%;">途徑</th>
                     <th style="width: 14%;">Stat / Loading Dose</th>
-                    <th style="width: 15%;">eGFR > 50 mL/min<br><span style="font-size:0.8rem; font-weight:normal;">(常規/輕度)</span></th>
-                    <th style="width: 17%;">eGFR 10–50 mL/min<br><span style="font-size:0.8rem; font-weight:normal;">(中度腎功能不全)</span></th>
-                    <th style="width: 15%;">eGFR < 10 mL/min<br><span style="font-size:0.8rem; font-weight:normal;">(重度/HD/PD)</span></th>
+                    <th style="width: 15%;">eGFR > 50 mL/min/1.73^2<br><span style="font-size:0.8rem; font-weight:normal;">(常規/輕度)</span></th>
+                    <th style="width: 17%;">eGFR 10–50 mL/min/1.73^2<br><span style="font-size:0.8rem; font-weight:normal;">(中度腎功能不全)</span></th>
+                    <th style="width: 15%;">eGFR < 10 mL/min/1.73^2<br><span style="font-size:0.8rem; font-weight:normal;">(重度/HD/PD)</span></th>
                     <th style="width: 20%;">臨床備註 (Notes)</th>
                 </tr>
             </thead>
@@ -496,7 +555,7 @@ const drugDatabase = [
         drugs: [
             { name: "Vancomycin 500mg", route: "IV", stat: "500mg–1g (drip > 1h)", norm: "1g Q12H", mod: "1g QD–Q3D (隨 HD 後打)", sev: "500mg Q2–3D (隨 HD 後打)", note: "MRSA 首選一線藥物；⚠️ 每次至少滴注 60–120 分鐘以預防紅人症候群 (Red Man Syndrome)；具腎毒性，常規需監測 Trough 濃度 (15–20 μg/mL)；隨 HD 後給藥。" },
             { name: "Teicon 200mg (Teicoplanin / Targocid)", route: "IV", stat: "10 mg/kg Q12H × 3 doses", norm: "5 mg/kg QD", mod: "5 mg/kg QD (>30)\n5 mg/kg Q2D (<30)", sev: "5 mg/kg Q2D", note: "糖肽類抗生素；⚠️ 首要關鍵：Loading 需打滿 3 劑 (每 12 小時一劑) 始能迅速達有效血中濃度；半衰期極長 (100–170 小時)，透析不清除，HD 維持 5 mg/kg Q2D。" },
-            { name: "Daptomycin 500mg (Cubicin / 達托黴素)", route: "IV", stat: "4–6 mg/kg (重症菌血症可達 8–10 mg/kg)", norm: "4–6 mg/kg QD\n(重症菌血症: 6–8 mg/kg QD)", mod: "CrCl ≥ 30: 4–6 mg/kg QD\nCrCl < 30: 4–6 mg/kg Q48H", sev: "4–6 mg/kg Q48H (隨 HD 透析後給藥)", note: "【抗革蘭氏陽性菌 / MRSA / VRE】\n常規劑量 4–6 mg/kg QD，洗腎病患 Q48H 給藥 (每次 HD 透析結束後補充)。\n⚠️ 臨床監測要點：\n• 每 3–5 天追蹤 Blood Culture (B/C) 評估療效\n• 每 7 天定期監測 CPK (肌酸激酶，防橫紋肌溶解/肌病變，若 CPK > 1000 有症狀或 > 2000 無症狀應停藥)\n⚠️ 本藥會被肺表面活性劑去活化，絕對不可用於治療肺炎！" }
+            { name: "Daptomycin 500mg (Cubicin / 達托黴素)", route: "IV", stat: "6–10 mg/kg (視感染嚴重度/菌血症評估)", norm: "6–10 mg/kg QD\n(重症菌血症/心內膜炎: 8–10 mg/kg QD)", mod: "CrCl ≥ 30: 6–10 mg/kg QD\nCrCl < 30: 6–10 mg/kg Q48H", sev: "6–10 mg/kg Q48H (隨 HD 透析後給藥)", note: "【抗革蘭氏陽性菌 / MRSA / VRE】\n常規劑量 6–10 mg/kg QD，洗腎病患 Q48H 給藥 (每次 HD 透析結束後補充)。\n⚠️ 臨床監測要點：\n• 每 3–5 天追蹤 Blood Culture (B/C) 評估療效\n• 每 7 天定期監測 CPK (肌酸激酶，防橫紋肌溶解/肌病變，若 CPK > 1000 有症狀或 > 2000 無症狀應停藥)\n⚠️ 本藥會被肺表面活性劑去活化，絕對不可用於治療肺炎！" }
         ]
     },
     {
@@ -541,6 +600,7 @@ const drugDatabase = [
 // Initialize DOM
 const tableBody = document.getElementById("tableBody");
 const searchInput = document.getElementById("searchInput");
+const categorySelect = document.getElementById("categorySelect");
 const drugSelect = document.getElementById("drugSelect");
 const filterBtns = document.querySelectorAll(".filter-btn");
 const resetBtn = document.getElementById("resetBtn");
@@ -549,6 +609,8 @@ const resultCount = document.getElementById("resultCount");
 const featuredCard = document.getElementById("featuredCard");
 
 let currentRoute = "ALL";
+let currentCategory = "ALL";
+let selectedDrugName = null; // When set, the table ONLY renders this single selected drug!
 
 // Helper: Escape RegExp special characters
 function escapeRegExp(string) {
@@ -563,23 +625,35 @@ drugDatabase.forEach(cat => {
     });
 });
 
-// A–Z Alphabetical Sort for Dropdown
-const sortedDrugList = [...flatDrugList].sort((a, b) => 
-    a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
-);
-
-// Populate Select Dropdown in A-Z order
-function populateDropdown(routeFilter = "ALL") {
-    const prevVal = drugSelect.value;
-    drugSelect.innerHTML = '<option value="">-- 下拉挑選單一抗生素 (A–Z 依序排列) --</option>';
-    sortedDrugList.forEach(d => {
-        if (routeFilter === "ALL" || d.route.includes(routeFilter)) {
-            const opt = document.createElement("option");
-            opt.value = d.name;
-            opt.textContent = `${d.name} [${d.route}]`;
-            drugSelect.appendChild(opt);
-        }
+// Populate Category Select Dropdown
+function populateCategoryDropdown() {
+    categorySelect.innerHTML = '<option value="ALL">-- 全部分類 (9 大類) --</option>';
+    drugDatabase.forEach(cat => {
+        const opt = document.createElement("option");
+        opt.value = cat.category;
+        opt.textContent = cat.category;
+        categorySelect.appendChild(opt);
     });
+}
+
+// Populate Drug Select Dropdown in A-Z order (filtered by category & route)
+function populateDrugDropdown(catFilter = "ALL", routeFilter = "ALL") {
+    const prevVal = drugSelect.value;
+    drugSelect.innerHTML = '<option value="">-- 全部抗生素品項 (A–Z 依序排列) --</option>';
+
+    const filtered = flatDrugList.filter(d => {
+        const matchesCat = (catFilter === "ALL") || (d.category === catFilter);
+        const matchesRoute = (routeFilter === "ALL") || d.route.includes(routeFilter);
+        return matchesCat && matchesRoute;
+    }).sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+
+    filtered.forEach(d => {
+        const opt = document.createElement("option");
+        opt.value = d.name;
+        opt.textContent = `${d.name} [${d.route}]`;
+        drugSelect.appendChild(opt);
+    });
+
     if (prevVal && Array.from(drugSelect.options).some(o => o.value === prevVal)) {
         drugSelect.value = prevVal;
     } else {
@@ -611,28 +685,26 @@ function updateFeaturedCard(drug) {
     featuredCard.classList.add("active");
 }
 
-// Highlight selected row in the bottom table
-function highlightSelectedRow(drugName) {
-    document.querySelectorAll("tr.drug-row").forEach(r => {
-        if (drugName && r.getAttribute("data-drug-name") === drugName) {
-            r.classList.add("selected-row");
-        } else {
-            r.classList.remove("selected-row");
-        }
-    });
-}
-
-// Render Table with safe highlighting & row click listeners
-function renderTable(searchTerm = "", routeFilter = "ALL") {
+// Render Table: when selectedDrugName is present, ONLY render that selected drug!
+function renderTable() {
     tableBody.innerHTML = "";
     let totalMatches = 0;
-    const term = searchTerm.trim().toLowerCase();
+    const term = searchInput.value.trim().toLowerCase();
 
     drugDatabase.forEach(cat => {
+        if (currentCategory !== "ALL" && cat.category !== currentCategory) {
+            return;
+        }
+
         const filteredDrugs = cat.drugs.filter(d => {
+            // If user has locked a specific drug, ONLY display this drug!
+            if (selectedDrugName) {
+                return d.name === selectedDrugName;
+            }
+
             const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
             const matchesSearch = !term || matchText.includes(term);
-            const matchesRoute = (routeFilter === "ALL") || d.route.includes(routeFilter);
+            const matchesRoute = (currentRoute === "ALL") || d.route.includes(currentRoute);
             return matchesSearch && matchesRoute;
         });
 
@@ -646,11 +718,14 @@ function renderTable(searchTerm = "", routeFilter = "ALL") {
                 totalMatches++;
                 const tr = document.createElement("tr");
                 tr.className = "drug-row";
+                if (selectedDrugName === d.name) {
+                    tr.classList.add("selected-row");
+                }
                 tr.setAttribute("data-drug-name", d.name);
                 
                 // Safe RegExp highlight
                 let displayName = d.name;
-                if (term) {
+                if (term && !selectedDrugName) {
                     const escaped = escapeRegExp(term);
                     const regex = new RegExp(`(${escaped})`, "gi");
                     displayName = displayName.replace(regex, `<span class="highlight-match">$1</span>`);
@@ -666,11 +741,9 @@ function renderTable(searchTerm = "", routeFilter = "ALL") {
                     <td class="notes-cell">${d.note ? d.note.replace(/\n/g, '<br>') : '—'}</td>
                 `;
 
-                // Row click listener to sync top card & dropdown
+                // Row click listener: select drug and isolate bottom table to ONLY this drug!
                 tr.addEventListener("click", () => {
-                    updateFeaturedCard(d);
-                    drugSelect.value = d.name;
-                    highlightSelectedRow(d.name);
+                    selectDrug(d);
                 });
 
                 tableBody.appendChild(tr);
@@ -678,107 +751,147 @@ function renderTable(searchTerm = "", routeFilter = "ALL") {
         }
     });
 
-    resultCount.textContent = `共符合 ${totalMatches} 種抗生素品項`;
+    if (selectedDrugName) {
+        resultCount.innerHTML = `已鎖定顯示：<strong>${selectedDrugName}</strong>（共 1 種品項，點「↺ 顯示全部」可還原完整清單）`;
+    } else {
+        resultCount.textContent = `共符合 ${totalMatches} 種抗生素品項`;
+    }
 }
 
-// 1. Search input event: filter table + sync top card and dropdown
+// Function to select a single drug: updates top card, isolates bottom table to only this drug!
+function selectDrug(drug) {
+    if (!drug) return;
+    selectedDrugName = drug.name;
+    drugSelect.value = drug.name;
+    updateFeaturedCard(drug);
+    renderTable();
+}
+
+// 1. Search input event
 searchInput.addEventListener("input", (e) => {
+    selectedDrugName = null; // typing un-isolates single selection
     const term = e.target.value.trim().toLowerCase();
-    renderTable(term, currentRoute);
 
-    if (term) {
-        // Find matching drugs under current route
-        const matched = flatDrugList.filter(d => {
-            const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
-            const matchesSearch = matchText.includes(term);
-            const matchesRoute = (currentRoute === "ALL") || d.route.includes(currentRoute);
-            return matchesSearch && matchesRoute;
-        });
+    const matched = flatDrugList.filter(d => {
+        const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
+        const matchesSearch = matchText.includes(term);
+        const matchesCat = (currentCategory === "ALL") || (d.category === currentCategory);
+        const matchesRoute = (currentRoute === "ALL") || d.route.includes(currentRoute);
+        return matchesSearch && matchesCat && matchesRoute;
+    });
 
-        if (matched.length > 0) {
-            const topMatch = matched[0];
-            updateFeaturedCard(topMatch);
-            drugSelect.value = topMatch.name;
-            highlightSelectedRow(topMatch.name);
-        } else {
-            updateFeaturedCard(null);
-            drugSelect.value = "";
-            highlightSelectedRow(null);
-        }
+    if (term && matched.length > 0) {
+        updateFeaturedCard(matched[0]);
+        drugSelect.value = matched[0].name;
+    } else if (term) {
+        updateFeaturedCard(null);
+        drugSelect.value = "";
     } else {
         updateFeaturedCard(null);
         drugSelect.value = "";
-        highlightSelectedRow(null);
+    }
+
+    renderTable();
+});
+
+// Press Enter on search input to isolate the first matched drug
+searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        const term = searchInput.value.trim().toLowerCase();
+        if (term) {
+            const matched = flatDrugList.filter(d => {
+                const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
+                const matchesSearch = matchText.includes(term);
+                const matchesCat = (currentCategory === "ALL") || (d.category === currentCategory);
+                const matchesRoute = (currentRoute === "ALL") || d.route.includes(currentRoute);
+                return matchesSearch && matchesCat && matchesRoute;
+            });
+            if (matched.length > 0) {
+                selectDrug(matched[0]);
+            }
+        }
     }
 });
 
-// 2. Dropdown change event: sync top card, search input, and table
+// 2. Category Select event
+categorySelect.addEventListener("change", (e) => {
+    currentCategory = e.target.value;
+    populateDrugDropdown(currentCategory, currentRoute);
+
+    if (selectedDrugName) {
+        const drug = flatDrugList.find(d => d.name === selectedDrugName);
+        if (!drug || (currentCategory !== "ALL" && drug.category !== currentCategory)) {
+            selectedDrugName = null;
+            drugSelect.value = "";
+            updateFeaturedCard(null);
+        }
+    }
+    renderTable();
+});
+
+// 3. Drug Select dropdown event: SELECTING A DRUG LOCKS THE VIEW TO ONLY THIS DRUG!
 drugSelect.addEventListener("change", (e) => {
     const selectedName = e.target.value;
     if (!selectedName) {
+        selectedDrugName = null;
         updateFeaturedCard(null);
-        searchInput.value = "";
-        renderTable("", currentRoute);
-        highlightSelectedRow(null);
+        renderTable();
         return;
     }
     const drug = flatDrugList.find(d => d.name === selectedName);
     if (drug) {
-        updateFeaturedCard(drug);
-        searchInput.value = drug.name;
-        renderTable(drug.name, currentRoute);
-        highlightSelectedRow(drug.name);
-        featuredCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        selectDrug(drug);
     }
 });
 
-// 3. Filter buttons (ALL / IV / PO)
+// 4. Route Filter buttons (ALL / IV / PO)
 filterBtns.forEach(btn => {
     btn.addEventListener("click", () => {
         filterBtns.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         currentRoute = btn.getAttribute("data-route");
-        populateDropdown(currentRoute);
-        renderTable(searchInput.value, currentRoute);
+        populateDrugDropdown(currentCategory, currentRoute);
 
-        const currentDrugName = drugSelect.value;
-        if (currentDrugName) {
-            const drug = flatDrugList.find(d => d.name === currentDrugName);
-            if (drug && (currentRoute === "ALL" || drug.route.includes(currentRoute))) {
-                updateFeaturedCard(drug);
-                highlightSelectedRow(drug.name);
-            } else {
-                updateFeaturedCard(null);
+        if (selectedDrugName) {
+            const drug = flatDrugList.find(d => d.name === selectedDrugName);
+            if (!drug || (currentRoute !== "ALL" && !drug.route.includes(currentRoute))) {
+                selectedDrugName = null;
                 drugSelect.value = "";
+                updateFeaturedCard(null);
             }
         }
+        renderTable();
     });
 });
 
-// 4. Reset Button: restore everything to initial state
+// 5. Reset Button: restore everything to full initial view
 resetBtn.addEventListener("click", () => {
     searchInput.value = "";
     currentRoute = "ALL";
+    currentCategory = "ALL";
+    selectedDrugName = null;
+    categorySelect.value = "ALL";
     filterBtns.forEach(b => {
         b.classList.toggle("active", b.getAttribute("data-route") === "ALL");
     });
-    populateDropdown("ALL");
+    populateDrugDropdown("ALL", "ALL");
     drugSelect.value = "";
     updateFeaturedCard(null);
-    renderTable("", "ALL");
-    highlightSelectedRow(null);
+    renderTable();
     searchInput.focus();
 });
 
-// 5. Close Top Card Button
+// 6. Close Top Card Button
 closeFeatBtn.addEventListener("click", () => {
+    selectedDrugName = null;
     updateFeaturedCard(null);
     drugSelect.value = "";
-    highlightSelectedRow(null);
+    renderTable();
 });
 
 // Initial Setup
-populateDropdown();
+populateCategoryDropdown();
+populateDrugDropdown();
 renderTable();
 </script>
 
