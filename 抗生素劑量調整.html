@@ -153,6 +153,23 @@
             border-color: var(--primary);
         }
 
+        .reset-btn {
+            padding: 8px 14px;
+            border: 1px dashed var(--border);
+            background: white;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-muted);
+        }
+
+        .reset-btn:hover {
+            background: #eef2f6;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
         /* Result Counter */
         .status-bar {
             margin-bottom: 12px;
@@ -210,8 +227,18 @@
             border-bottom: 1px solid #c2cde2;
         }
 
+        tbody tr.drug-row {
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
         tbody tr.drug-row:hover {
-            background-color: #f0f4f9 !important;
+            background-color: #eef4fc !important;
+        }
+
+        tbody tr.drug-row.selected-row {
+            background-color: #dbeafe !important;
+            box-shadow: inset 4px 0 0 var(--primary-light);
         }
 
         tbody tr.drug-row:nth-child(even) {
@@ -253,7 +280,8 @@
             color: #555;
             font-size: 0.87rem;
             min-width: 220px;
-            line-height: 1.4;
+            line-height: 1.45;
+            white-space: pre-line;
         }
 
         .highlight-match {
@@ -342,25 +370,29 @@
     <div class="search-panel">
         <div class="search-box-wrapper">
             <span class="icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="輸入藥名關鍵字（如 vanco, zefotam, mica, cef 等）..." autofocus>
+            <input type="text" id="searchInput" placeholder="輸入藥名關鍵字（如 vanco, dapto, xocova, cef 等）..." autofocus>
         </div>
         <div class="select-wrapper">
             <select id="drugSelect">
-                <option value="">-- 下拉挑選單一抗生素快速預覽 --</option>
+                <option value="">-- 下拉挑選單一抗生素 (A–Z 依序排列) --</option>
             </select>
         </div>
         <div class="filter-buttons">
             <button class="filter-btn active" data-route="ALL">全部途徑</button>
             <button class="filter-btn" data-route="IV">IV 針劑</button>
             <button class="filter-btn" data-route="PO">PO 口服</button>
+            <button class="reset-btn" id="resetBtn" title="清除搜尋並還原所有抗生素清單">↺ 顯示全部</button>
         </div>
     </div>
 
     <!-- Single Selected Drug Card (Quick Highlight) -->
     <div class="featured-card" id="featuredCard">
         <div class="featured-title">
-            <span id="featName">藥物名稱</span>
-            <span id="featRoute" class="route-badge route-iv">IV</span>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span id="featName">藥物名稱</span>
+                <span id="featRouteContainer"><span id="featRoute" class="route-badge route-iv">IV</span></span>
+            </div>
+            <button id="closeFeatBtn" style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: #888; padding: 2px 8px; border-radius: 4px;" title="關閉單藥卡片">✕</button>
         </div>
         <div class="grid-dose">
             <div class="dose-box c-stat">
@@ -380,8 +412,8 @@
                 <div class="val dose-severe" id="featSev">—</div>
             </div>
         </div>
-        <div style="margin-top: 12px; font-size: 0.9rem; color: #555; background: #fff8e1; padding: 8px 12px; border-radius: 6px;">
-            <strong>📌 臨床備註：</strong><span id="featNote">—</span>
+        <div style="margin-top: 12px; font-size: 0.9rem; color: #555; background: #fff8e1; padding: 10px 14px; border-radius: 6px; border-left: 4px solid #f59e0b;">
+            <strong>📌 臨床備註：</strong><span id="featNote" style="white-space: pre-line; display: inline-block; vertical-align: top; margin-top: 2px;">—</span>
         </div>
     </div>
 
@@ -463,7 +495,8 @@ const drugDatabase = [
         category: "Glycopeptides & Lipopeptides (糖肽類及抗革蘭氏陽性菌)",
         drugs: [
             { name: "Vancomycin 500mg", route: "IV", stat: "500mg–1g (drip > 1h)", norm: "1g Q12H", mod: "1g QD–Q3D (隨 HD 後打)", sev: "500mg Q2–3D (隨 HD 後打)", note: "MRSA 首選一線藥物；⚠️ 每次至少滴注 60–120 分鐘以預防紅人症候群 (Red Man Syndrome)；具腎毒性，常規需監測 Trough 濃度 (15–20 μg/mL)；隨 HD 後給藥。" },
-            { name: "Teicon 200mg (Teicoplanin / Targocid)", route: "IV", stat: "10 mg/kg Q12H × 3 doses", norm: "5 mg/kg QD", mod: "5 mg/kg QD (>30)\n5 mg/kg Q2D (<30)", sev: "5 mg/kg Q2D", note: "糖肽類抗生素；⚠️ 首要關鍵：Loading 需打滿 3 劑 (每 12 小時一劑) 始能迅速達有效血中濃度；半衰期極長 (100–170 小時)，透析不清除，HD 維持 5 mg/kg Q2D。" }
+            { name: "Teicon 200mg (Teicoplanin / Targocid)", route: "IV", stat: "10 mg/kg Q12H × 3 doses", norm: "5 mg/kg QD", mod: "5 mg/kg QD (>30)\n5 mg/kg Q2D (<30)", sev: "5 mg/kg Q2D", note: "糖肽類抗生素；⚠️ 首要關鍵：Loading 需打滿 3 劑 (每 12 小時一劑) 始能迅速達有效血中濃度；半衰期極長 (100–170 小時)，透析不清除，HD 維持 5 mg/kg Q2D。" },
+            { name: "Daptomycin 500mg (Cubicin / 達托黴素)", route: "IV", stat: "4–6 mg/kg (重症菌血症可達 8–10 mg/kg)", norm: "4–6 mg/kg QD\n(重症菌血症: 6–8 mg/kg QD)", mod: "CrCl ≥ 30: 4–6 mg/kg QD\nCrCl < 30: 4–6 mg/kg Q48H", sev: "4–6 mg/kg Q48H (隨 HD 透析後給藥)", note: "【抗革蘭氏陽性菌 / MRSA / VRE】\n常規劑量 4–6 mg/kg QD，洗腎病患 Q48H 給藥 (每次 HD 透析結束後補充)。\n⚠️ 臨床監測要點：\n• 每 3–5 天追蹤 Blood Culture (B/C) 評估療效\n• 每 7 天定期監測 CPK (肌酸激酶，防橫紋肌溶解/肌病變，若 CPK > 1000 有症狀或 > 2000 無症狀應停藥)\n⚠️ 本藥會被肺表面活性劑去活化，絕對不可用於治療肺炎！" }
         ]
     },
     {
@@ -485,6 +518,7 @@ const drugDatabase = [
         category: "Antivirals (抗病毒藥物)",
         drugs: [
             { name: "Veklury 100mg (Remdesivir / 瑞德西韋) [院內碼: VEKI99]", route: "IV", stat: "Day 1: 200mg (2 vial)", norm: "Day 2–5: 100mg (1 vial) QD", mod: "Day 2–5: 100mg QD", sev: "Day 2–5: 100mg QD (透析後給)", note: "【院內碼】VEKI99\n【療程】Day 1: 200mg (2 vial)；Day 2–5: 100mg (1 vial) QD。\n【輸注 Pump 設定】\n• 200mg: 2 vial + N/S total 150 mL，IV pump 跑 75 mL/hr (輸注 2 小時)\n• 100mg: 1 vial + N/S total 150 mL，IV pump 跑 150 mL/hr (輸注 1 小時)\n【常用共處方】Dexamethasone 6mg (1.5 amp) QD + PPI (Pane 40mg) QD。\n【腎功能】最新指引/FDA 仿單更新允許用於重度腎不全及洗腎 (透析日於透析後給藥)；需定期追蹤肝腎功能。" },
+            { name: "Xocova 125mg (Ensitrelvir / 恩賽特韋)", route: "PO", stat: "Day 1: 375mg (3# QD)", norm: "Day 2–5: 125mg (1# QD)", mod: "Day 2–5: 125mg (1# QD)", sev: "eGFR < 15 或 HD 不建議使用", note: "【COVID-19 口服抗病毒藥 (3CL 蛋白酶抑制劑)】\n發病 72 小時內投藥效果最佳，總療程 5 天 (Day 1 給 375mg，Day 2–5 給 125mg QD)；輕中度腎不全不需調整；eGFR < 15 或洗腎病患缺乏臨床數據不建議使用。\n⚠️ 強效 CYP3A 抑制劑，禁忌與多種藥物併用 (包含特定 Statin、抗心律不整、鎮靜安眠藥等)；孕婦禁用。" },
             { name: "Aciclovir 250mg (Acyclovir)", route: "IV", stat: "—", norm: "500mg Q8H (IV drip > 1hr)", mod: "5–12.5 mg/kg Q12–24H", sev: "2.5–6.25 mg/kg QD (洗腎後給)", note: "抗 HSV/VZV 首選；⚠️ 輸注期間與之後務必維持充足水化 (Hydration)，避免藥物於腎小管結晶引起急性腎衰竭；每次滴注時間 ≥ 1 小時；HD 後給藥。" },
             { name: "Paxlovid (Nirmatrelvir / Ritonavir)", route: "PO", stat: "—", norm: "3# BID (300/100mg)", mod: "2# BID (30–60 mL/min)\neGFR < 30 不建議使用", sev: "不建議使用 (eGFR < 30)", note: "COVID-19 口服抗病毒藥；中度腎功能不全 (eGFR 30–60) 減為 2# BID (粉紅錠 1 顆 + 白錠 1 顆)；⚠️ eGFR < 30 禁忌使用；Ritonavir 為強效 CYP3A4 抑制劑，交互作用極多！" },
             { name: "Tamiflu / Eraflu 75mg (Oseltamivir)", route: "PO", stat: "—", norm: "75mg BID", mod: "30mg BID (30–60)\n30mg QD (10–30)", sev: "HD/PD: 30mg QD", note: "流感抗病毒藥，發病 48 小時內投藥效果最佳；主要活性代謝物經腎排泄，中重度腎衰竭需減量；HD 透析病患建議於每次透析結束後給予 30mg。" }
@@ -509,22 +543,49 @@ const tableBody = document.getElementById("tableBody");
 const searchInput = document.getElementById("searchInput");
 const drugSelect = document.getElementById("drugSelect");
 const filterBtns = document.querySelectorAll(".filter-btn");
+const resetBtn = document.getElementById("resetBtn");
+const closeFeatBtn = document.getElementById("closeFeatBtn");
 const resultCount = document.getElementById("resultCount");
 const featuredCard = document.getElementById("featuredCard");
 
 let currentRoute = "ALL";
 
-// Populate Select Dropdown
+// Helper: Escape RegExp special characters
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Flat Drug List
 let flatDrugList = [];
 drugDatabase.forEach(cat => {
     cat.drugs.forEach(d => {
-        flatDrugList.push(d);
-        const opt = document.createElement("option");
-        opt.value = d.name;
-        opt.textContent = `${d.name} [${d.route}]`;
-        drugSelect.appendChild(opt);
+        flatDrugList.push({ ...d, category: cat.category });
     });
 });
+
+// A–Z Alphabetical Sort for Dropdown
+const sortedDrugList = [...flatDrugList].sort((a, b) => 
+    a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
+);
+
+// Populate Select Dropdown in A-Z order
+function populateDropdown(routeFilter = "ALL") {
+    const prevVal = drugSelect.value;
+    drugSelect.innerHTML = '<option value="">-- 下拉挑選單一抗生素 (A–Z 依序排列) --</option>';
+    sortedDrugList.forEach(d => {
+        if (routeFilter === "ALL" || d.route.includes(routeFilter)) {
+            const opt = document.createElement("option");
+            opt.value = d.name;
+            opt.textContent = `${d.name} [${d.route}]`;
+            drugSelect.appendChild(opt);
+        }
+    });
+    if (prevVal && Array.from(drugSelect.options).some(o => o.value === prevVal)) {
+        drugSelect.value = prevVal;
+    } else {
+        drugSelect.value = "";
+    }
+}
 
 function getRouteBadge(route) {
     if (route.includes("IV") && route.includes("PO")) return `<span class="route-badge route-mix">${route}</span>`;
@@ -534,6 +595,34 @@ function getRouteBadge(route) {
     return `<span class="route-badge">${route}</span>`;
 }
 
+// Update Top Featured Card
+function updateFeaturedCard(drug) {
+    if (!drug) {
+        featuredCard.classList.remove("active");
+        return;
+    }
+    document.getElementById("featName").textContent = drug.name;
+    document.getElementById("featRouteContainer").innerHTML = getRouteBadge(drug.route);
+    document.getElementById("featStat").innerHTML = drug.stat ? drug.stat.replace(/\n/g, '<br>') : "—";
+    document.getElementById("featNorm").innerHTML = drug.norm ? drug.norm.replace(/\n/g, '<br>') : "—";
+    document.getElementById("featMod").innerHTML = drug.mod ? drug.mod.replace(/\n/g, '<br>') : "—";
+    document.getElementById("featSev").innerHTML = drug.sev ? drug.sev.replace(/\n/g, '<br>') : "—";
+    document.getElementById("featNote").innerHTML = drug.note ? drug.note.replace(/\n/g, '<br>') : "無特別備註";
+    featuredCard.classList.add("active");
+}
+
+// Highlight selected row in the bottom table
+function highlightSelectedRow(drugName) {
+    document.querySelectorAll("tr.drug-row").forEach(r => {
+        if (drugName && r.getAttribute("data-drug-name") === drugName) {
+            r.classList.add("selected-row");
+        } else {
+            r.classList.remove("selected-row");
+        }
+    });
+}
+
+// Render Table with safe highlighting & row click listeners
 function renderTable(searchTerm = "", routeFilter = "ALL") {
     tableBody.innerHTML = "";
     let totalMatches = 0;
@@ -548,7 +637,6 @@ function renderTable(searchTerm = "", routeFilter = "ALL") {
         });
 
         if (filteredDrugs.length > 0) {
-            // Category Row
             const catTr = document.createElement("tr");
             catTr.className = "category-row";
             catTr.innerHTML = `<td colspan="7">【${cat.category}】</td>`;
@@ -558,23 +646,33 @@ function renderTable(searchTerm = "", routeFilter = "ALL") {
                 totalMatches++;
                 const tr = document.createElement("tr");
                 tr.className = "drug-row";
+                tr.setAttribute("data-drug-name", d.name);
                 
-                // Highlight text if searching
+                // Safe RegExp highlight
                 let displayName = d.name;
                 if (term) {
-                    const regex = new RegExp(`(${term})`, "gi");
+                    const escaped = escapeRegExp(term);
+                    const regex = new RegExp(`(${escaped})`, "gi");
                     displayName = displayName.replace(regex, `<span class="highlight-match">$1</span>`);
                 }
 
                 tr.innerHTML = `
                     <td class="drug-name">${displayName}</td>
                     <td style="text-align:center;">${getRouteBadge(d.route)}</td>
-                    <td class="dose-cell">${d.stat.replace(/\n/g, '<br>')}</td>
-                    <td class="dose-cell dose-normal">${d.norm.replace(/\n/g, '<br>')}</td>
-                    <td class="dose-cell dose-moderate">${d.mod.replace(/\n/g, '<br>')}</td>
-                    <td class="dose-cell dose-severe">${d.sev.replace(/\n/g, '<br>')}</td>
-                    <td class="notes-cell">${d.note}</td>
+                    <td class="dose-cell">${d.stat ? d.stat.replace(/\n/g, '<br>') : '—'}</td>
+                    <td class="dose-cell dose-normal">${d.norm ? d.norm.replace(/\n/g, '<br>') : '—'}</td>
+                    <td class="dose-cell dose-moderate">${d.mod ? d.mod.replace(/\n/g, '<br>') : '—'}</td>
+                    <td class="dose-cell dose-severe">${d.sev ? d.sev.replace(/\n/g, '<br>') : '—'}</td>
+                    <td class="notes-cell">${d.note ? d.note.replace(/\n/g, '<br>') : '—'}</td>
                 `;
+
+                // Row click listener to sync top card & dropdown
+                tr.addEventListener("click", () => {
+                    updateFeaturedCard(d);
+                    drugSelect.value = d.name;
+                    highlightSelectedRow(d.name);
+                });
+
                 tableBody.appendChild(tr);
             });
         }
@@ -583,41 +681,104 @@ function renderTable(searchTerm = "", routeFilter = "ALL") {
     resultCount.textContent = `共符合 ${totalMatches} 種抗生素品項`;
 }
 
-// Event Listeners
+// 1. Search input event: filter table + sync top card and dropdown
 searchInput.addEventListener("input", (e) => {
-    renderTable(e.target.value, currentRoute);
+    const term = e.target.value.trim().toLowerCase();
+    renderTable(term, currentRoute);
+
+    if (term) {
+        // Find matching drugs under current route
+        const matched = flatDrugList.filter(d => {
+            const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
+            const matchesSearch = matchText.includes(term);
+            const matchesRoute = (currentRoute === "ALL") || d.route.includes(currentRoute);
+            return matchesSearch && matchesRoute;
+        });
+
+        if (matched.length > 0) {
+            const topMatch = matched[0];
+            updateFeaturedCard(topMatch);
+            drugSelect.value = topMatch.name;
+            highlightSelectedRow(topMatch.name);
+        } else {
+            updateFeaturedCard(null);
+            drugSelect.value = "";
+            highlightSelectedRow(null);
+        }
+    } else {
+        updateFeaturedCard(null);
+        drugSelect.value = "";
+        highlightSelectedRow(null);
+    }
 });
 
+// 2. Dropdown change event: sync top card, search input, and table
+drugSelect.addEventListener("change", (e) => {
+    const selectedName = e.target.value;
+    if (!selectedName) {
+        updateFeaturedCard(null);
+        searchInput.value = "";
+        renderTable("", currentRoute);
+        highlightSelectedRow(null);
+        return;
+    }
+    const drug = flatDrugList.find(d => d.name === selectedName);
+    if (drug) {
+        updateFeaturedCard(drug);
+        searchInput.value = drug.name;
+        renderTable(drug.name, currentRoute);
+        highlightSelectedRow(drug.name);
+        featuredCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+});
+
+// 3. Filter buttons (ALL / IV / PO)
 filterBtns.forEach(btn => {
     btn.addEventListener("click", () => {
         filterBtns.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         currentRoute = btn.getAttribute("data-route");
+        populateDropdown(currentRoute);
         renderTable(searchInput.value, currentRoute);
+
+        const currentDrugName = drugSelect.value;
+        if (currentDrugName) {
+            const drug = flatDrugList.find(d => d.name === currentDrugName);
+            if (drug && (currentRoute === "ALL" || drug.route.includes(currentRoute))) {
+                updateFeaturedCard(drug);
+                highlightSelectedRow(drug.name);
+            } else {
+                updateFeaturedCard(null);
+                drugSelect.value = "";
+            }
+        }
     });
 });
 
-drugSelect.addEventListener("change", (e) => {
-    const selectedName = e.target.value;
-    if (!selectedName) {
-        featuredCard.classList.remove("active");
-        return;
-    }
-    const drug = flatDrugList.find(d => d.name === selectedName);
-    if (drug) {
-        document.getElementById("featName").textContent = drug.name;
-        document.getElementById("featRoute").outerHTML = getRouteBadge(drug.route);
-        document.getElementById("featStat").innerHTML = drug.stat.replace(/\n/g, '<br>') || "—";
-        document.getElementById("featNorm").innerHTML = drug.norm.replace(/\n/g, '<br>') || "—";
-        document.getElementById("featMod").innerHTML = drug.mod.replace(/\n/g, '<br>') || "—";
-        document.getElementById("featSev").innerHTML = drug.sev.replace(/\n/g, '<br>') || "—";
-        document.getElementById("featNote").textContent = drug.note || "無特別備註";
-        featuredCard.classList.add("active");
-        featuredCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+// 4. Reset Button: restore everything to initial state
+resetBtn.addEventListener("click", () => {
+    searchInput.value = "";
+    currentRoute = "ALL";
+    filterBtns.forEach(b => {
+        b.classList.toggle("active", b.getAttribute("data-route") === "ALL");
+    });
+    populateDropdown("ALL");
+    drugSelect.value = "";
+    updateFeaturedCard(null);
+    renderTable("", "ALL");
+    highlightSelectedRow(null);
+    searchInput.focus();
 });
 
-// Initial Render
+// 5. Close Top Card Button
+closeFeatBtn.addEventListener("click", () => {
+    updateFeaturedCard(null);
+    drugSelect.value = "";
+    highlightSelectedRow(null);
+});
+
+// Initial Setup
+populateDropdown();
 renderTable();
 </script>
 
