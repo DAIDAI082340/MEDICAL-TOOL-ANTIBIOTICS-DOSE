@@ -432,7 +432,7 @@
         <div class="search-panel">
             <div class="search-box-wrapper">
                 <span class="icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="輸入藥名關鍵字（如 vanco, dapto, xocova, cef 等）..." autofocus>
+                <input type="text" id="searchInput" placeholder="輸入商品名、學名或院內代碼（如 cefin, rocephin, ROCI17, vanco, dapto 等）..." autofocus>
             </div>
             <div class="select-wrapper">
                 <select id="categorySelect">
@@ -496,7 +496,7 @@
         <table id="mainTable">
             <thead>
                 <tr>
-                    <th style="width: 22%;">抗生素名稱 (Antibiotics / 規格)</th>
+                    <th style="width: 22%;">抗生素品項：商品名（學名 規格）</th>
                     <th style="width: 7%;">途徑</th>
                     <th style="width: 14%;">Stat / Loading Dose</th>
                     <th style="width: 15%;">eGFR > 50 mL/min/1.73m2<br><span style="font-size:0.85rem; font-weight:normal;">(常規/輕度)</span></th>
@@ -517,91 +517,735 @@ const drugDatabase = [
     {
         category: "Penicillins & β-Lactam / Inhibitor Combinations",
         drugs: [
-            { name: "Oxacillin 2g", route: "IV", stat: "2g", norm: "2g Q6H", mod: "2g Q6H", sev: "2g Q6H", note: "主要經肝臟代謝，腎功能不全不需調整；MSSA 感染首選；每克約含 2.8 mEq 鈉離子，心衰或水腫患者注意鈉負荷。" },
-            { name: "Dicloxacillin 250mg (PO)", route: "PO", stat: "2#", norm: "2# QID", mod: "2# QID", sev: "2# QID", note: "主要經肝膽代謝，腎衰竭不需調整；口服宜空腹（飯前 1 小時或飯後 2 小時）併服整杯水，以防食道刺激。" },
-            { name: "Curam 500mg/125mg (PO)", route: "PO", stat: "1#", norm: "1# TID", mod: "1# BID", sev: "1# QD", note: "Amoxicillin/Clavulanate；建議隨餐服用以減輕胃腸道不適；主要經腎排泄，重度腎功能不全需拉長給藥間隔。" },
-            { name: "Tapimycin 2.25g (Piperacillin/Tazobactam)", route: "IV", stat: "2.25g–4.5g", norm: "4.5g Q6H", mod: "2.25g Q6H", sev: "2.25g Q8H", note: "抗綠膿桿菌廣效青黴素；HD 透析約清除 30–50%，透析日建議於每次 HD 結束後補充 2.25g；注意出血傾向與鈉蓄積。" },
-            { name: "Ansullina 3g (Ampicillin/Sulbactam)", route: "IV", stat: "3g", norm: "3g Q6H", mod: "3g Q8–12H", sev: "3g QD", note: "廣效 β-lactam/BLI 複合劑；主要由腎排泄，HD 透析後建議補充 1.5g；中重度腎不全需依 GFR 顯著拉長間隔。" }
+            {
+                genericName: "Oxacillin",
+                spec: "1g/2g",
+                route: "IV",
+                brands: [
+                    { name: "Oxacillin", status: "active", code: "OXAI11", vendor: "中國化學" },
+                    { name: "Prostaphlin", status: "inactive" }
+                ],
+                stat: "2g",
+                norm: "2g Q6H",
+                mod: "2g Q6H",
+                sev: "2g Q6H",
+                note: "主要經肝臟代謝，腎功能不全不需調整；MSSA 感染首選；每克約含 2.8 mEq 鈉離子，心衰或水腫患者注意鈉負荷。"
+            },
+            {
+                genericName: "Dicloxacillin",
+                spec: "250mg",
+                route: "PO",
+                brands: [
+                    { name: "Dicloxacillin", status: "active", vendor: "榮民製藥" },
+                    { name: "Dynapen", status: "inactive" }
+                ],
+                stat: "2#",
+                norm: "2# QID",
+                mod: "2# QID",
+                sev: "2# QID",
+                note: "主要經肝膽代謝，腎衰竭不需調整；口服宜空腹（飯前 1 小時或飯後 2 小時）併服整杯水，以防食道刺激。"
+            },
+            {
+                genericName: "Amoxicillin",
+                spec: "500mg",
+                route: "PO",
+                brands: [
+                    { name: "Amoxicillin", status: "active", code: "AMXO13", vendor: "榮民製藥" },
+                    { name: "Amolin", status: "inactive" }
+                ],
+                stat: "500mg",
+                norm: "500mg TID",
+                mod: "500mg Q12H (10–30)",
+                sev: "500mg QD (<10 或 HD)",
+                note: "口服廣效青黴素；主要經腎排泄，中重度腎衰竭需拉長給藥間隔至 Q12H 或 QD；HD 透析後建議補充 500mg。"
+            },
+            {
+                genericName: "Amoxicillin/Clavulanate",
+                spec: "500/125mg",
+                route: "PO",
+                brands: [
+                    { name: "Curam", status: "active", code: "CURO00", vendor: "SANDOZ" },
+                    { name: "Augmentin", status: "inactive" }
+                ],
+                stat: "1#",
+                norm: "1# TID",
+                mod: "1# BID",
+                sev: "1# QD",
+                note: "Amoxicillin/Clavulanate；建議隨餐服用以減輕胃腸道不適；主要經腎排泄，重度腎功能不全需拉長給藥間隔。"
+            },
+            {
+                genericName: "Amoxicillin/Clavulanate",
+                spec: "600mg",
+                route: "IV",
+                brands: [
+                    { name: "Anbicyn", status: "active", code: "AUGI02", vendor: "中國化學" },
+                    { name: "Augmentin", status: "inactive" }
+                ],
+                stat: "1.2g",
+                norm: "1.2g Q8H",
+                mod: "1.2g Q12H (10–50)",
+                sev: "0.6g Q12H (<10 或 HD)",
+                note: "廣效 β-lactam/BLI 複合劑針劑；主要經腎排泄，HD 透析後建議補充劑量；注意高劑量腹瀉與肝功能指數監測。"
+            },
+            {
+                genericName: "Piperacillin/Tazobactam",
+                spec: "2.25g",
+                route: "IV",
+                brands: [
+                    { name: "Tapimycin", status: "active", code: "PIPI07", vendor: "永信藥品" },
+                    { name: "Tazocin", status: "inactive" }
+                ],
+                stat: "2.25g–4.5g",
+                norm: "4.5g Q6H",
+                mod: "2.25g Q6H",
+                sev: "2.25g Q8H",
+                note: "抗綠膿桿菌廣效青黴素；HD 透析約清除 30–50%，透析日建議於每次 HD 結束後補充 2.25g；注意出血傾向與鈉蓄積。"
+            },
+            {
+                genericName: "Ampicillin/Sulbactam",
+                spec: "3g/1.5g",
+                route: "IV",
+                brands: [
+                    { name: "Sulampi", status: "active", code: "AMPI21", vendor: "政德製藥" },
+                    { name: "Amsulber", status: "active", code: "AMPI19", vendor: "中國化學" },
+                    { name: "Ansullina", status: "inactive" },
+                    { name: "Unasyn", status: "inactive" }
+                ],
+                stat: "3g",
+                norm: "3g Q6H",
+                mod: "3g Q8–12H",
+                sev: "3g QD",
+                note: "廣效 β-lactam/BLI 複合劑；主要由腎排泄，HD 透析後建議補充 1.5g；中重度腎不全需依 GFR 顯著拉長間隔。"
+            }
         ]
     },
     {
         category: "Cephalosporins (頭孢菌素類)",
         drugs: [
-            { name: "Cefazolin 1g (1st gen)", route: "IV", stat: "1g", norm: "1g Q8H", mod: "1g Q12H", sev: "1g QD", note: "第一代頭孢菌素，外科手術預防及 MSSA 感染首選；主要經腎排泄，HD 透析結束後給藥 1g；腎衰竭病患注意劑量蓄積。" },
-            { name: "Cefadroxil 500mg (PO, 1st gen)", route: "PO", stat: "1#–2#", norm: "2# Q12H", mod: "1# Q12H", sev: "1# QD", note: "第一代口服頭孢菌素，食物不影響吸收；主要經腎臟原型排泄，中重度腎不全需拉長間隔或減半劑量。" },
-            { name: "Cephalexin 500mg (PO, 1st gen)", route: "PO", stat: "250–500mg", norm: "500mg Q6H", mod: "500mg Q12H", sev: "250mg Q12H", note: "第一代口服頭孢菌素，常見於皮膚與軟組織感染；主要經腎排泄，重度腎功能不全需減半並拉長間隔至 Q12H。" },
-            { name: "Curoxime 750mg (Cefuroxime, 2nd gen)", route: "IV", stat: "1.5g", norm: "1.5g Q8H", mod: "1.5g Q12H", sev: "1.5g QD", note: "第二代頭孢菌素，涵蓋流感嗜血桿菌等呼吸道致病菌；主要經腎小球濾過與腎小管排泄，腎衰竭需顯著減量。" },
-            { name: "Flomoxef 1g (Flumarin, 2nd gen)", route: "IV", stat: "HD 前後 各 1g", norm: "1g Q6H", mod: "1.5g Q12H (30–50)\n1g Q12H (<30)", sev: "1g QD\nPD: 1g QD", note: "具良好抗厭氧菌活性；含 N-MTT 側鏈，長期使用需監測凝血功能 (PT/INR) 防出血，並避免飲酒以防雙硫侖樣反應。" },
-            { name: "Ceftriaxone / Cefin / Sintrix 500mg (3rd gen)", route: "IV", stat: "1g–2g", norm: "2g QD 或 1g Q12H", mod: "2g QD 或 1g Q12H", sev: "2g QD 或 1g Q12H", note: "【常用商品名】Cefin (賽芬) / Sintrix (欣得力) / Rocephin (羅氏芬)；雙重排泄途徑 (膽汁 40%、腎 60%)，各腎功能分級不需調整劑量；⚠️ 嚴禁與含鈣溶液 (如 Ringer's) 同管輸注防結晶沉澱；蛋白結合率高不易被透析清除。" },
-            { name: "Cefixime 100mg (PO, 3rd gen)", route: "PO", stat: "200mg", norm: "200mg Q12H", mod: "100mg Q12H", sev: "100mg QD", note: "第三代口服頭孢菌素，對 GNB 活性佳 (對綠膿桿菌無效)；主要經腎排泄，eGFR < 50 需減量至 100mg Q12H–QD。" },
-            { name: "Cetadime / Fortum 1g (Ceftazidime, 3rd gen)", route: "IV", stat: "2g", norm: "2g Q8H", mod: "1g Q12H (31–50)\n1g Q12H (16–30)\n1g QD (6–15)", sev: "1g HS (隨HD後給)", note: "抗綠膿桿菌第三代頭孢菌素主力；主要經腎排泄，腎衰竭蓄積易引發神經毒性 (腦病變、意識混亂、抽搐)；HD 透析後給藥。" },
-            { name: "Cefoperazone 1g / Sulbactam 1g (Brosym)", route: "IV", stat: "2g / 2g", norm: "2g / 2g Q12H", mod: "2g / 2g Q12H (30–50)\n1g / 1g Q12H (15–30)", sev: "1g / 1g Q12H (eGFR<15)", note: "主要經膽汁代謝排泄 (約 75%)，一般腎功能不全不需大幅減量；含 N-MTT 側鏈，長期使用宜補充維生素 K 防出血，避免飲酒。" },
-            { name: "Zefotam 1000mg/1000mg/Vial (Cefoperazone, Sulbactam)", route: "IV", stat: "-", norm: "2 vial Q12H", mod: "2 vial Q12H", sev: "2 vial Q12H", note: "主要由肝膽代謝排泄，各腎功能分級維持 2 vial Q12H；嚴重肝腎合併功能不全時需監測臨床濃度並調整。" },
-            { name: "Cefepime 1g/2g (Maxipime, 4th gen)", route: "IV", stat: "1g–2g", norm: "2g Q8H", mod: "2g Q12H (30–49)\n2g QD (11–29)", sev: "1g QD", note: "第四代廣效頭孢菌素 (涵蓋綠膿桿菌)；⚠️ 腎衰竭未適當減量易引發神經毒性 (Cefepime neurotoxicity: 意識不清、肌躍、抽搐)；HD 後補充 1g。" },
-            { name: "Zinforo 600mg (Ceftaroline, 5th gen)", route: "IV", stat: "600mg", norm: "600mg Q12H", mod: "400mg Q12H (30–50)\n300mg Q12H (15–30)", sev: "200mg Q12H (<15)", note: "第五代抗 MRSA 頭孢菌素；主要經腎臟排泄，需依 eGFR 階梯式調降劑量；每次滴注時間建議 60 分鐘。" },
-            { name: "Zavicefta 2g/0.5g (Ceftazidime/Avibactam)", route: "IV", stat: "—", norm: "2g/0.5g Q8H (drip 2h)", mod: "1g/0.25g Q8H (31–50)\n1g/0.25g Q12H (16–30)", sev: "0.75g/0.1875g QD (6–15)\n0.75g/0.1875g Q48H (HD)", note: "【調配抽藥】1 瓶加 10 mL 滅菌水溶勻 (總體積約 12.0 mL，排氣針頭需待完全溶解後才插入)。\n★ 減量抽取體積：\n• 抽 6.0 mL = 1000mg/250mg (中度腎不全 16–50)\n• 抽 4.5 mL = 750mg/187.5mg (重度 6–15 或 HD)\n【輸注法】移入 100 mL 輸注袋 (NS / D5W / LR)，IV pump 以 120 分鐘輸注完畢；調配至完成不應超過 30 分鐘；HD 於透析結束後給藥 (Q48H)。" }
+            {
+                genericName: "Cefazolin",
+                spec: "1g",
+                route: "IV",
+                brands: [
+                    { name: "Cefa", status: "active", code: "CEZI03", vendor: "信東生技" },
+                    { name: "Cefamezin", status: "inactive" }
+                ],
+                stat: "1g",
+                norm: "1g Q8H",
+                mod: "1g Q12H",
+                sev: "1g QD",
+                note: "第一代頭孢菌素，外科手術預防及 MSSA 感染首選；主要經腎排泄，HD 透析結束後給藥 1g；腎衰竭病患注意劑量蓄積。"
+            },
+            {
+                genericName: "Cefadroxil",
+                spec: "500mg",
+                route: "PO",
+                brands: [
+                    { name: "Lonfadroxil", status: "active", code: "CEFO18", vendor: "瑞士藥廠" },
+                    { name: "Duricef", status: "inactive" }
+                ],
+                stat: "1#–2#",
+                norm: "2# Q12H",
+                mod: "1# Q12H",
+                sev: "1# QD",
+                note: "第一代口服頭孢菌素，食物不影響吸收；主要經腎臟原型排泄，中重度腎不全需拉長間隔或減半劑量。"
+            },
+            {
+                genericName: "Cephalexin",
+                spec: "500mg",
+                route: "PO",
+                brands: [
+                    { name: "Cephalexin", status: "active", vendor: "榮民製藥" },
+                    { name: "Keflex", status: "inactive" }
+                ],
+                stat: "250–500mg",
+                norm: "500mg Q6H",
+                mod: "500mg Q12H",
+                sev: "250mg Q12H",
+                note: "第一代口服頭孢菌素，常見於皮膚與軟組織感染；主要經腎排泄，重度腎功能不全需減半並拉長間隔至 Q12H。"
+            },
+            {
+                genericName: "Cefuroxime",
+                spec: "750mg",
+                route: "IV",
+                brands: [
+                    { name: "Cefuroxime", status: "active", code: "CEFI08", vendor: "中國化學" },
+                    { name: "Curoxime", status: "inactive" },
+                    { name: "Zinacef", status: "inactive" }
+                ],
+                stat: "1.5g",
+                norm: "1.5g Q8H",
+                mod: "1.5g Q12H",
+                sev: "1.5g QD",
+                note: "第二代頭孢菌素，涵蓋流感嗜血桿菌等呼吸道致病菌；主要經腎小球濾過與腎小管排泄，腎衰竭需顯著減量。"
+            },
+            {
+                genericName: "Flomoxef",
+                spec: "1g",
+                route: "IV",
+                brands: [
+                    { name: "Flomoxef", status: "active", code: "FLOI01", vendor: "中國化學" },
+                    { name: "Flumarin", status: "inactive" }
+                ],
+                stat: "HD 前後 各 1g",
+                norm: "1g Q6H",
+                mod: "1.5g Q12H (30–50)\n1g Q12H (<30)",
+                sev: "1g QD\nPD: 1g QD",
+                note: "具良好抗厭氧菌活性；含 N-MTT 側鏈，長期使用需監測凝血功能 (PT/INR) 防出血，並避免飲酒以防雙硫侖樣反應。"
+            },
+            {
+                genericName: "Ceftriaxone",
+                spec: "500mg",
+                route: "IV",
+                brands: [
+                    { name: "Cefin", status: "active", code: "ROCI17", vendor: "汎生製藥" },
+                    { name: "Sintrix", status: "inactive" },
+                    { name: "Rocephin", status: "inactive" }
+                ],
+                stat: "1g–2g",
+                norm: "2g QD 或 1g Q12H",
+                mod: "2g QD 或 1g Q12H",
+                sev: "2g QD 或 1g Q12H",
+                note: "雙重排泄途徑 (膽汁 40%、腎 60%)，各腎功能分級不需調整劑量；⚠️ 嚴禁與含鈣溶液 (如 Ringer's) 同管輸注防結晶沉澱；蛋白結合率高不易被透析清除。"
+            },
+            {
+                genericName: "Cefixime",
+                spec: "100mg",
+                route: "PO",
+                brands: [
+                    { name: "Cexime", status: "active", code: "CEFO17", vendor: "信東生技" },
+                    { name: "Mag cyclic", status: "inactive" }
+                ],
+                stat: "200mg",
+                norm: "200mg Q12H",
+                mod: "100mg Q12H",
+                sev: "100mg QD",
+                note: "第三代口服頭孢菌素，對 GNB 活性佳 (對綠膿桿菌無效)；主要經腎排泄，eGFR < 50 需減量至 100mg Q12H–QD。"
+            },
+            {
+                genericName: "Ceftazidime",
+                spec: "1g",
+                route: "IV",
+                brands: [
+                    { name: "Sintum", status: "active", code: "CEFI38", vendor: "信東生技" },
+                    { name: "Tatumcef", status: "active", code: "FORI06", vendor: "中國化學" },
+                    { name: "Fortum", status: "inactive" },
+                    { name: "Cetadime", status: "inactive" }
+                ],
+                stat: "2g",
+                norm: "2g Q8H",
+                mod: "1g Q12H (31–50)\n1g Q12H (16–30)\n1g QD (6–15)",
+                sev: "1g HS (隨HD後給)",
+                note: "抗綠膿桿菌第三代頭孢菌素主力；主要經腎排泄，腎衰竭蓄積易引發神經毒性 (腦病變、意識混亂、抽搐)；HD 透析後給藥。"
+            },
+            {
+                genericName: "Cefoperazone/Sulbactam",
+                spec: "2g",
+                route: "IV",
+                brands: [
+                    { name: "Zefotam", status: "active", code: "ZEFI01", vendor: "中國化學" },
+                    { name: "Brosym", status: "inactive" }
+                ],
+                stat: "2g",
+                norm: "2g Q12H",
+                mod: "2g Q12H (30–50)\n1g Q12H (15–30)",
+                sev: "1g Q12H (<15)",
+                note: "主要經膽汁代謝排泄 (約 75%)，一般腎功能不全不需大幅減量；含 N-MTT 側鏈，長期使用宜補充維生素 K 防出血，避免飲酒。"
+            },
+            {
+                genericName: "Ceftazidime/Avibactam",
+                spec: "2g/0.5g",
+                route: "IV",
+                brands: [
+                    { name: "Zavicefta", status: "active", code: "ZAVI90", vendor: "ACS Dobfar" }
+                ],
+                stat: "—",
+                norm: "2g/0.5g Q8H (drip 2h)",
+                mod: "1g/0.25g Q8H (31–50)\n1g/0.25g Q12H (16–30)",
+                sev: "0.75g/0.1875g QD (6–15)\n0.75g/0.1875g Q48H (HD)",
+                note: "【調配抽藥】1 瓶加 10 mL 滅菌水溶勻 (總體積約 12.0 mL，排氣針頭需待完全溶解後才插入)。\n★ 減量抽取體積：\n• 抽 6.0 mL = 1000mg/250mg (中度腎不全 16–50)\n• 抽 4.5 mL = 750mg/187.5mg (重度 6–15 或 HD)\n【輸注法】移入 100 mL 輸注袋 (NS / D5W / LR)，IV pump 以 120 分鐘輸注完畢；調配至完成不應超過 30 分鐘；HD 於透析結束後給藥 (Q48H)。"
+            },
+            {
+                genericName: "Cefepime",
+                spec: "1g",
+                route: "IV",
+                brands: [
+                    { name: "Yupime", status: "active", code: "CEFI44", vendor: "政德製藥" },
+                    { name: "Maxipime", status: "inactive" }
+                ],
+                stat: "1g–2g",
+                norm: "2g Q8H",
+                mod: "2g Q12H (30–49)\n2g QD (11–29)",
+                sev: "1g QD",
+                note: "第四代廣效頭孢菌素 (涵蓋綠膿桿菌)；⚠️ 腎衰竭未適當減量易引發神經毒性 (Cefepime neurotoxicity: 意識不清、肌躍、抽搐)；HD 後補充 1g。"
+            },
+            {
+                genericName: "Ceftaroline fosamil",
+                spec: "600mg",
+                route: "IV",
+                brands: [
+                    { name: "Zinforo", status: "active", code: "CEFI83", vendor: "ACS DOBFAR" }
+                ],
+                stat: "600mg",
+                norm: "600mg Q12H",
+                mod: "400mg Q12H (30–50)\n300mg Q12H (15–30)",
+                sev: "200mg Q12H (<15)",
+                note: "第五代抗 MRSA 頭孢菌素；主要經腎臟排泄，需依 eGFR 階梯式調降劑量；每次滴注時間建議 60 分鐘。"
+            }
         ]
     },
     {
         category: "Carbapenems (碳青黴烯類)",
         drugs: [
-            { name: "Tienam 500mg (Imipenem/Cilastatin)", route: "IV", stat: "500mg", norm: "500mg Q6H", mod: "500mg Q8H (30–49)\n500mg Q12H (11–29)", sev: "250mg Q12H", note: "廣效 Carbapenem；⚠️ 腎衰竭未減量或中樞神經病史者，蓄積易引發嚴重抽搐 (Seizure)；滴注時間建議 40–60 分鐘。" },
-            { name: "Invanz 1g (Ertapenem)", route: "IV", stat: "0.5g–1g", norm: "1g QD", mod: "1g QD (30–49)\n0.5g QD (11–29)", sev: "0.5g QD", note: "每日一次給藥；⚠️ 不涵蓋 Pseudomonas (綠膿桿菌) 與 Acinetobacter；重度腎衰竭或洗腎病患減為 0.5g QD，HD 於透析後給藥。" },
-            { name: "Meropenem 1g (Mepem)", route: "IV", stat: "1g / 0.5g", norm: "1g Q8H", mod: "1g Q12H (25–50)\n0.5g Q12H (10–25)", sev: "0.5g QD", note: "重症首選 Carbapenem，中樞神經毒性抽搐風險低於 Imipenem；重症抗藥性菌株可採 3 小時延長滴注 (Extended Infusion)；HD 透析後給藥。" }
+            {
+                genericName: "Imipenem/Cilastatin",
+                spec: "500mg/500mg",
+                route: "IV",
+                brands: [
+                    { name: "Culin", status: "active", code: "IMII05", vendor: "松瑞製藥" },
+                    { name: "Tienam", status: "inactive" }
+                ],
+                stat: "500mg",
+                norm: "500mg Q6H",
+                mod: "500mg Q8H (30–49)\n500mg Q12H (11–29)",
+                sev: "250mg Q12H",
+                note: "廣效 Carbapenem；⚠️ 腎衰竭未減量或中樞神經病史者，蓄積易引發嚴重抽搐 (Seizure)；滴注時間建議 40–60 分鐘。"
+            },
+            {
+                genericName: "Ertapenem",
+                spec: "1g",
+                route: "IV",
+                brands: [
+                    { name: "Ertapenem", status: "active", code: "ERTI01", vendor: "松瑞製藥" },
+                    { name: "Invanz", status: "inactive" }
+                ],
+                stat: "0.5g–1g",
+                norm: "1g QD",
+                mod: "1g QD (30–49)\n0.5g QD (11–29)",
+                sev: "0.5g QD",
+                note: "每日一次給藥；⚠️ 不涵蓋 Pseudomonas (綠膿桿菌) 與 Acinetobacter；重度腎衰竭或洗腎病患減為 0.5g QD，HD 於透析後給藥。"
+            },
+            {
+                genericName: "Meropenem",
+                spec: "1g",
+                route: "IV",
+                brands: [
+                    { name: "Mepenem", status: "active", code: "MERI35", vendor: "松瑞製藥" },
+                    { name: "Mepem", status: "inactive" },
+                    { name: "Meropen", status: "inactive" }
+                ],
+                stat: "1g / 0.5g",
+                norm: "1g Q8H",
+                mod: "1g Q12H (25–50)\n0.5g Q12H (10–25)",
+                sev: "0.5g QD",
+                note: "重症首選 Carbapenem，中樞神經毒性抽搐風險低於 Imipenem；重症抗藥性菌株可採 3 小時延長滴注 (Extended Infusion)；HD 透析後給藥。"
+            }
         ]
     },
     {
         category: "Fluoroquinolones (氟喹諾酮類)",
         drugs: [
-            { name: "Ciprofloxacin 400mg (IV)", route: "IV", stat: "200–400mg", norm: "400mg Q12H", mod: "200mg Q12H 或 400mg QD", sev: "400mg QD", note: "抗綠膿桿菌 Quinolone 主力；黑框警示：肌腱炎/肌腱斷裂、QTc 延長、重症肌無力惡化、中樞神經興奮；HD 僅清除微量 (<10%)。" },
-            { name: "Ciproxin 250/500mg (PO)", route: "PO", stat: "250–500mg", norm: "500mg Q12H", mod: "250mg Q12H", sev: "250mg Q12H", note: "口服吸收良好；⚠️ 避免與含金屬多價陽離子 (鈣、鎂、鋁制酸劑、鐵劑) 或牛奶同時服用，需間隔至少 2 小時防形成螯合物失效。" },
-            { name: "Cravit 500mg (Levofloxacin)", route: "IV/PO", stat: "500–750mg", norm: "500–750mg QD", mod: "500–750mg Q2D", sev: "500mg Q2D", note: "呼吸型 Quinolone，高劑量 (750mg) 適用於綠膿桿菌或重症肺炎；主要經腎排泄，腎衰竭需拉長間隔至 Q2D；注意血糖劇烈波動與 QTc 延長。" },
-            { name: "Avelox 400mg (Moxifloxacin)", route: "IV/PO", stat: "400mg", norm: "400mg QD", mod: "400mg QD", sev: "400mg QD", note: "主要經肝膽代謝，腎衰竭與洗腎病患皆不需調整劑量；⚠️ 尿中原型排泄率低 (<20%)，不可用於治療單純性泌尿道感染 (UTI)；注意 QTc 延長。" }
+            {
+                genericName: "Ciprofloxacin",
+                spec: "200mg/400mg",
+                route: "IV",
+                brands: [
+                    { name: "Cinolone", status: "active", code: "CEDI27", vendor: "信東生技" },
+                    { name: "Seforce", status: "active", code: "CIPI10", vendor: "南光化學" },
+                    { name: "Ciproxin", status: "inactive" }
+                ],
+                stat: "200–400mg",
+                norm: "400mg Q12H",
+                mod: "200mg Q12H 或 400mg QD",
+                sev: "400mg QD",
+                note: "抗綠膿桿菌 Quinolone 主力；黑框警示：肌腱炎/肌腱斷裂、QTc 延長、重症肌無力惡化、中樞神經興奮；HD 僅清除微量 (<10%)。"
+            },
+            {
+                genericName: "Ciprofloxacin",
+                spec: "250mg",
+                route: "PO",
+                brands: [
+                    { name: "Suxen", status: "active", code: "CIPO24", vendor: "永信藥品" },
+                    { name: "Ciproxin", status: "inactive" }
+                ],
+                stat: "250–500mg",
+                norm: "500mg Q12H",
+                mod: "250mg Q12H",
+                sev: "250mg Q12H",
+                note: "口服吸收良好；⚠️ 避免與含金屬多價陽離子 (鈣、鎂、鋁制酸劑、鐵劑) 或牛奶同時服用，需間隔至少 2 小時防形成螯合物失效。"
+            },
+            {
+                genericName: "Levofloxacin",
+                spec: "500mg/750mg",
+                route: "IV/PO",
+                brands: [
+                    { name: "Cravit", status: "active", code: "LEVI02", vendor: "健亞生技" },
+                    { name: "Levofloxacin", status: "active", code: "LEVI21", vendor: "濟生醫藥" }
+                ],
+                stat: "500–750mg",
+                norm: "500–750mg QD",
+                mod: "500–750mg Q2D",
+                sev: "500mg Q2D",
+                note: "呼吸型 Quinolone，高劑量 (750mg) 適用於綠膿桿菌或重症肺炎；主要經腎排泄，腎衰竭需拉長間隔至 Q2D；注意血糖劇烈波動與 QTc 延長。"
+            },
+            {
+                genericName: "Moxifloxacin",
+                spec: "400mg",
+                route: "IV/PO",
+                brands: [
+                    { name: "Avelox", status: "active", code: "AVEO00", vendor: "Bayer" },
+                    { name: "Mosflow", status: "active", code: "MOXI03", vendor: "信東生技" }
+                ],
+                stat: "400mg",
+                norm: "400mg QD",
+                mod: "400mg QD",
+                sev: "400mg QD",
+                note: "主要經肝膽代謝，腎衰竭與洗腎病患皆不需調整劑量；⚠️ 尿中原型排泄率低 (<20%)，不可用於治療單純性泌尿道感染 (UTI)；注意 QTc 延長。"
+            },
+            {
+                genericName: "Nemonoxacin",
+                spec: "250mg",
+                route: "PO",
+                brands: [
+                    { name: "Taigexyn", status: "active", code: "NEMO00", vendor: "培力藥品" }
+                ],
+                stat: "500mg",
+                norm: "500mg QD",
+                mod: "500mg QD",
+                sev: "500mg QD",
+                note: "新型無氟喹諾酮抗生素 (Non-fluorinated quinolone)，治療社區型肺炎 (CAP)；主要經肝膽及腎臟排泄，輕中重度腎功能不全皆不需調整劑量。"
+            }
         ]
     },
     {
         category: "Glycopeptides & Lipopeptides (糖肽類及抗革蘭氏陽性菌)",
         drugs: [
-            { name: "Vancomycin 500mg", route: "IV", stat: "500mg–1g (drip > 1h)", norm: "1g Q12H", mod: "1g QD–Q3D (隨 HD 後打)", sev: "500mg Q2–3D (隨 HD 後打)", note: "MRSA 首選一線藥物；⚠️ 每次至少滴注 60–120 分鐘以預防紅人症候群 (Red Man Syndrome)；具腎毒性，常規需監測 Trough 濃度 (15–20 μg/mL)；隨 HD 後給藥。" },
-            { name: "Teicon 200mg (Teicoplanin / Targocid)", route: "IV", stat: "10 mg/kg Q12H × 3 doses", norm: "5 mg/kg QD", mod: "5 mg/kg QD (>30)\n5 mg/kg Q2D (<30)", sev: "5 mg/kg Q2D", note: "糖肽類抗生素；⚠️ 首要關鍵：Loading 需打滿 3 劑 (每 12 小時一劑) 始能迅速達有效血中濃度；半衰期極長 (100–170 小時)，透析不清除，HD 維持 5 mg/kg Q2D。" },
-            { name: "Daptomycin 500mg (Cubicin / 達托黴素)", route: "IV", stat: "6–10 mg/kg (視感染嚴重度/菌血症評估)", norm: "6–10 mg/kg QD\n(重症菌血症/心內膜炎: 8–10 mg/kg QD)", mod: "CrCl ≥ 30: 6–10 mg/kg QD\nCrCl < 30: 6–10 mg/kg Q48H", sev: "6–10 mg/kg Q48H (隨 HD 透析後給藥)", note: "【抗革蘭氏陽性菌 / MRSA / VRE】\n常規劑量 6–10 mg/kg QD，洗腎病患 Q48H 給藥 (每次 HD 透析結束後補充)。\n⚠️ 臨床監測要點：\n• 每 3–5 天追蹤 Blood Culture (B/C) 評估療效\n• 每 7 天定期監測 CPK (肌酸激酶，防橫紋肌溶解/肌病變，若 CPK > 1000 有症狀或 > 2000 無症狀應停藥)\n⚠️ 本藥會被肺表面活性劑去活化，絕對不可用於治療肺炎！" }
+            {
+                genericName: "Vancomycin",
+                spec: "500mg",
+                route: "IV",
+                brands: [
+                    { name: "Vanlyo", status: "active", code: "VANI10", vendor: "台裕化學" },
+                    { name: "Vancover", status: "active", code: "VANO00", vendor: "友霖生技" },
+                    { name: "Vancocin", status: "inactive" }
+                ],
+                stat: "500mg–1g (drip > 1h)",
+                norm: "1g Q12H",
+                mod: "1g QD–Q3D (隨 HD 後打)",
+                sev: "500mg Q2–3D (隨 HD 後打)",
+                note: "MRSA 首選一線藥物；⚠️ 每次至少滴注 60–120 分鐘以預防紅人症候群 (Red Man Syndrome)；具腎毒性，常規需監測 Trough 濃度 (15–20 μg/mL)；隨 HD 後給藥。"
+            },
+            {
+                genericName: "Teicoplanin",
+                spec: "200mg",
+                route: "IV",
+                brands: [
+                    { name: "Teicod", status: "active", code: "TEII04", vendor: "中國化學" },
+                    { name: "Targocid", status: "inactive" },
+                    { name: "Teicon", status: "inactive" }
+                ],
+                stat: "10 mg/kg Q12H × 3 doses",
+                norm: "5 mg/kg QD",
+                mod: "5 mg/kg QD (>30)\n5 mg/kg Q2D (<30)",
+                sev: "5 mg/kg Q2D",
+                note: "糖肽類抗生素；⚠️ 首要關鍵：Loading 需打滿 3 劑 (每 12 小時一劑) 始能迅速達有效血中濃度；半衰期極長 (100–170 小時)，透析不清除，HD 維持 5 mg/kg Q2D。"
+            },
+            {
+                genericName: "Daptomycin",
+                spec: "500mg",
+                route: "IV",
+                brands: [
+                    { name: "Cubicin", status: "active", code: "CUBI00", vendor: "Patheon Italia" }
+                ],
+                stat: "6–10 mg/kg (視感染嚴重度/菌血症評估)",
+                norm: "6–10 mg/kg QD\n(重症菌血症/心內膜炎: 8–10 mg/kg QD)",
+                mod: "CrCl ≥ 30: 6–10 mg/kg QD\nCrCl < 30: 6–10 mg/kg Q48H",
+                sev: "6–10 mg/kg Q48H (隨 HD 透析後給藥)",
+                note: "【抗革蘭氏陽性菌 / MRSA / VRE】\n常規劑量 6–10 mg/kg QD，洗腎病患 Q48H 給藥 (每次 HD 透析結束後補充)。\n⚠️ 臨床監測要點：\n• 每 3–5 天追蹤 Blood Culture (B/C) 評估療效\n• 每 7 天定期監測 CPK (肌酸激酶，防橫紋肌溶解/肌病變，若 CPK > 1000 有症狀或 > 2000 無症狀應停藥)\n⚠️ 本藥會被肺表面活性劑去活化，絕對不可用於治療肺炎！"
+            }
         ]
     },
     {
         category: "Aminoglycosides & Polymyxins (氨基糖苷類與多黏菌素)",
         drugs: [
-            { name: "Amikacin 250mg", route: "IV", stat: "—", norm: ">80: 15mg/kg QD\n60–80: 12mg/kg QD", mod: "40–60: 7.5mg/kg QD\n30–40: 4mg/kg QD\n20–30: 7.5mg/kg Q2D\n10–20: 4mg/kg Q2D", sev: "3mg/kg Q3D", note: "⚠️ 具顯著腎毒性與不可逆耳毒性；務必監測 Peak (療效) 與 Trough (毒性)；採高劑量單次延長間隔給藥法，重度腎衰竭需嚴格延長間隔並監測血中濃度。" },
-            { name: "Colimycin 2MU (Colistimethate sodium)", route: "IV/Inh", stat: "Loading:\n>60: 4.5支\n>50: 3.5支\n>40: 3支\n**1# Q12H (inh)", norm: ">70: 2.5支 Q12H\n50–69: 2支 Q12H\n**1# Q12H (inh)", mod: "20–49: 1 vial Q12H\n**1# Q12H (inh)", sev: "0.5 vial Q12H\n**1# Q12H (inh)", note: "超級抗藥性陰性菌最後防線；⚠️ 具高腎毒性與神經毒性 (感覺異常/肌肉無力)；靜脈 (IV) 必須精確依腎功能計算；吸入劑型 (Inh) 為局部治療不需依腎功能調整。" }
+            {
+                genericName: "Amikacin",
+                spec: "250mg",
+                route: "IV",
+                brands: [
+                    { name: "Amikacin", status: "active", code: "AMKI14", vendor: "南光化學" },
+                    { name: "Amikin", status: "inactive" }
+                ],
+                stat: "—",
+                norm: ">80: 15mg/kg QD\n60–80: 12mg/kg QD",
+                mod: "40–60: 7.5mg/kg QD\n30–40: 4mg/kg QD\n20–30: 7.5mg/kg Q2D\n10–20: 4mg/kg Q2D",
+                sev: "3mg/kg Q3D",
+                note: "⚠️ 具顯著腎毒性與不可逆耳毒性；務必監測 Peak (療效) 與 Trough (毒性)；採高劑量單次延長間隔給藥法，重度腎衰竭需嚴格延長間隔並監測血中濃度。"
+            },
+            {
+                genericName: "Gentamicin",
+                spec: "80mg/2ml",
+                route: "IV/IM",
+                brands: [
+                    { name: "Gentamycin", status: "active", code: "GM-I30", vendor: "壽元製藥" },
+                    { name: "Garamycin", status: "inactive" }
+                ],
+                stat: "2 mg/kg",
+                norm: "1.5–2 mg/kg Q8H 或 5–7 mg/kg QD",
+                mod: "依 CrCl 延長間隔或依 TDM 調整",
+                sev: "2 mg/kg Q48H (隨 HD 後給)",
+                note: "Aminoglycoside 類常用抗生素；⚠️ 具前庭/耳毒性與腎毒性；主要經腎小球濾過排泄，HD 透析約清除 50%，於每次 HD 結束後補充；常規建議監測 Trough 濃度 (<1–2 μg/mL)。"
+            },
+            {
+                genericName: "Colistimethate sodium",
+                spec: "2MU",
+                route: "IV/Inh",
+                brands: [
+                    { name: "Colistin", status: "active", code: "COLI03", vendor: "政德製藥" },
+                    { name: "Colimycin", status: "inactive" }
+                ],
+                stat: "Loading:\n>60: 4.5支\n>50: 3.5支\n>40: 3支\n**1# Q12H (inh)",
+                norm: ">70: 2.5支 Q12H\n50–69: 2支 Q12H\n**1# Q12H (inh)",
+                mod: "20–49: 1 vial Q12H\n**1# Q12H (inh)",
+                sev: "0.5 vial Q12H\n**1# Q12H (inh)",
+                note: "超級抗藥性陰性菌最後防線；⚠️ 具高腎毒性與神經毒性 (感覺異常/肌肉無力)；靜脈 (IV) 必須精確依腎功能計算；吸入劑型 (Inh) 為局部治療不需依腎功能調整。"
+            }
         ]
     },
     {
         category: "Antifungals (抗黴菌藥物)",
         drugs: [
-            { name: "Fluconazole 200mg (IV)", route: "IV", stat: "100–400mg", norm: "100–400mg QD (視嚴重度)", mod: "50–200mg QD (視嚴重度)", sev: "50–200mg QD (視嚴重度)", note: "抗念珠菌常用 Azole 類；約 80% 原型經腎排泄，HD 透析約清除 50%，故於每次 HD 結束後補充全劑量；注意保肝功能監測與 CYP450 交互作用。" },
-            { name: "Diflucan 50mg (Fluconazole PO)", route: "PO", stat: "100–400mg", norm: "100–400mg QD (視嚴重度)", mod: "50–200mg QD (視嚴重度)", sev: "50–200mg QD (視嚴重度)", note: "口服生體利用度極佳 (>90%)，不受進食影響；主要經腎排泄，中重度腎不全建議常規劑量減半 (50%)；HD 透析後給予全額劑量。" },
-            { name: "Micafungin 50mg (Mycamine)", route: "IV", stat: "—", norm: "100mg QD", mod: "100mg QD", sev: "100mg QN", note: "Echinocandin 類抗黴菌藥，主要由肝臟代謝，不受腎功能影響，各腎功能分級與 HD/PD 皆不需調整劑量；對腎毒性低，安全性良好。" }
+            {
+                genericName: "Fluconazole",
+                spec: "200mg",
+                route: "IV",
+                brands: [
+                    { name: "Flucon", status: "active", code: "FLUI07", vendor: "信東生技" },
+                    { name: "Diflucan", status: "inactive" }
+                ],
+                stat: "100–400mg",
+                norm: "100–400mg QD (視嚴重度)",
+                mod: "50–200mg QD (視嚴重度)",
+                sev: "50–200mg QD (視嚴重度)",
+                note: "抗念珠菌常用 Azole 類；約 80% 原型經腎排泄，HD 透析約清除 50%，故於每次 HD 結束後補充全劑量；注意保肝功能監測與 CYP450 交互作用。"
+            },
+            {
+                genericName: "Fluconazole",
+                spec: "50mg",
+                route: "PO",
+                brands: [
+                    { name: "Fluene", status: "active", code: "DIFO07", vendor: "瑞安大藥廠" },
+                    { name: "Diflucan", status: "inactive" }
+                ],
+                stat: "100–400mg",
+                norm: "100–400mg QD (視嚴重度)",
+                mod: "50–200mg QD (視嚴重度)",
+                sev: "50–200mg QD (視嚴重度)",
+                note: "口服生體利用度極佳 (>90%)，不受進食影響；主要經腎排泄，中重度腎不全建議常規劑量減半 (50%)；HD 透析後給予全額劑量。"
+            },
+            {
+                genericName: "Micafungin",
+                spec: "50mg",
+                route: "IV",
+                brands: [
+                    { name: "Myfungin", status: "active", code: "MYCI01", vendor: "永信藥品" },
+                    { name: "Mycamine", status: "inactive" }
+                ],
+                stat: "—",
+                norm: "100mg QD",
+                mod: "100mg QD",
+                sev: "100mg QN",
+                note: "Echinocandin 類抗黴菌藥，主要由肝臟代謝，不受腎功能影響，各腎功能分級與 HD/PD 皆不需調整劑量；對腎毒性低，安全性良好。"
+            },
+            {
+                genericName: "Voriconazole",
+                spec: "200mg",
+                route: "IV/PO",
+                brands: [
+                    { name: "Vaway", status: "active", code: "VORI03", vendor: "永信藥品" },
+                    { name: "Vfend", status: "active", code: "VORO00", vendor: "Pfizer" }
+                ],
+                stat: "IV: 6 mg/kg Q12H x 2 doses\nPO: 200–400mg Q12H",
+                norm: "IV: 4 mg/kg Q12H\nPO: 200mg Q12H",
+                mod: "CrCl < 50 建議改口服 PO",
+                sev: "建議口服 200mg Q12H",
+                note: "抗麴菌屬 (Aspergillus) 首選；IV 針劑含有賦形劑 SBECD，在 eGFR < 50 易蓄積具潛在腎毒性，中重度腎衰竭建議優先轉換為口服劑型；常規需監測 TDM 及肝功能。"
+            }
         ]
     },
     {
         category: "Antivirals (抗病毒藥物)",
         drugs: [
-            { name: "Veklury 100mg (Remdesivir / 瑞德西韋) [院內碼: VEKI99]", route: "IV", stat: "Day 1: 200mg (2 vial)", norm: "Day 2–5: 100mg (1 vial) QD", mod: "Day 2–5: 100mg QD", sev: "Day 2–5: 100mg QD (透析後給)", note: "【院內碼】VEKI99\n【療程】Day 1: 200mg (2 vial)；Day 2–5: 100mg (1 vial) QD。\n【輸注 Pump 設定】\n• 200mg: 2 vial + N/S total 150 mL，IV pump 跑 75 mL/hr (輸注 2 小時)\n• 100mg: 1 vial + N/S total 150 mL，IV pump 跑 150 mL/hr (輸注 1 小時)\n【常用共處方】Dexamethasone 6mg (1.5 amp) QD + PPI (Pane 40mg) QD。\n【腎功能】最新指引/FDA 仿單更新允許用於重度腎不全及洗腎 (透析日於透析後給藥)；需定期追蹤肝腎功能。" },
-            { name: "Xocova 125mg (Ensitrelvir / 恩賽特韋)", route: "PO", stat: "Day 1: 375mg (3# QD)", norm: "Day 2–5: 125mg (1# QD)", mod: "Day 2–5: 125mg (1# QD)", sev: "eGFR < 15 或 HD 不建議使用", note: "【COVID-19 口服抗病毒藥 (3CL 蛋白酶抑制劑)】\n發病 72 小時內投藥效果最佳，總療程 5 天 (Day 1 給 375mg，Day 2–5 給 125mg QD)；輕中度腎不全不需調整；eGFR < 15 或洗腎病患缺乏臨床數據不建議使用。\n⚠️ 強效 CYP3A 抑制劑，禁忌與多種藥物併用 (包含特定 Statin、抗心律不整、鎮靜安眠藥等)；孕婦禁用。" },
-            { name: "Aciclovir 250mg (Acyclovir)", route: "IV", stat: "—", norm: "500mg Q8H (IV drip > 1hr)", mod: "5–12.5 mg/kg Q12–24H", sev: "2.5–6.25 mg/kg QD (洗腎後給)", note: "抗 HSV/VZV 首選；⚠️ 輸注期間與之後務必維持充足水化 (Hydration)，避免藥物於腎小管結晶引起急性腎衰竭；每次滴注時間 ≥ 1 小時；HD 後給藥。" },
-            { name: "Paxlovid (Nirmatrelvir / Ritonavir)", route: "PO", stat: "—", norm: "3# BID (300/100mg)", mod: "2# BID (30–60 mL/min)\neGFR < 30 不建議使用", sev: "不建議使用 (eGFR < 30)", note: "COVID-19 口服抗病毒藥；中度腎功能不全 (eGFR 30–60) 減為 2# BID (粉紅錠 1 顆 + 白錠 1 顆)；⚠️ eGFR < 30 禁忌使用；Ritonavir 為強效 CYP3A4 抑制劑，交互作用極多！" },
-            { name: "Tamiflu / Eraflu 75mg (Oseltamivir)", route: "PO", stat: "—", norm: "75mg BID", mod: "30mg BID (30–60)\n30mg QD (10–30)", sev: "HD/PD: 30mg QD", note: "流感抗病毒藥，發病 48 小時內投藥效果最佳；主要活性代謝物經腎排泄，中重度腎衰竭需減量；HD 透析病患建議於每次透析結束後給予 30mg。" }
+            {
+                genericName: "Remdesivir",
+                spec: "100mg",
+                route: "IV",
+                brands: [
+                    { name: "Veklury", status: "active", code: "VEKI99", vendor: "Gilead" }
+                ],
+                stat: "Day 1: 200mg (2 vial)",
+                norm: "Day 2–5: 100mg (1 vial) QD",
+                mod: "Day 2–5: 100mg QD",
+                sev: "Day 2–5: 100mg QD (透析後給)",
+                note: "【院內碼】VEKI99\n【療程】Day 1: 200mg (2 vial)；Day 2–5: 100mg (1 vial) QD。\n【輸注 Pump 設定】\n• 200mg: 2 vial + N/S total 150 mL，IV pump 跑 75 mL/hr (輸注 2 小時)\n• 100mg: 1 vial + N/S total 150 mL，IV pump 跑 150 mL/hr (輸注 1 小時)\n【常用共處方】Dexamethasone 6mg (1.5 amp) QD + PPI (Pane 40mg) QD。\n【腎功能】最新指引/FDA 仿單更新允許用於重度腎不全及洗腎 (透析日於透析後給藥)；需定期追蹤肝腎功能。"
+            },
+            {
+                genericName: "Ensitrelvir",
+                spec: "125mg",
+                route: "PO",
+                brands: [
+                    { name: "Xocova", status: "active", vendor: "Shionogi" }
+                ],
+                stat: "Day 1: 375mg (3# QD)",
+                norm: "Day 2–5: 125mg (1# QD)",
+                mod: "Day 2–5: 125mg (1# QD)",
+                sev: "eGFR < 15 或 HD 不建議使用",
+                note: "【COVID-19 口服抗病毒藥 (3CL 蛋白酶抑制劑)】\n發病 72 小時內投藥效果最佳，總療程 5 天 (Day 1 給 375mg，Day 2–5 給 125mg QD)；輕中度腎不全不需調整；eGFR < 15 或洗腎病患缺乏臨床數據不建議使用。\n⚠️ 強效 CYP3A 抑制劑，禁忌與多種藥物併用 (包含特定 Statin、抗心律不整、鎮靜安眠藥等)；孕婦禁用。"
+            },
+            {
+                genericName: "Acyclovir",
+                spec: "250mg",
+                route: "IV",
+                brands: [
+                    { name: "Zovirax", status: "active", code: "ZOVI00", vendor: "GSK" },
+                    { name: "Aciclovir", status: "inactive" }
+                ],
+                stat: "—",
+                norm: "500mg Q8H (IV drip > 1hr)",
+                mod: "5–12.5 mg/kg Q12–24H",
+                sev: "2.5–6.25 mg/kg QD (洗腎後給)",
+                note: "抗 HSV/VZV 首選；⚠️ 輸注期間與之後務必維持充足水化 (Hydration)，避免藥物於腎小管結晶引起急性腎衰竭；每次滴注時間 ≥ 1 小時；HD 後給藥。"
+            },
+            {
+                genericName: "Nirmatrelvir/Ritonavir",
+                spec: "150/100mg",
+                route: "PO",
+                brands: [
+                    { name: "Paxlovid", status: "active", vendor: "Pfizer" }
+                ],
+                stat: "—",
+                norm: "3# BID (300/100mg)",
+                mod: "2# BID (30–60 mL/min)\neGFR < 30 不建議使用",
+                sev: "不建議使用 (eGFR < 30)",
+                note: "COVID-19 口服抗病毒藥；中度腎功能不全 (eGFR 30–60) 減為 2# BID (粉紅錠 1 顆 + 白錠 1 顆)；⚠️ eGFR < 30 禁忌使用；Ritonavir 為強效 CYP3A4 抑制劑，交互作用極多！"
+            },
+            {
+                genericName: "Oseltamivir",
+                spec: "75mg",
+                route: "PO",
+                brands: [
+                    { name: "Eraflu", status: "active", vendor: "臺灣東洋" },
+                    { name: "Tamiflu", status: "inactive" }
+                ],
+                stat: "—",
+                norm: "75mg BID",
+                mod: "30mg BID (30–60)\n30mg QD (10–30)",
+                sev: "HD/PD: 30mg QD",
+                note: "流感抗病毒藥，發病 48 小時內投藥效果最佳；主要活性代謝物經腎排泄，中重度腎衰竭需減量；HD 透析病患建議於每次透析結束後給予 30mg。"
+            }
         ]
     },
     {
         category: "Other Antibiotics (其他各類抗生素)",
         drugs: [
-            { name: "Clindamycin 300mg (Cleocin)", route: "IV", stat: "300mg", norm: "300mg Q6–8H", mod: "300mg Q6–8H", sev: "300mg Q6–8H", note: "主要由肝臟代謝，腎衰竭及透析皆不需調整劑量；⚠️ 警惕抗生素相關偽膜性腸炎 (C. difficile 結腸炎)；靜脈注射切勿直接快速推注 (Bolus)。" },
-            { name: "Klaricid 500mg (Clarithromycin)", route: "PO", stat: "—", norm: "500mg BID", mod: "500mg QD", sev: "500mg QD", note: "巨環類抗生素；主要經肝腎雙重排泄，eGFR < 30 劑量減半 (500mg QD)；⚠️ 強效 CYP3A4 抑制劑，禁與某些 Statin 類 (防橫紋肌溶解) 併用；注意 QTc 延長。" },
-            { name: "Baktar 400/80mg (TMP/SMX)", route: "PO", stat: "—", norm: "2# BID", mod: "1# BID (15–30)", sev: "不建議使用 (<15)", note: "⚠️ TMP 抑制腎小管分泌肌酸酐 (假性 Scr 上昇) 並抑制鉀排泄，高血鉀高風險族群需密切監測；eGFR < 15 禁忌使用；長期需監測血球計數。" },
-            { name: "Metronidazol 500mg (IV) / 250mg (PO)", route: "IV/PO", stat: "500mg", norm: "500mg Q6H", mod: "500mg Q6H", sev: "500mg Q12H", note: "厭氧菌感染專用；主要經肝代謝，重度腎衰竭減為 Q12H；服藥期間與停藥 3 天內嚴禁飲酒 (防雙硫侖反應)；注意長期周邊神經病變。" },
-            { name: "Tigecyclin 50mg (Tygacil)", route: "IV", stat: "100mg", norm: "50mg Q12H", mod: "50mg Q12H", sev: "50mg Q12H", note: "主要由肝膽與糞便排泄，腎衰竭與透析不需調整劑量；⚠️ 組織穿透高但血中與尿液濃度低，不適用於單純菌血症 (BSI) 或單純泌尿道感染 (UTI)；常伴隨噁心嘔吐。" },
-            { name: "UFO 2g/4g (Flomoxef 複合劑)", route: "IV", stat: "2g / 4g", norm: "4g Q8H", mod: "2g Q8H", sev: "1g Q12H", note: "第二代 Oxacephem 類抗生素；對厭氧菌及部分 ESBL 菌有效；具 N-MTT 側鏈，長療程注意出血傾向；主要由腎排泄，中重度腎衰竭需依比例減量。" },
-            { name: "Fosfomycin 3g/8g (PO/IV)", route: "PO", stat: "3g", norm: "UTI: 3g x 1 dose\nComplicated UTI: 3g x 3 doses Q2-3days\nProstatitis: 3g x 7 dose Q3D", mod: "UTI: 3g x 1 dose\nComplicated UTI: 3g x 3 doses Q2-3days\nProstatitis: 3g x 7 doses Q3D", sev: "不建議使用", note: "主要用於單純性下泌尿道感染 (急性膀胱炎) 單劑療法；以原型高濃度排泄於尿液中；重度腎衰竭因無法達有效尿中殺菌濃度，不建議使用。" }
+            {
+                genericName: "Clindamycin",
+                spec: "300mg",
+                route: "IV/PO",
+                brands: [
+                    { name: "Clincin", status: "active", code: "CLEI02", vendor: "南光化學" },
+                    { name: "Clindamycin", status: "active", code: "CLIO02", vendor: "榮民製藥" },
+                    { name: "Cleocin", status: "inactive" }
+                ],
+                stat: "300mg",
+                norm: "300mg Q6–8H",
+                mod: "300mg Q6–8H",
+                sev: "300mg Q6–8H",
+                note: "主要由肝臟代謝，腎衰竭及透析皆不需調整劑量；⚠️ 警惕抗生素相關偽膜性腸炎 (C. difficile 結腸炎)；靜脈注射切勿直接快速推注 (Bolus)。"
+            },
+            {
+                genericName: "Clarithromycin",
+                spec: "500mg",
+                route: "PO",
+                brands: [
+                    { name: "Klaricid", status: "active", code: "KLAO06", vendor: "Abbvie" }
+                ],
+                stat: "—",
+                norm: "500mg BID",
+                mod: "500mg QD",
+                sev: "500mg QD",
+                note: "巨環類抗生素；主要經肝腎雙重排泄，eGFR < 30 劑量減半 (500mg QD)；⚠️ 強效 CYP3A4 抑制劑，禁與某些 Statin 類 (防橫紋肌溶解) 併用；注意 QTc 延長。"
+            },
+            {
+                genericName: "Sulfamethoxazole/Trimethoprim",
+                spec: "400/80mg",
+                route: "PO/IV",
+                brands: [
+                    { name: "Senfihu", status: "active", code: "BAKO06", vendor: "瑞士藥廠" },
+                    { name: "Sevatrim", status: "active", code: "SEVI00", vendor: "瑞士藥廠" },
+                    { name: "Baktar", status: "inactive" }
+                ],
+                stat: "—",
+                norm: "2# BID (PO) 或 2–3 amp Q8–12H (IV)",
+                mod: "1# BID (15–30)",
+                sev: "不建議使用 (<15)",
+                note: "⚠️ TMP 抑制腎小管分泌肌酸酐 (假性 Scr 上昇) 並抑制鉀排泄，高血鉀高風險族群需密切監測；eGFR < 15 禁忌使用；長期需監測血球計數。"
+            },
+            {
+                genericName: "Metronidazole",
+                spec: "500mg/250mg",
+                route: "IV/PO",
+                brands: [
+                    { name: "SABS", status: "active", code: "ANEI05", vendor: "信東生技" },
+                    { name: "Tolizole", status: "active", code: "ANEO08", vendor: "國嘉製藥" },
+                    { name: "Flagyl", status: "inactive" }
+                ],
+                stat: "500mg",
+                norm: "500mg Q6H",
+                mod: "500mg Q6H",
+                sev: "500mg Q12H",
+                note: "厭氧菌感染專用；主要經肝代謝，重度腎衰竭減為 Q12H；服藥期間與停藥 3 天內嚴禁飲酒 (防雙硫侖反應)；注意長期周邊神經病變。"
+            },
+            {
+                genericName: "Tigecycline",
+                spec: "50mg",
+                route: "IV",
+                brands: [
+                    { name: "Tygacil", status: "active", code: "TYGI00", vendor: "Wyeth" }
+                ],
+                stat: "100mg",
+                norm: "50mg Q12H",
+                mod: "50mg Q12H",
+                sev: "50mg Q12H",
+                note: "主要由肝膽與糞便排泄，腎衰竭與透析不需調整劑量；⚠️ 組織穿透高但血中與尿液濃度低，不適用於單純菌血症 (BSI) 或單純泌尿道感染 (UTI)；常伴隨噁心嘔吐。"
+            },
+            {
+                genericName: "Fosfomycin",
+                spec: "3g/2g",
+                route: "PO/IV",
+                brands: [
+                    { name: "Monurol", status: "active", code: "FOSO02", vendor: "Zambon" },
+                    { name: "Ufo", status: "active", code: "FOSI07", vendor: "政德製藥" }
+                ],
+                stat: "3g (PO) / 2g (IV)",
+                norm: "PO (單純UTI): 3g x 1 劑\nIV: 2–4g Q6–8H",
+                mod: "PO: 3g x 1 劑\nIV: 2g Q8–12H",
+                sev: "不建議使用 (PO 尿中濃度不足)",
+                note: "PO 用於單純急性膀胱炎；IV 用於抗藥性革蘭氏陰性菌/陽性菌重度感染；主要以原型經腎排泄，重度腎衰竭 PO 無法達有效尿中殺菌濃度。"
+            },
+            {
+                genericName: "Linezolid",
+                spec: "600mg",
+                route: "PO/IV",
+                brands: [
+                    { name: "Zyvox", status: "active", code: "LINO05", vendor: "Viatris" }
+                ],
+                stat: "600mg",
+                norm: "600mg Q12H",
+                mod: "600mg Q12H",
+                sev: "600mg Q12H (透析後給)",
+                note: "Oxazolidinone 類抗革蘭氏陽性菌藥物 (MRSA/VRE)；主要經非腎臟代謝，各腎功能分級不需調整劑量；約 30% 可被 HD 清除，透析日於透析後給藥；⚠️ 使用超過 2 週需每週監測 CBC (骨髓抑制/血小板低下)，注意血清素症候群。"
+            }
         ]
     }
 ];
@@ -626,10 +1270,39 @@ function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-// Flat Drug List
+// Helper functions for decoupled brand/generic management
+function getActiveBrandString(drug) {
+    if (!drug.brands || drug.brands.length === 0) return "";
+    const activeBrands = drug.brands
+        .filter(b => b.status === "active")
+        .map(b => b.name);
+    const uniqueBrands = Array.from(new Set(activeBrands));
+    return uniqueBrands.join(" / ");
+}
+
+function getDisplayFullName(drug) {
+    const brandStr = getActiveBrandString(drug);
+    const specStr = drug.spec ? ` ${drug.spec}` : "";
+    if (brandStr) {
+        return `${brandStr}（${drug.genericName}${specStr}）`;
+    } else {
+        return `${drug.genericName}${specStr}`;
+    }
+}
+
+function getSearchText(drug) {
+    const brandNames = (drug.brands || []).map(b => b.name).join(" ");
+    const codes = (drug.brands || []).map(b => b.code || "").join(" ");
+    const vendors = (drug.brands || []).map(b => b.vendor || "").join(" ");
+    return `${drug.name || ""} ${drug.genericName || ""} ${brandNames} ${codes} ${vendors} ${drug.spec || ""} ${drug.note || ""} ${drug.norm || ""} ${drug.mod || ""} ${drug.sev || ""}`.toLowerCase();
+}
+
+// Flat Drug List & Initialize Display Names & Search Index
 let flatDrugList = [];
 drugDatabase.forEach(cat => {
     cat.drugs.forEach(d => {
+        d.name = getDisplayFullName(d);
+        d.searchIndex = getSearchText(d);
         flatDrugList.push({ ...d, category: cat.category });
     });
 });
@@ -711,8 +1384,7 @@ function renderTable() {
                 return d.name === selectedDrugName;
             }
 
-            const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
-            const matchesSearch = !term || matchText.includes(term);
+            const matchesSearch = !term || d.searchIndex.includes(term);
             const matchesRoute = (currentRoute === "ALL") || d.route.includes(currentRoute);
             return matchesSearch && matchesRoute;
         });
@@ -782,8 +1454,7 @@ searchInput.addEventListener("input", (e) => {
     const term = e.target.value.trim().toLowerCase();
 
     const matched = flatDrugList.filter(d => {
-        const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
-        const matchesSearch = matchText.includes(term);
+        const matchesSearch = !term || d.searchIndex.includes(term);
         const matchesCat = (currentCategory === "ALL") || (d.category === currentCategory);
         const matchesRoute = (currentRoute === "ALL") || d.route.includes(currentRoute);
         return matchesSearch && matchesCat && matchesRoute;
@@ -809,8 +1480,7 @@ searchInput.addEventListener("keydown", (e) => {
         const term = searchInput.value.trim().toLowerCase();
         if (term) {
             const matched = flatDrugList.filter(d => {
-                const matchText = (d.name + " " + d.note + " " + d.norm + " " + d.mod + " " + d.sev).toLowerCase();
-                const matchesSearch = matchText.includes(term);
+                const matchesSearch = !term || d.searchIndex.includes(term);
                 const matchesCat = (currentCategory === "ALL") || (d.category === currentCategory);
                 const matchesRoute = (currentRoute === "ALL") || d.route.includes(currentRoute);
                 return matchesSearch && matchesCat && matchesRoute;

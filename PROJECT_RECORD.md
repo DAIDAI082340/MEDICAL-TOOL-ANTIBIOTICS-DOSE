@@ -186,7 +186,21 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
-- **v0.4.2 (2026-09-16)**:
+- **v0.5.0 (2026-09-17)**:
+  - **學名與商品名架構完整解耦 (Generic vs. Brand Name Decoupling Architecture)**：
+    - 依據臨床實際換藥採購情境，將抗生素資料結構徹底解耦：學名 (`genericName`) 固定、劑量與 eGFR 調整邏輯以學名為核心；商品名 (`brands`) 改為獨立陣列管理。
+    - 支援 `active` / `inactive` 狀態標籤：現行招標用藥設為 `active`，歷史或舊廠牌設為 `inactive` 保存歷史紀錄；未來更換新商品名時直接追加並切換狀態即可，不影響核心計算。
+  - **對齊衛生福利部彰化醫院最新總表（1150908 版）**：
+    - 全面核對並同步彰化醫院最新抗生素清單（包含 79 項品項對應關係），收錄各品項最新現用商品名、院內代碼（如 ROCI17, PIPI07, AMPI21 等）與藥廠廠牌。
+  - **品項顯示名稱去數字與劑型純化 (Clean Brand Names)**：
+    - 嚴格遵守去數字與劑型規範：商品名不再出現劑型後綴（如 `Inj.`, `tab.`, `cap.`, `Susp.`）或規格數字（如 `500`, `1000`, `3000`, `2.25` 等）。例如：`Gentamycin Inj.` 純化為 `Gentamycin`、`Mepenem 500 / 1000` 純化為 `Mepenem`、`Cefin 500` 純化為 `Cefin`、`Sulampi 3000` 純化為 `Sulampi`。
+  - **統一標準顯示格式**：
+    - 統一為：**`商品名（學名 規格）`**（全形括號，例如：`Cefin（Ceftriaxone 500mg）`、`Mepenem（Meropenem 1g）`、`Curam（Amoxicillin/Clavulanate 500/125mg）`）。
+  - **簡潔畫面原則 (Clean UI & Multi-dimensional Search Index)**：
+    - 依使用者明確指示，畫面保持最簡潔舒適風格：院內代碼、藥廠廠牌、懷孕安全危險性級數**不在畫面上呈現**。
+    - 院內代碼、廠牌、歷史商品名皆納入後台高維度搜尋索引 (`searchIndex`)，臨床使用者無論輸入院內碼（如 `ROCI17`）、學名（如 `Ceftriaxone`）、現行商品名（如 `Cefin`）或舊商品名（如 `Rocephin`、`Sintrix`）皆可直接秒級精準檢索。
+
+- **v0.4.2 (2026-09-17)**:
   - **版面上方與整體字體適度放大 (Layout & Font Readability Enhancement)**：
     - 上方固定區塊（Header、搜尋工具列、選定藥物精選卡、狀態欄）適度放寬間距與高度，提供更舒適的閱讀與操作呼吸感。
     - 全面放大整體文字字級：標題 (`1.35rem`)、搜尋輸入框與下拉選單 (`1.0rem` / `0.96rem`)、四大劑量方塊文字與數值 (`0.88rem` / `1.15rem`)、備註文字 (`0.95rem`)。
