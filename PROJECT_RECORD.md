@@ -186,6 +186,30 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
+- **v0.5.1 (2026-09-17)**:
+  - **抗生素品項顯示格式規格外置 (Refined Display Format: `商品名（學名） 規格`)**：
+    - 全面微調全系統品項名稱顯示格式為：**`商品名（學名） 規格`**（規格置於括號外，例如：`Cefin（Ceftriaxone） 500mg`、`Tatumcef（Ceftazidime） 1g`、`SABS（Metronidazole） 500mg`）。
+    - 表格表頭相應修訂為「**抗生素品項：商品名（學名） 規格**」。
+  - **Sintum / Tatumcef 狀態與劑量更新**：
+    - `Sintum` 標記為暫停用藥 (`inactive`)，現行用藥只保留 `Tatumcef` (`active`)，畫面預設僅呈現 `Tatumcef（Ceftazidime） 1g`，搜尋 `Sintum` 仍可快速定位。
+    - 其重度腎功能 (`eGFR < 10 mL/min/1.73m2`) 劑量修訂為：`1g QD\n(HD：HD透析後給藥或QN、HS)`。
+  - **Metronidazole 針劑與口服分開呈現（劑量純化無 PO 字眼）**：
+    - 將 Metronidazole 拆分為兩筆獨立品項：
+      1. 針劑：`SABS（Metronidazole） 500mg` [IV]（院內碼 `ANEI05`，常規 `500mg Q6H`、重度 `500mg Q12H`）。
+      2. 口服：`Tolizole（Metronidazole） 250mg` [PO]（院內碼 `ANEO08`，常規與中度 `500mg TID`、重度 `250mg TID 或 500mg BID`）。
+    - 依指示劑量欄位內**完全不呈現 `PO` 字眼**（由途徑藍色標籤清楚表達），大幅提升視覺乾淨度。
+  - **新增口服 Vancomycin 125mg（全階層劑量一致且無 PO 字眼）**：
+    - 正式新增口服品項：`Vancover（Vancomycin） 125mg` [PO]（院內碼 `VANO00`），專用於治療困難梭菌偽膜性腸炎 (CDI)。
+    - 各階層腎功能劑量皆設定為 `125mg QID`（全階層劑量一致且不帶 `PO` 字眼）。
+    - 原針劑保留為：`Vanlyo（Vancomycin） 500mg` [IV]。
+  - **全藥品重度腎功能 HD 標註格式精準統一**：
+    - 凡重度欄位頻率為 `QD`, `Q2D`, `Q48H`, `Q2-3D`, `Q3D` 之品項，備註格式全面精準統一為：
+      👉 **`(HD：HD透析後給藥或QN、HS)`**
+    - 頂部單藥卡片與表格重度表頭同步醒目標示「(HD：HD透析後給藥或QN、HS)」。
+  - **Colistin 途徑大寫規範化 (`IV/INH`)**：
+    - 途徑由 `IV/Inh` 統一改為大寫 **`IV/INH`**，並啟用複合式紫色 Route Badge。
+    - 內文及備註中所有 `(inh)` 一律改為標準大寫 **`(INH)`**。
+
 - **v0.5.0 (2026-09-17)**:
   - **學名與商品名架構完整解耦 (Generic vs. Brand Name Decoupling Architecture)**：
     - 依據臨床實際換藥採購情境，將抗生素資料結構徹底解耦：學名 (`genericName`) 固定、劑量與 eGFR 調整邏輯以學名為核心；商品名 (`brands`) 改為獨立陣列管理。
