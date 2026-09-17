@@ -186,6 +186,20 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
+- **v0.5.4 (2026-09-17)**:
+  - **100% 精準還原歷史黃金比例 (Exact Historical Proportions Restoration - Commit `cf97497`)**：
+    - 依據使用者桌面截圖，從 Git 歷史中精準提取 Commit `cf97497` (v0.5.0) 的全部欄寬與 CSS 數值進行 1:1 還原。
+    - 主表格 7 欄位百分比完全對齊歷史原始設定：
+      - 抗生素品項：`22%`（`min-width: 185px`）
+      - 途徑：`7%`
+      - Stat / Loading Dose：`14%`（`min-width: 140px`）
+      - eGFR > 50：`15%`（`min-width: 140px`）
+      - eGFR 10–50：`17%`（`min-width: 140px`）
+      - eGFR < 10：`15%`（`min-width: 140px`）
+      - 臨床備註 (Notes)：`20%`（`min-width: 230px`）
+    - 表頭樣式還原 `white-space: nowrap`，確保標題文字整齊筆直。
+    - 搭配已簡化的表頭標題，在 1480px 置中容器下完美開展，無任何水平捲軸，視覺比例與截圖 100% 一致。
+
 - **v0.5.3 (2026-09-17)**:
   - **精準還原置中卡片視覺佈局 (Centered Elegant Dashboard Layout)**：
     - 依使用者上傳之參考標準畫面，將容器恢復為經典置中格局（`max-width: 1480px; margin: 0 auto;`），兩側保留優雅舒緩的背景留白，不再貼齊螢幕滿版。
