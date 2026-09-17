@@ -186,6 +186,18 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
+- **v0.5.2 (2026-09-17)**:
+  - **表頭與頂部單藥卡片透析標籤精簡化 (Header & Card Cleanliness)**：
+    - 主表格第 6 欄表頭：移除 `※ QD/Q2D/Q48H/Q2–3D (HD：HD透析後給藥或QN、HS)`，僅保留核心欄名 `eGFR < 10 mL/min/1.73m2 (重度/HD/PD)`。
+    - 頂部單藥精選卡第 4 格：移除標題中的 `(HD：HD透析後給藥或QN、HS)`，僅保留 `eGFR < 10 mL/min/1.73m2 (重度/HD/PD)`。
+  - **藥品重度透析標註文字微調 (`HD：透析後給藥或QN、HS`)**：
+    - 全藥品資料庫中所有重度欄位的 `(HD：HD透析後給藥或QN、HS)` 全面修訂為 **`(HD：透析後給藥或QN、HS)`**（去除重複的 `HD`，文義更加通順專業）。
+  - **自適應排版與消滅水平捲軸 (Zero Horizontal Scroll - Full Screen Fit)**：
+    - `.container` 容器全面改為寬度自適應（`width: 100%; max-width: 100%`），充分運用各螢幕橫向空間。
+    - 主表格 7 大欄位百分比重新配置，總和嚴格等於 100%（`18% + 5% + 11% + 13% + 14% + 15% + 24% = 100%`）。
+    - 啟用 `table-layout: fixed; width: 100%` 搭配 `word-break: break-word`，並將單元格 padding 由 `10px 12px` 微調為 `8px 6px`。
+    - 移除單元格硬性 `min-width`，桌面解析度下徹底消除水平滾動條，所有資料及右側備註欄位於同一畫面完整呈現。
+
 - **v0.5.1 (2026-09-17)**:
   - **抗生素品項顯示格式規格外置 (Refined Display Format: `商品名（學名） 規格`)**：
     - 全面微調全系統品項名稱顯示格式為：**`商品名（學名） 規格`**（規格置於括號外，例如：`Cefin（Ceftriaxone） 500mg`、`Tatumcef（Ceftazidime） 1g`、`SABS（Metronidazole） 500mg`）。
