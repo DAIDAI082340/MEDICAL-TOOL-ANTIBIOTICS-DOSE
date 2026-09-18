@@ -104,8 +104,8 @@
         }
 
         .search-box-wrapper {
-            flex: 1.8;
-            min-width: 220px;
+            flex: 1.5;
+            min-width: 200px;
             position: relative;
         }
 
@@ -135,8 +135,8 @@
         }
 
         .select-wrapper {
-            flex: 1.2;
-            min-width: 190px;
+            flex: 1.1;
+            min-width: 170px;
         }
 
         .select-wrapper select {
@@ -342,11 +342,13 @@
         /* Quick Card for selected drug */
         .featured-card {
             display: none;
+            flex-shrink: 0;
             background: #fff;
             border: 1.8px solid var(--primary-light);
             border-radius: 10px;
             padding: 11px 16px;
-            margin-bottom: 8px;
+            margin-top: 8px;
+            margin-bottom: 0;
             box-shadow: 0 3px 12px rgba(47, 85, 151, 0.12);
         }
 
@@ -440,8 +442,13 @@
                 </select>
             </div>
             <div class="select-wrapper">
-                <select id="drugSelect">
-                    <option value="">-- 全部抗生素品項 (A–Z 依序排列) --</option>
+                <select id="brandSelect">
+                    <option value="">-- 依商品名 (A–Z 依序排列) --</option>
+                </select>
+            </div>
+            <div class="select-wrapper">
+                <select id="genericSelect">
+                    <option value="">-- 依學名 (A–Z 依序排列) --</option>
                 </select>
             </div>
             <div class="filter-buttons">
@@ -452,41 +459,9 @@
             </div>
         </div>
 
-        <!-- Single Selected Drug Card (Quick Highlight) -->
-        <div class="featured-card" id="featuredCard">
-            <div class="featured-title">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span id="featName">藥物名稱</span>
-                    <span id="featRouteContainer"><span id="featRoute" class="route-badge route-iv">IV</span></span>
-                </div>
-                <button id="closeFeatBtn" style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: #888; padding: 2px 8px; border-radius: 4px;" title="關閉單藥卡片">✕</button>
-            </div>
-            <div class="grid-dose">
-                <div class="dose-box c-stat">
-                    <div class="label">Stat / Loading Dose</div>
-                    <div class="val" id="featStat">—</div>
-                </div>
-                <div class="dose-box c-norm">
-                    <div class="label">eGFR > 50 mL/min/1.73m2<br><span style="font-size:0.82rem; font-weight:normal;">(常規/輕度)</span></div>
-                    <div class="val dose-normal" id="featNorm">—</div>
-                </div>
-                <div class="dose-box c-mod">
-                    <div class="label">eGFR 10–50 mL/min/1.73m2<br><span style="font-size:0.82rem; font-weight:normal;">(中度減量)</span></div>
-                    <div class="val dose-moderate" id="featMod">—</div>
-                </div>
-                <div class="dose-box c-sev">
-                    <div class="label">eGFR < 10 mL/min/1.73m2<br><span style="font-size:0.82rem; font-weight:normal;">(重度/HD/PD)</span></div>
-                    <div class="val dose-severe" id="featSev">—</div>
-                </div>
-            </div>
-            <div class="featured-note-box">
-                <strong>📌 臨床備註：</strong><span id="featNote" style="white-space: pre-line; display: inline-block; vertical-align: top; margin-top: 1px;">—</span>
-            </div>
-        </div>
-
         <!-- Status Bar -->
         <div class="status-bar">
-            <span id="resultCount">共符合 45 種抗生素品項</span>
+            <span id="resultCount">共符合 51 種抗生素品項</span>
             <span class="status-tip">點選表格任一品項鎖定檢視，或使用上方分類與搜尋即時過濾</span>
         </div>
     </div>
@@ -509,6 +484,38 @@
                 <!-- Javascript will inject data dynamically -->
             </tbody>
         </table>
+    </div>
+
+    <!-- Single Selected Drug Card (Quick Highlight - Placed at the bottom) -->
+    <div class="featured-card" id="featuredCard">
+        <div class="featured-title">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span id="featName">藥物名稱</span>
+                <span id="featRouteContainer"><span id="featRoute" class="route-badge route-iv">IV</span></span>
+            </div>
+            <button id="closeFeatBtn" style="background: none; border: none; font-size: 1.25rem; cursor: pointer; color: #888; padding: 2px 8px; border-radius: 4px;" title="關閉單藥卡片">✕</button>
+        </div>
+        <div class="grid-dose">
+            <div class="dose-box c-stat">
+                <div class="label">Stat / Loading Dose</div>
+                <div class="val" id="featStat">—</div>
+            </div>
+            <div class="dose-box c-norm">
+                <div class="label">eGFR > 50 mL/min/1.73m2<br><span style="font-size:0.82rem; font-weight:normal;">(常規/輕度)</span></div>
+                <div class="val dose-normal" id="featNorm">—</div>
+            </div>
+            <div class="dose-box c-mod">
+                <div class="label">eGFR 10–50 mL/min/1.73m2<br><span style="font-size:0.82rem; font-weight:normal;">(中度減量)</span></div>
+                <div class="val dose-moderate" id="featMod">—</div>
+            </div>
+            <div class="dose-box c-sev">
+                <div class="label">eGFR < 10 mL/min/1.73m2<br><span style="font-size:0.82rem; font-weight:normal;">(重度/HD/PD)</span></div>
+                <div class="val dose-severe" id="featSev">—</div>
+            </div>
+        </div>
+        <div class="featured-note-box">
+            <strong>📌 臨床備註：</strong><span id="featNote" style="white-space: pre-line; display: inline-block; vertical-align: top; margin-top: 1px;">—</span>
+        </div>
     </div>
 </div>
 
@@ -1280,7 +1287,8 @@ const drugDatabase = [
 const tableBody = document.getElementById("tableBody");
 const searchInput = document.getElementById("searchInput");
 const categorySelect = document.getElementById("categorySelect");
-const drugSelect = document.getElementById("drugSelect");
+const brandSelect = document.getElementById("brandSelect");
+const genericSelect = document.getElementById("genericSelect");
 const filterBtns = document.querySelectorAll(".filter-btn");
 const resetBtn = document.getElementById("resetBtn");
 const closeFeatBtn = document.getElementById("closeFeatBtn");
@@ -1316,6 +1324,16 @@ function getDisplayFullName(drug) {
     }
 }
 
+function getDisplayGenericFirst(drug) {
+    const brandStr = getActiveBrandString(drug);
+    const specStr = drug.spec ? ` ${drug.spec}` : "";
+    if (brandStr) {
+        return `${drug.genericName}（${brandStr}）${specStr}`;
+    } else {
+        return `${drug.genericName}${specStr}`;
+    }
+}
+
 function getSearchText(drug) {
     const brandNames = (drug.brands || []).map(b => b.name).join(" ");
     const codes = (drug.brands || []).map(b => b.code || "").join(" ");
@@ -1328,6 +1346,7 @@ let flatDrugList = [];
 drugDatabase.forEach(cat => {
     cat.drugs.forEach(d => {
         d.name = getDisplayFullName(d);
+        d.genericFirstName = getDisplayGenericFirst(d);
         d.searchIndex = getSearchText(d);
         flatDrugList.push({ ...d, category: cat.category });
     });
@@ -1344,28 +1363,51 @@ function populateCategoryDropdown() {
     });
 }
 
-// Populate Drug Select Dropdown in A-Z order (filtered by category & route)
-function populateDrugDropdown(catFilter = "ALL", routeFilter = "ALL") {
-    const prevVal = drugSelect.value;
-    drugSelect.innerHTML = '<option value="">-- 全部抗生素品項 (A–Z 依序排列) --</option>';
+// Populate Brand & Generic Dropdowns in A-Z order (filtered by category & route)
+function populateDrugDropdowns(catFilter = "ALL", routeFilter = "ALL") {
+    const prevBrand = brandSelect ? brandSelect.value : "";
+    const prevGeneric = genericSelect ? genericSelect.value : "";
 
-    const filtered = flatDrugList.filter(d => {
+    // 1. 商品名選單：依商品名 A–Z 排序
+    brandSelect.innerHTML = '<option value="">-- 依商品名 (A–Z 依序排列) --</option>';
+    const brandList = flatDrugList.filter(d => {
         const matchesCat = (catFilter === "ALL") || (d.category === catFilter);
         const matchesRoute = (routeFilter === "ALL") || d.route.includes(routeFilter);
         return matchesCat && matchesRoute;
     }).sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
 
-    filtered.forEach(d => {
+    brandList.forEach(d => {
         const opt = document.createElement("option");
         opt.value = d.name;
         opt.textContent = `${d.name} [${d.route}]`;
-        drugSelect.appendChild(opt);
+        brandSelect.appendChild(opt);
     });
 
-    if (prevVal && Array.from(drugSelect.options).some(o => o.value === prevVal)) {
-        drugSelect.value = prevVal;
+    if (prevBrand && Array.from(brandSelect.options).some(o => o.value === prevBrand)) {
+        brandSelect.value = prevBrand;
     } else {
-        drugSelect.value = "";
+        brandSelect.value = "";
+    }
+
+    // 2. 學名選單：依學名 A–Z 排序
+    genericSelect.innerHTML = '<option value="">-- 依學名 (A–Z 依序排列) --</option>';
+    const genericList = flatDrugList.filter(d => {
+        const matchesCat = (catFilter === "ALL") || (d.category === catFilter);
+        const matchesRoute = (routeFilter === "ALL") || d.route.includes(routeFilter);
+        return matchesCat && matchesRoute;
+    }).sort((a, b) => (a.genericFirstName || a.genericName).localeCompare(b.genericFirstName || b.genericName, 'en', { sensitivity: 'base' }));
+
+    genericList.forEach(d => {
+        const opt = document.createElement("option");
+        opt.value = d.name;
+        opt.textContent = `${d.genericFirstName} [${d.route}]`;
+        genericSelect.appendChild(opt);
+    });
+
+    if (prevGeneric && Array.from(genericSelect.options).some(o => o.value === prevGeneric)) {
+        genericSelect.value = prevGeneric;
+    } else {
+        genericSelect.value = "";
     }
 }
 
@@ -1467,11 +1509,12 @@ function renderTable() {
     }
 }
 
-// Function to select a single drug: updates top card, isolates bottom table to only this drug!
+// Function to select a single drug: updates featured card, isolates table to only this drug!
 function selectDrug(drug) {
     if (!drug) return;
     selectedDrugName = drug.name;
-    drugSelect.value = drug.name;
+    if (brandSelect) brandSelect.value = drug.name;
+    if (genericSelect) genericSelect.value = drug.name;
     updateFeaturedCard(drug);
     renderTable();
 }
@@ -1490,13 +1533,12 @@ searchInput.addEventListener("input", (e) => {
 
     if (term && matched.length > 0) {
         updateFeaturedCard(matched[0]);
-        drugSelect.value = matched[0].name;
-    } else if (term) {
-        updateFeaturedCard(null);
-        drugSelect.value = "";
+        if (brandSelect) brandSelect.value = matched[0].name;
+        if (genericSelect) genericSelect.value = matched[0].name;
     } else {
         updateFeaturedCard(null);
-        drugSelect.value = "";
+        if (brandSelect) brandSelect.value = "";
+        if (genericSelect) genericSelect.value = "";
     }
 
     renderTable();
@@ -1523,24 +1565,42 @@ searchInput.addEventListener("keydown", (e) => {
 // 2. Category Select event
 categorySelect.addEventListener("change", (e) => {
     currentCategory = e.target.value;
-    populateDrugDropdown(currentCategory, currentRoute);
+    populateDrugDropdowns(currentCategory, currentRoute);
 
     if (selectedDrugName) {
         const drug = flatDrugList.find(d => d.name === selectedDrugName);
         if (!drug || (currentCategory !== "ALL" && drug.category !== currentCategory)) {
             selectedDrugName = null;
-            drugSelect.value = "";
+            if (brandSelect) brandSelect.value = "";
+            if (genericSelect) genericSelect.value = "";
             updateFeaturedCard(null);
         }
     }
     renderTable();
 });
 
-// 3. Drug Select dropdown event: SELECTING A DRUG LOCKS THE VIEW TO ONLY THIS DRUG!
-drugSelect.addEventListener("change", (e) => {
+// 3. Brand Select dropdown event
+brandSelect.addEventListener("change", (e) => {
     const selectedName = e.target.value;
     if (!selectedName) {
         selectedDrugName = null;
+        if (genericSelect) genericSelect.value = "";
+        updateFeaturedCard(null);
+        renderTable();
+        return;
+    }
+    const drug = flatDrugList.find(d => d.name === selectedName);
+    if (drug) {
+        selectDrug(drug);
+    }
+});
+
+// Generic Select dropdown event
+genericSelect.addEventListener("change", (e) => {
+    const selectedName = e.target.value;
+    if (!selectedName) {
+        selectedDrugName = null;
+        if (brandSelect) brandSelect.value = "";
         updateFeaturedCard(null);
         renderTable();
         return;
@@ -1557,13 +1617,14 @@ filterBtns.forEach(btn => {
         filterBtns.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         currentRoute = btn.getAttribute("data-route");
-        populateDrugDropdown(currentCategory, currentRoute);
+        populateDrugDropdowns(currentCategory, currentRoute);
 
         if (selectedDrugName) {
             const drug = flatDrugList.find(d => d.name === selectedDrugName);
             if (!drug || (currentRoute !== "ALL" && !drug.route.includes(currentRoute))) {
                 selectedDrugName = null;
-                drugSelect.value = "";
+                if (brandSelect) brandSelect.value = "";
+                if (genericSelect) genericSelect.value = "";
                 updateFeaturedCard(null);
             }
         }
@@ -1581,24 +1642,26 @@ resetBtn.addEventListener("click", () => {
     filterBtns.forEach(b => {
         b.classList.toggle("active", b.getAttribute("data-route") === "ALL");
     });
-    populateDrugDropdown("ALL", "ALL");
-    drugSelect.value = "";
+    populateDrugDropdowns("ALL", "ALL");
+    if (brandSelect) brandSelect.value = "";
+    if (genericSelect) genericSelect.value = "";
     updateFeaturedCard(null);
     renderTable();
     searchInput.focus();
 });
 
-// 6. Close Top Card Button
+// 6. Close Bottom Card Button
 closeFeatBtn.addEventListener("click", () => {
     selectedDrugName = null;
     updateFeaturedCard(null);
-    drugSelect.value = "";
+    if (brandSelect) brandSelect.value = "";
+    if (genericSelect) genericSelect.value = "";
     renderTable();
 });
 
 // Initial Setup
 populateCategoryDropdown();
-populateDrugDropdown();
+populateDrugDropdowns();
 renderTable();
 </script>
 
