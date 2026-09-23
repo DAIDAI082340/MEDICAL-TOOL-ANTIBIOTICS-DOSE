@@ -186,6 +186,21 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
+- **v0.6.4 (2026-09-23)**:
+  - **升級 App Logo 為「門診速查 100% 滿框厚金屬勳章版 (Full-Bleed Thick Gold Bezel)」**：
+    - 精準對齊門診速查在手機上的滿版滿框規格（`X=98, Y=98, W=860, H=860` 縮放至 1024×1024），去除外圍多餘和紙留白，讓寬達 78px 的 3D 厚金屬立體外框直接貼齊 App 畫布四邊。
+    - 手機系統圓角遮罩直接落在厚金屬外殼上，達成與門診速查完全 100% 一模一樣的「滿框厚金屬勳章高級感」。
+    - 全面更新標準多尺寸圖示資產：
+      - `assets/icons/app-logo.png` (1024×1024)
+      - `assets/icons/icon-512.png` (512×512)
+      - `assets/icons/icon-192.png` (192×192)
+      - `assets/icons/apple-touch-icon.png` (180×180)
+      - `assets/icons/favicon-64.png` (64×64)
+      - `assets/icons/favicon-32.png` (32×32)
+      - `favicon.png` (1024×1024)
+  - **Service Worker 快取版本升級 (`v0.6.4`)**：
+    - `sw.js` 的 `CACHE_NAME` 升級為 `'antibiotics-dose-v0.6.4'`，確保手機端即時清理舊圖示快取。
+
 - **v0.6.3 (2026-09-23)**:
   - **升級 App Logo 為「門診速查 100% 同款厚金屬浮雕勳章框（雙生系列款）」**：
     - 依使用者對照截圖指示，將門診速查標竿款之 **3D 厚金屬立體雙倒角外框（寬達 78px）、深邃懸浮陰影（Drop Shadow）與外圍和紙底座**，與抗生素劑量立體圖騰（細菌微粒＋針筒＋草脈）進行精準融合。
