@@ -186,6 +186,21 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
+- **v0.6.2 (2026-09-23)**:
+  - **正式啟用 1024px 超高清「文青紙感極簡線性圖標風（微浮雕金屬拉絲金框）」App Logo**：
+    - 採用使用者最新確認之微浮雕拉絲金框款式，由 1024×1024 原圖無損裁切（徹底去除外圍多餘白邊，拉絲金框飽滿填滿）。
+    - 融合四大核心美學：微浮雕斜角立體感、湖水綠青色針筒與微菌、右下角草木生機「卉」字書法嫩芽、溫潤手作和紙底紋。
+    - 全面更新標準多尺寸圖示資產：
+      - `assets/icons/app-logo.png` (1024×1024)
+      - `assets/icons/icon-512.png` (512×512)
+      - `assets/icons/icon-192.png` (192×192)
+      - `assets/icons/apple-touch-icon.png` (180×180)
+      - `assets/icons/favicon-64.png` (64×64)
+      - `assets/icons/favicon-32.png` (32×32)
+      - `favicon.png` (1024×1024)
+  - **Service Worker 快取版本升級 (`v0.6.2`)**：
+    - `sw.js` 的 `CACHE_NAME` 升級為 `'antibiotics-dose-v0.6.2'`，自動觸發手機 PWA 與桌面瀏覽器清理舊圖示快取，立即生效呈現全新超高清圖標。
+
 - **v0.6.0 (2026-09-23)**:
   - **正式轉製為可安裝之手機 App (Progressive Web App - PWA)**：
     - 配置標準 `manifest.webmanifest` 與相容性 `manifest.json`，支援 iPhone (iOS) 與 Android (安卓) 一鍵安裝至手機主畫面。
@@ -396,3 +411,30 @@ flowchart TD
   - 成功推送至遠端倉庫：`https://github.com/DAIDAI082340/MEDICAL-TOOL-ANTIBIOTICS-DOSE.git`。
   - 成功透過 GitHub Pages API 自動啟用並完成部署，正式上線運作。
   - 線上速查系統網址：`https://daidai082340.github.io/MEDICAL-TOOL-ANTIBIOTICS-DOSE/`。
+
+---
+
+## 8. 品牌視覺與圖標設計規範 (Brand & Icon Design Guidelines)
+
+### 8.1 設計風格定調
+* **風格名稱**：**文青紙感極簡線性圖標風（Minimalist Line Art Badge with Paper Texture）**
+* **設計理念**：以簡約流暢的線條結合手作紙質的人文溫度，中和醫療題材的生硬冷峻，呈現專業、平靜與治癒的視覺感受。
+
+### 8.2 四大核心視覺特徵
+1. **極簡線性圖標（Minimalist Line Art / Iconography）**：
+   - 以簡約流暢的粗線條與實心剪影呈現核心元素（細菌／病毒微粒、注射針筒、右下角的植物線條標記），造形結構乾淨易讀。
+2. **圓角徽章佈局（Rounded Square Badge）**：
+   - 外層以圓潤的粗外框收納主體，具備 App Icon、印章徽章或臨床指示圖樣的規格感。
+3. **大地與醫療專業配色（Muted Earthy & Teal Palette）**：
+   - **主視覺**：使用冷靜、專業的霧面藍綠色／湖水青（Muted Teal，`#3B8E96`）。
+   - **外框**：溫潤沉穩的駝金／芥末土黃色（Ochre / Muted Gold，`#A18238`）。
+4. **溫潤手作紙紋背景（Textured Cream/Washi Paper）**：
+   - 底色非死白的螢幕純色，而是帶有細緻纖維顆粒感的米白手作紙／水彩紙質感（`#F8F6F0`），中和了醫療題材的生硬感，多了一份溫和人文氣息。
+
+### 8.3 AI 繪圖提示詞配方 (Prompt Formula)
+日後若需生成同系列圖標、宣傳插圖或介面視覺元素，請統一採用以下專屬 Prompt 關鍵字配方：
+```text
+minimalist medical line art icon, rounded square frame, muted teal and gold palette, textured cream paper background, clean flat iconography
+```
+
+
