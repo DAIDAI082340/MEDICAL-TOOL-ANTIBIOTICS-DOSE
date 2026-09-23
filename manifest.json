@@ -1,0 +1,36 @@
+{
+  "name": "臨床抗生素腎功能劑量調整速查系統",
+  "short_name": "抗生素劑量",
+  "description": "臨床常用抗生素依據 eGFR 腎功能分級之劑量微調速查系統 (支援 100% 離線使用)",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1F4E79",
+  "theme_color": "#1F4E79",
+  "categories": [
+    "medical",
+    "health",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

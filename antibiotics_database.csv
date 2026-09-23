@@ -1,0 +1,132 @@
+﻿"抗生素分類","現用商品名","國際學名","規格","給藥途徑","Stat / Loading Dose","eGFR > 50 mL/min (常規/輕度)","eGFR 10-50 mL/min (中度)","eGFR < 10 mL/min (重度/透析)","臨床備註 (Notes)","院內代碼","藥廠/廠商","歷史舊商品名"
+"Penicillins & β-Lactam / Inhibitor Combinations","Oxacillin","Oxacillin","1g/2g","IV","2g","2g Q6H","2g Q6H","2g Q6H","主要經肝臟代謝，腎功能不全不需調整；MSSA 感染首選；每克約含 2.8 mEq 鈉離子，心衰或水腫患者注意鈉負荷。","OXAI11","中國化學","Prostaphlin"
+"Penicillins & β-Lactam / Inhibitor Combinations","Dicloxacillin","Dicloxacillin","250mg","PO","2#","2# QID","2# QID","2# QID","主要經肝膽代謝，腎衰竭不需調整；口服宜空腹（飯前 1 小時或飯後 2 小時）併服整杯水，以防食道刺激。","","榮民製藥","Dynapen"
+"Penicillins & β-Lactam / Inhibitor Combinations","Amoxicillin","Amoxicillin","500mg","PO","500mg","500mg TID","500mg Q12H (10–30)","500mg QD
+(HD：透析後給藥或QN、HS)","口服廣效青黴素；主要經腎排泄，中重度腎衰竭需拉長給藥間隔至 Q12H 或 QD；HD 透析後建議補充 500mg。","AMXO13","榮民製藥","Amolin"
+"Penicillins & β-Lactam / Inhibitor Combinations","Curam","Amoxicillin/Clavulanate","500/125mg","PO","1#","1# TID","1# BID","1# QD
+(HD：透析後給藥或QN、HS)","Amoxicillin/Clavulanate；建議隨餐服用以減輕胃腸道不適；主要經腎排泄，重度腎功能不全需拉長給藥間隔。","CURO00","SANDOZ","Augmentin"
+"Penicillins & β-Lactam / Inhibitor Combinations","Anbicyn","Amoxicillin/Clavulanate","600mg","IV","1.2g","1.2g Q8H","1.2g Q12H (10–50)","0.6g Q12H (<10 或 HD)","廣效 β-lactam/BLI 複合劑針劑；主要經腎排泄，HD 透析後建議補充劑量；注意高劑量腹瀉與肝功能指數監測。","AUGI02","中國化學","Augmentin"
+"Penicillins & β-Lactam / Inhibitor Combinations","Tapimycin","Piperacillin/Tazobactam","2.25g","IV","2.25g–4.5g","4.5g Q6H","2.25g Q6H","2.25g Q8H","抗綠膿桿菌廣效青黴素；HD 透析約清除 30–50%，透析日建議於每次 HD 結束後補充 2.25g；注意出血傾向與鈉蓄積。","PIPI07","永信藥品","Tazocin"
+"Penicillins & β-Lactam / Inhibitor Combinations","Sulampi","Ampicillin/Sulbactam","3g/1.5g","IV","3g","3g Q6H","3g Q8–12H","3g QD
+(HD：透析後給藥或QN、HS)","廣效 β-lactam/BLI 複合劑；主要由腎排泄，HD 透析後建議補充 1.5g；中重度腎不全需依 GFR 顯著拉長間隔。","AMPI21","政德製藥","Ansullina / Unasyn"
+"Cephalosporins (頭孢菌素類)","Cefa","Cefazolin","1g","IV","1g","1g Q8H","1g Q12H","1g QD
+(HD：透析後給藥或QN、HS)","第一代頭孢菌素，外科手術預防及 MSSA 感染首選；主要經腎排泄，HD 透析結束後給藥 1g；腎衰竭病患注意劑量蓄積。","CEZI03","信東生技","Cefamezin"
+"Cephalosporins (頭孢菌素類)","Lonfadroxil","Cefadroxil","500mg","PO","1#–2#","2# Q12H","1# Q12H","1# QD
+(HD：透析後給藥或QN、HS)","第一代口服頭孢菌素，食物不影響吸收；主要經腎臟原型排泄，中重度腎不全需拉長間隔或減半劑量。","CEFO18","瑞士藥廠","Duricef"
+"Cephalosporins (頭孢菌素類)","Cephalexin","Cephalexin","500mg","PO","250–500mg","500mg Q6H","500mg Q12H","250mg Q12H","第一代口服頭孢菌素，常見於皮膚與軟組織感染；主要經腎排泄，重度腎功能不全需減半並拉長間隔至 Q12H。","","榮民製藥","Keflex"
+"Cephalosporins (頭孢菌素類)","Cefuroxime","Cefuroxime","750mg","IV","1.5g","1.5g Q8H","1.5g Q12H","1.5g QD
+(HD：透析後給藥或QN、HS)","第二代頭孢菌素，涵蓋流感嗜血桿菌等呼吸道致病菌；主要經腎小球濾過與腎小管排泄，腎衰竭需顯著減量。","CEFI08","中國化學","Curoxime / Zinacef"
+"Cephalosporins (頭孢菌素類)","Flomoxef","Flomoxef","1g","IV","HD 前後 各 1g","1g Q6H","1.5g Q12H (30–50)
+1g Q12H (<30)","1g QD
+PD: 1g QD
+(HD：透析後給藥或QN、HS)","具良好抗厭氧菌活性；含 N-MTT 側鏈，長期使用需監測凝血功能 (PT/INR) 防出血，並避免飲酒以防雙硫侖樣反應。","FLOI01","中國化學","Flumarin"
+"Cephalosporins (頭孢菌素類)","Cefin","Ceftriaxone","500mg","IV","1g–2g","2g QD 或 1g Q12H","2g QD 或 1g Q12H","2g QD 或 1g Q12H
+(HD：透析後給藥或QN、HS)","雙重排泄途徑 (膽汁 40%、腎 60%)，各腎功能分級不需調整劑量；⚠️ 嚴禁與含鈣溶液 (如 Ringer's) 同管輸注防結晶沉澱；蛋白結合率高不易被透析清除。","ROCI17","汎生製藥","Sintrix / Rocephin"
+"Cephalosporins (頭孢菌素類)","Cexime","Cefixime","100mg","PO","200mg","200mg Q12H","100mg Q12H","100mg QD
+(HD：透析後給藥或QN、HS)","第三代口服頭孢菌素，對 GNB 活性佳 (對綠膿桿菌無效)；主要經腎排泄，eGFR < 50 需減量至 100mg Q12H–QD。","CEFO17","信東生技","Mag cyclic"
+"Cephalosporins (頭孢菌素類)","Tatumcef","Ceftazidime","1g","IV","2g","2g Q8H","1g Q12H (31–50)
+1g Q12H (16–30)
+1g QD (6–15)","1g QD
+(HD：透析後給藥或QN、HS)","抗綠膿桿菌第三代頭孢菌素主力；主要經腎排泄，腎衰竭蓄積易引發神經毒性 (腦病變、意識混亂、抽搐)；HD 透析後給藥。","FORI06","中國化學","Sintum / Fortum / Cetadime"
+"Cephalosporins (頭孢菌素類)","Zefotam","Cefoperazone/Sulbactam","2g","IV","2g","2g Q12H","2g Q12H (30–50)
+1g Q12H (15–30)","1g Q12H (<15)","主要經膽汁代謝排泄 (約 75%)，一般腎功能不全不需大幅減量；含 N-MTT 側鏈，長期使用宜補充維生素 K 防出血，避免飲酒。","ZEFI01","中國化學","Brosym"
+"Cephalosporins (頭孢菌素類)","Zavicefta","Ceftazidime/Avibactam","2g/0.5g","IV","—","2g/0.5g Q8H (drip 2h)","1g/0.25g Q8H (31–50)
+1g/0.25g Q12H (16–30)","0.75g/0.1875g QD (6–15)
+0.75g/0.1875g Q48H (HD)
+(HD：透析後給藥或QN、HS)","【調配抽藥】1 瓶加 10 mL 滅菌水溶勻 (總體積約 12.0 mL，排氣針頭需待完全溶解後才插入)。
+★ 減量抽取體積：
+• 抽 6.0 mL = 1000mg/250mg (中度腎不全 16–50)
+• 抽 4.5 mL = 750mg/187.5mg (重度 6–15 或 HD)
+【輸注法】移入 100 mL 輸注袋 (NS / D5W / LR)，IV pump 以 120 分鐘輸注完畢；調配至完成不應超過 30 分鐘；HD 於透析結束後給藥 (Q48H)。","ZAVI90","ACS Dobfar",""
+"Cephalosporins (頭孢菌素類)","Yupime","Cefepime","1g","IV","1g–2g","2g Q8H","2g Q12H (30–49)
+2g QD (11–29)","1g QD
+(HD：透析後給藥或QN、HS)","第四代廣效頭孢菌素 (涵蓋綠膿桿菌)；⚠️ 腎衰竭未適當減量易引發神經毒性 (Cefepime neurotoxicity: 意識不清、肌躍、抽搐)；HD 後補充 1g。","CEFI44","政德製藥","Maxipime"
+"Cephalosporins (頭孢菌素類)","Zinforo","Ceftaroline fosamil","600mg","IV","600mg","600mg Q12H","400mg Q12H (30–50)
+300mg Q12H (15–30)","200mg Q12H (<15)","第五代抗 MRSA 頭孢菌素；主要經腎臟排泄，需依 eGFR 階梯式調降劑量；每次滴注時間建議 60 分鐘。","CEFI83","ACS DOBFAR",""
+"Carbapenems (碳青黴烯類)","Culin","Imipenem/Cilastatin","500mg/500mg","IV","500mg","500mg Q6H","500mg Q8H (30–49)
+500mg Q12H (11–29)","250mg Q12H","廣效 Carbapenem；⚠️ 腎衰竭未減量或中樞神經病史者，蓄積易引發嚴重抽搐 (Seizure)；滴注時間建議 40–60 分鐘。","IMII05","松瑞製藥","Tienam"
+"Carbapenems (碳青黴烯類)","Ertapenem","Ertapenem","1g","IV","0.5g–1g","1g QD","1g QD (30–49)
+0.5g QD (11–29)","0.5g QD
+(HD：透析後給藥或QN、HS)","每日一次給藥；⚠️ 不涵蓋 Pseudomonas (綠膿桿菌) 與 Acinetobacter；重度腎衰竭或洗腎病患減為 0.5g QD，HD 於透析後給藥。","ERTI01","松瑞製藥","Invanz"
+"Carbapenems (碳青黴烯類)","Mepenem","Meropenem","1g","IV","1g / 0.5g","1g Q8H","1g Q12H (25–50)
+0.5g Q12H (10–25)","0.5g QD
+(HD：透析後給藥或QN、HS)","重症首選 Carbapenem，中樞神經毒性抽搐風險低於 Imipenem；重症抗藥性菌株可採 3 小時延長滴注 (Extended Infusion)；HD 透析後給藥。","MERI35","松瑞製藥","Mepem / Meropen"
+"Fluoroquinolones (氟喹諾酮類)","Cinolone","Ciprofloxacin","200mg/400mg","IV","200–400mg","400mg Q12H","200mg Q12H 或 400mg QD","400mg QD
+(HD：透析後給藥或QN、HS)","抗綠膿桿菌 Quinolone 主力；黑框警示：肌腱炎/肌腱斷裂、QTc 延長、重症肌無力惡化、中樞神經興奮；HD 僅清除微量 (<10%)。","CEDI27","信東生技","Ciproxin"
+"Fluoroquinolones (氟喹諾酮類)","Suxen","Ciprofloxacin","250mg","PO","250–500mg","500mg Q12H","250mg Q12H","250mg Q12H","口服吸收良好；⚠️ 避免與含金屬多價陽離子 (鈣、鎂、鋁制酸劑、鐵劑) 或牛奶同時服用，需間隔至少 2 小時防形成螯合物失效。","CIPO24","永信藥品","Ciproxin"
+"Fluoroquinolones (氟喹諾酮類)","Cravit","Levofloxacin","500mg/750mg","IV/PO","500–750mg","500–750mg QD","500–750mg Q2D","500mg Q2D
+(HD：透析後給藥或QN、HS)","呼吸型 Quinolone，高劑量 (750mg) 適用於綠膿桿菌或重症肺炎；主要經腎排泄，腎衰竭需拉長間隔至 Q2D；注意血糖劇烈波動與 QTc 延長。","LEVI02","健亞生技",""
+"Fluoroquinolones (氟喹諾酮類)","Avelox","Moxifloxacin","400mg","IV/PO","400mg","400mg QD","400mg QD","400mg QD
+(HD：透析後給藥或QN、HS)","主要經肝膽代謝，腎衰竭與洗腎病患皆不需調整劑量；⚠️ 尿中原型排泄率低 (<20%)，不可用於治療單純性泌尿道感染 (UTI)；注意 QTc 延長。","AVEO00","Bayer",""
+"Fluoroquinolones (氟喹諾酮類)","Taigexyn","Nemonoxacin","250mg","PO","500mg","500mg QD","500mg QD","500mg QD","新型無氟喹諾酮抗生素 (Non-fluorinated quinolone)，治療社區型肺炎 (CAP)；主要經肝膽及腎臟排泄，輕中重度腎功能不全皆不需調整劑量。","NEMO00","培力藥品",""
+"Glycopeptides & Lipopeptides (糖肽類及抗革蘭氏陽性菌)","Vanlyo","Vancomycin","500mg","IV","500mg–1g (drip > 1h)","1g Q12H","1g QD–Q3D (隨 HD 後打)","500mg Q2–3D
+(HD：透析後給藥或QN、HS)","MRSA 首選一線藥物；⚠️ 每次至少滴注 60–120 分鐘以預防紅人症候群 (Red Man Syndrome)；具腎毒性，常規需監測 Trough 濃度 (15–20 μg/mL)；隨 HD 後給藥。","VANI10","台裕化學","Vancocin"
+"Glycopeptides & Lipopeptides (糖肽類及抗革蘭氏陽性菌)","Vancover","Vancomycin","125mg","PO","125mg","125mg QID","125mg QID","125mg QID","口服 Vancomycin 腸道吸收極低 (<5%)，僅作用於腸道局部，治療困難梭菌結腸炎 (CDI / 偽膜性腸炎)；全部腎功能分級劑量皆相同 (不需依腎功能調整或透析補充)；重症或猛爆性 CDI 可依醫囑提高至 500mg QID。","VANO00","友霖生技","Vancocin"
+"Glycopeptides & Lipopeptides (糖肽類及抗革蘭氏陽性菌)","Teicod","Teicoplanin","200mg","IV","10 mg/kg Q12H × 3 doses","5 mg/kg QD","5 mg/kg QD (>30)
+5 mg/kg Q2D (<30)","5 mg/kg Q2D
+(HD：透析後給藥或QN、HS)","糖肽類抗生素；⚠️ 首要關鍵：Loading 需打滿 3 劑 (每 12 小時一劑) 始能迅速達有效血中濃度；半衰期極長 (100–170 小時)，透析不清除，HD 維持 5 mg/kg Q2D。","TEII04","中國化學","Targocid / Teicon"
+"Glycopeptides & Lipopeptides (糖肽類及抗革蘭氏陽性菌)","Cubicin","Daptomycin","500mg","IV","6–10 mg/kg (視感染嚴重度/菌血症評估)","6–10 mg/kg QD
+(重症菌血症/心內膜炎: 8–10 mg/kg QD)","CrCl ≥ 30: 6–10 mg/kg QD
+CrCl < 30: 6–10 mg/kg Q48H","6–10 mg/kg Q48H
+(HD：透析後給藥或QN、HS)","【抗革蘭氏陽性菌 / MRSA / VRE】
+常規劑量 6–10 mg/kg QD，洗腎病患 Q48H 給藥 (每次 HD 透析結束後補充)。
+⚠️ 臨床監測要點：
+• 每 3–5 天追蹤 Blood Culture (B/C) 評估療效
+• 每 7 天定期監測 CPK (肌酸激酶，防橫紋肌溶解/肌病變，若 CPK > 1000 有症狀或 > 2000 無症狀應停藥)
+⚠️ 本藥會被肺表面活性劑去活化，絕對不可用於治療肺炎！","CUBI00","Patheon Italia",""
+"Aminoglycosides & Polymyxins (氨基糖苷類與多黏菌素)","Amikacin","Amikacin","250mg","IV","—",">80: 15mg/kg QD
+60–80: 12mg/kg QD","40–60: 7.5mg/kg QD
+30–40: 4mg/kg QD
+20–30: 7.5mg/kg Q2D
+10–20: 4mg/kg Q2D","3mg/kg Q3D
+(HD：透析後給藥或QN、HS)","⚠️ 具顯著腎毒性與不可逆耳毒性；務必監測 Peak (療效) 與 Trough (毒性)；採高劑量單次延長間隔給藥法，重度腎衰竭需嚴格延長間隔並監測血中濃度。","AMKI14","南光化學","Amikin"
+"Aminoglycosides & Polymyxins (氨基糖苷類與多黏菌素)","Gentamycin","Gentamicin","80mg/2ml","IV/IM","2 mg/kg","1.5–2 mg/kg Q8H 或 5–7 mg/kg QD","依 CrCl 延長間隔或依 TDM 調整","2 mg/kg Q48H
+(HD：透析後給藥或QN、HS)","Aminoglycoside 類常用抗生素；⚠️ 具前庭/耳毒性與腎毒性；主要經腎小球濾過排泄，HD 透析約清除 50%，於每次 HD 結束後補充；常規建議監測 Trough 濃度 (<1–2 μg/mL)。","GM-I30","壽元製藥","Garamycin"
+"Aminoglycosides & Polymyxins (氨基糖苷類與多黏菌素)","Colistin","Colistimethate sodium","2MU","IV/INH","Loading:
+>60: 4.5支
+>50: 3.5支
+>40: 3支
+**1# Q12H (INH)",">70: 2.5支 Q12H
+50–69: 2支 Q12H
+**1# Q12H (INH)","20–49: 1 vial Q12H
+**1# Q12H (INH)","0.5 vial Q12H
+**1# Q12H (INH)","超級抗藥性陰性菌最後防線；⚠️ 具高腎毒性與神經毒性 (感覺異常/肌肉無力)；靜脈 (IV) 必須精確依腎功能計算；吸入劑型 (INH) 為局部治療不需依腎功能調整。","COLI03","政德製藥","Colimycin"
+"Antifungals (抗黴菌藥物)","Flucon","Fluconazole","200mg","IV","100–400mg","100–400mg QD (視嚴重度)","50–200mg QD (視嚴重度)","50–200mg QD (視嚴重度)
+(HD：透析後給藥或QN、HS)","抗念珠菌常用 Azole 類；約 80% 原型經腎排泄，HD 透析約清除 50%，故於每次 HD 結束後補充全劑量；注意保肝功能監測與 CYP450 交互作用。","FLUI07","信東生技","Diflucan"
+"Antifungals (抗黴菌藥物)","Fluene","Fluconazole","50mg","PO","100–400mg","100–400mg QD (視嚴重度)","50–200mg QD (視嚴重度)","50–200mg QD (視嚴重度)
+(HD：透析後給藥或QN、HS)","口服生體利用度極佳 (>90%)，不受進食影響；主要經腎排泄，中重度腎不全建議常規劑量減半 (50%)；HD 透析後給予全額劑量。","DIFO07","瑞安大藥廠","Diflucan"
+"Antifungals (抗黴菌藥物)","Myfungin","Micafungin","50mg","IV","—","100mg QD","100mg QD","100mg QN","Echinocandin 類抗黴菌藥，主要由肝臟代謝，不受腎功能影響，各腎功能分級與 HD/PD 皆不需調整劑量；對腎毒性低，安全性良好。","MYCI01","永信藥品","Mycamine"
+"Antifungals (抗黴菌藥物)","Vaway","Voriconazole","200mg","IV/PO","IV: 6 mg/kg Q12H x 2 doses
+PO: 200–400mg Q12H","IV: 4 mg/kg Q12H
+PO: 200mg Q12H","CrCl < 50 建議改口服 PO","建議口服 200mg Q12H","抗麴菌屬 (Aspergillus) 首選；IV 針劑含有賦形劑 SBECD，在 eGFR < 50 易蓄積具潛在腎毒性，中重度腎衰竭建議優先轉換為口服劑型；常規需監測 TDM 及肝功能。","VORI03","永信藥品",""
+"Antivirals (抗病毒藥物)","Veklury","Remdesivir","100mg","IV","Day 1: 200mg (2 vial)","Day 2–5: 100mg (1 vial) QD","Day 2–5: 100mg QD","Day 2–5: 100mg QD
+(HD：透析後給藥或QN、HS)","【院內碼】VEKI99
+【療程】Day 1: 200mg (2 vial)；Day 2–5: 100mg (1 vial) QD。
+【輸注 Pump 設定】
+• 200mg: 2 vial + N/S total 150 mL，IV pump 跑 75 mL/hr (輸注 2 小時)
+• 100mg: 1 vial + N/S total 150 mL，IV pump 跑 150 mL/hr (輸注 1 小時)
+【常用共處方】Dexamethasone 6mg (1.5 amp) QD + PPI (Pane 40mg) QD。
+【腎功能】最新指引/FDA 仿單更新允許用於重度腎不全及洗腎 (透析日於透析後給藥)；需定期追蹤肝腎功能。","VEKI99","Gilead",""
+"Antivirals (抗病毒藥物)","Xocova","Ensitrelvir","125mg","PO","Day 1: 375mg (3# QD)","Day 2–5: 125mg (1# QD)","Day 2–5: 125mg (1# QD)","eGFR < 15 或 HD 不建議使用","【COVID-19 口服抗病毒藥 (3CL 蛋白酶抑制劑)】
+發病 72 小時內投藥效果最佳，總療程 5 天 (Day 1 給 375mg，Day 2–5 給 125mg QD)；輕中度腎不全不需調整；eGFR < 15 或洗腎病患缺乏臨床數據不建議使用。
+⚠️ 強效 CYP3A 抑制劑，禁忌與多種藥物併用 (包含特定 Statin、抗心律不整、鎮靜安眠藥等)；孕婦禁用。","","Shionogi",""
+"Antivirals (抗病毒藥物)","Zovirax","Acyclovir","250mg","IV","—","500mg Q8H (IV drip > 1hr)","5–12.5 mg/kg Q12–24H","2.5–6.25 mg/kg QD
+(HD：透析後給藥或QN、HS)","抗 HSV/VZV 首選；⚠️ 輸注期間與之後務必維持充足水化 (Hydration)，避免藥物於腎小管結晶引起急性腎衰竭；每次滴注時間 ≥ 1 小時；HD 後給藥。","ZOVI00","GSK","Aciclovir"
+"Antivirals (抗病毒藥物)","Paxlovid","Nirmatrelvir/Ritonavir","150/100mg","PO","—","3# BID (300/100mg)","2# BID (30–60 mL/min)
+eGFR < 30 不建議使用","不建議使用 (eGFR < 30)","COVID-19 口服抗病毒藥；中度腎功能不全 (eGFR 30–60) 減為 2# BID (粉紅錠 1 顆 + 白錠 1 顆)；⚠️ eGFR < 30 禁忌使用；Ritonavir 為強效 CYP3A4 抑制劑，交互作用極多！","","Pfizer",""
+"Antivirals (抗病毒藥物)","Eraflu","Oseltamivir","75mg","PO","—","75mg BID","30mg BID (30–60)
+30mg QD (10–30)","HD/PD: 30mg QD
+(HD：透析後給藥或QN、HS)","流感抗病毒藥，發病 48 小時內投藥效果最佳；主要活性代謝物經腎排泄，中重度腎衰竭需減量；HD 透析病患建議於每次透析結束後給予 30mg。","","臺灣東洋","Tamiflu"
+"Other Antibiotics (其他各類抗生素)","Clincin","Clindamycin","300mg","IV/PO","300mg","300mg Q6–8H","300mg Q6–8H","300mg Q6–8H","主要由肝臟代謝，腎衰竭及透析皆不需調整劑量；⚠️ 警惕抗生素相關偽膜性腸炎 (C. difficile 結腸炎)；靜脈注射切勿直接快速推注 (Bolus)。","CLEI02","南光化學","Cleocin"
+"Other Antibiotics (其他各類抗生素)","Klaricid","Clarithromycin","500mg","PO","—","500mg BID","500mg QD","500mg QD
+(HD：透析後給藥或QN、HS)","巨環類抗生素；主要經肝腎雙重排泄，eGFR < 30 劑量減半 (500mg QD)；⚠️ 強效 CYP3A4 抑制劑，禁與某些 Statin 類 (防橫紋肌溶解) 併用；注意 QTc 延長。","KLAO06","Abbvie",""
+"Other Antibiotics (其他各類抗生素)","Senfihu","Sulfamethoxazole/Trimethoprim","400/80mg","PO/IV","—","2# BID (PO) 或 2–3 amp Q8–12H (IV)","1# BID (15–30)","不建議使用 (<15)","⚠️ TMP 抑制腎小管分泌肌酸酐 (假性 Scr 上昇) 並抑制鉀排泄，高血鉀高風險族群需密切監測；eGFR < 15 禁忌使用；長期需監測血球計數。","BAKO06","瑞士藥廠","Baktar"
+"Other Antibiotics (其他各類抗生素)","SABS","Metronidazole","500mg","IV","500mg","500mg Q6H","500mg Q6H","500mg Q12H
+(HD：透析後給藥或QN、HS)","厭氧菌感染專用；主要經肝代謝，重度腎衰竭減為 Q12H；服藥期間與停藥 3 天內嚴禁飲酒 (防雙硫侖反應)；注意長期周邊神經病變。","ANEI05","信東生技","Flagyl"
+"Other Antibiotics (其他各類抗生素)","Tolizole","Metronidazole","250mg","PO","500mg TID","500mg TID","500mg TID","250mg TID 或 500mg BID
+(HD：透析後給藥或QN、HS)","口服厭氧菌感染/阿米巴/滴蟲常用；服藥期間與停藥 3 天內嚴禁飲酒 (防雙硫侖反應)；主要經肝代謝，重度腎衰竭減量至 250mg TID 或 500mg BID。","ANEO08","國嘉製藥","Flagyl"
+"Other Antibiotics (其他各類抗生素)","Tygacil","Tigecycline","50mg","IV","100mg","50mg Q12H","50mg Q12H","50mg Q12H","主要由肝膽與糞便排泄，腎衰竭與透析不需調整劑量；⚠️ 組織穿透高但血中與尿液濃度低，不適用於單純菌血症 (BSI) 或單純泌尿道感染 (UTI)；常伴隨噁心嘔吐。","TYGI00","Wyeth",""
+"Other Antibiotics (其他各類抗生素)","Monurol","Fosfomycin","3g/2g","PO/IV","3g (PO) / 2g (IV)","PO (單純UTI): 3g x 1 劑
+IV: 2–4g Q6–8H","PO: 3g x 1 劑
+IV: 2g Q8–12H","不建議使用 (PO 尿中濃度不足)","PO 用於單純急性膀胱炎；IV 用於抗藥性革蘭氏陰性菌/陽性菌重度感染；主要以原型經腎排泄，重度腎衰竭 PO 無法達有效尿中殺菌濃度。","FOSO02","Zambon",""
+"Other Antibiotics (其他各類抗生素)","Zyvox","Linezolid","600mg","PO/IV","600mg","600mg Q12H","600mg Q12H","600mg Q12H (透析後給)","Oxazolidinone 類抗革蘭氏陽性菌藥物 (MRSA/VRE)；主要經非腎臟代謝，各腎功能分級不需調整劑量；約 30% 可被 HD 清除，透析日於透析後給藥；⚠️ 使用超過 2 週需每週監測 CBC (骨髓抑制/血小板低下)，注意血清素症候群。","LINO05","Viatris",""

@@ -186,6 +186,24 @@ flowchart TD
 
 ## 9. 變更紀錄 (Changelog)
 
+- **v0.6.0 (2026-09-23)**:
+  - **正式轉製為可安裝之手機 App (Progressive Web App - PWA)**：
+    - 配置標準 `manifest.webmanifest` 與相容性 `manifest.json`，支援 iPhone (iOS) 與 Android (安卓) 一鍵安裝至手機主畫面。
+    - 啟動模式設定為 `standalone`（全螢幕原生 App 姿態啟動，徹底隱藏瀏覽器網址列、上下導航欄與分頁標籤）。
+    - 支援 iOS 頂部狀態列同色沉浸與底部安全區域適配 (`viewport-fit=cover`)。
+  - **全套高質感 App 專屬 Logo 打造（方案二：超級細菌・典雅針筒手杖・肚印「抗」字）**：
+    - 依使用者上傳之 5 張照片靈感精煉轉化，打造專屬醫療識別 Logo。
+    - 結合紅披風綠色超級細菌、三環握把發光青藍針筒手杖（象徵 IV/IM 針劑）、藍白 ANTIBIOTIC 膠囊與刻度藥錠（象徵 PO 口服），以及肚前圓潤浮雕繁體中文字**「抗」**。
+    - 產出標準全解析度圖示陣列：`icon-192.png` (Android 標準)、`icon-512.png` (Android 高清與啟動畫面)、`apple-touch-icon.png` (iOS 專用高解析圓角圖示)、`favicon.png`。
+  - **100% 離線運行快取引擎 (`sw.js` Service Worker)**：
+    - 採 Network-First with Offline Cache Fallback 快取策略：有網路時自動靜默檢查 GitHub Pages 最新劑量資料；無網路時（醫院地下室、手術室、ICU）毫秒級自快取秒開秒查，51 項藥物與搜尋功能完全不受網路斷線影響。
+  - **標題列整合專屬 App Logo 與「📲 安裝 App」互動引導**：
+    - 系統頂部 `<h1>` 標題旁直接嵌合專屬 App Logo 微徽章。
+    - 右側設置「📲 安裝 App」按鈕，點擊跳出 iPhone（Safari 分享 ➔ 加入主畫面）與 Android（Chrome 安裝應用程式）之圖文步驟；支援原生 `beforeinstallprompt` 一鍵安裝。
+    - 系統運行於獨立 App 模式時，智慧自動標記為「✅ 離線 App 已就緒」。
+  - **匯出結構化試算表資料庫**：
+    - 產出標準 UTF-8 BOM 編碼之 `抗生素處方劑量總表.csv`，方便臨床藥師於 Google Sheets / Excel 中整批核校劑量並一鍵同步。
+
 - **v0.5.9 (2026-09-18)**:
   - **表格列上下間距拉開（增加舒適呼吸感）**：
     - 主表格單元格 `td` 上下 padding 由 `8px` 拉開至 **`13px 18px`**，行高由約 38px 增至 50px，點擊目標更充裕，整體視覺舒暢大器。
