@@ -1,7 +1,7 @@
 // Service Worker for 臨床抗生素腎功能劑量調整速查系統
-// Version: v0.6.0
+// Version: v0.6.1
 
-const CACHE_NAME = 'antibiotics-dose-v0.6.0';
+const CACHE_NAME = 'antibiotics-dose-v0.6.1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
