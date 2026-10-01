@@ -467,4 +467,17 @@ flowchart TD
 minimalist medical line art icon, rounded square frame, muted teal and gold palette, textured cream paper background, clean flat iconography
 ```
 
+---
+
+## 9. Android 桌面圖示自適應安全邊距金框升級 (v0.6.5 - 2026-10-01)
+
+### 9.1 更新背景與問題修正
+* **問題**：在 Android 系統上安裝為 PWA 時，系統套用自適應裁切遮罩（Adaptive Icon），導致外圍立體金框被硬生生切除。
+* **工程實現**：
+  1. 生成專屬 `assets/icons/icon-maskable-512.png`，底色延伸溫潤紙紋，金框與針筒圖騰縮放至中央 72% 安全區（Safe Zone）。
+  2. `manifest.json` 與 `manifest.webmanifest` 分離 `purpose: "any"` 與 `purpose: "maskable"`。
+  3. `sw.js` 升級版本至 `antibiotics-dose-v0.6.5` 並將新圖示納入快取。
+* **成果**：在 Android 各式手機桌面（三星 One UI 圓角方塊、Pixel 圓形等），金框 100% 完整保留，與「門診速查」並列時呈現完全一致的高質感雙生立體金框！
+
+
 
