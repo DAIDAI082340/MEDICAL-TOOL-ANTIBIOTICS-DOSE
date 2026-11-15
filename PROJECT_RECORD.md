@@ -479,5 +479,19 @@ minimalist medical line art icon, rounded square frame, muted teal and gold pale
   3. `sw.js` 升級版本至 `antibiotics-dose-v0.6.5` 並將新圖示納入快取。
 * **成果**：在 Android 各式手機桌面（三星 One UI 圓角方塊、Pixel 圓形等），金框 100% 完整保留，與「門診速查」並列時呈現完全一致的高質感雙生立體金框！
 
+---
+
+## 10. Zefotam 劑量設定更新 (v0.6.6 - 2026-11-15)
+
+### 10.1 更新背景與臨床依據
+* **藥品品項**：`Zefotam`（`Cefoperazone/Sulbactam`，代碼 `ZEFI01`，中國化學）。
+* **規格校準**：單瓶規格更新為 `1000mg/1000mg/Vial`（每瓶含 Cefoperazone 1000mg + Sulbactam 1000mg = 2g/vial）。
+* **劑量統一化**：依臨床指引與使用者指示，因本品主要經由膽汁代謝排泄（約 75%），**不論任何腎功能分級（常規/輕度 >50、中度 10–50、重度/透析/洗腎 <10），劑量皆不需調降，皆為 4g (2 vial) Q12H**。
+* **安全性與完整性**：
+  1. `index.html` 與 `抗生素劑量調整.html` 同步精準更新，雙主檔 SHA256 驗證 100% 吻合。
+  2. 資料庫檔案 `antibiotics_database.csv` 與 `抗生素處方劑量總表.csv` 同步更新第 31 列紀錄。
+  3. Service Worker 快取版號升級至 `antibiotics-dose-v0.6.6`，確保終端離線快取立即自動刷新。
+  4. 其餘 30+ 種抗生素劑量、搜尋索引、A–Z 下拉快選邏輯 100% 零變動。
+
 
 
